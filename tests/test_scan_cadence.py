@@ -36,5 +36,5 @@ def test_manual_launcher_can_repeat_without_reopening():
     assert launcher.index("powershell.exe -NoProfile") < launcher.index("choice /C YN")
     # Scheduled jobs invoke PowerShell directly, never the interactive launcher.
     assert 'Run-LocalScan.ps1' in scheduled
-    assert "' -Unattended'" in scheduled
+    assert "-NonInteractive" in scheduled and "-Unattended" in scheduled
     assert 'New-ScheduledTaskAction -Execute $powershellPath -Argument $arguments' in scheduled
