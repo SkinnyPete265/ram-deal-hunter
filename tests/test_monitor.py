@@ -246,3 +246,17 @@ def test_known_kit_sku_from_url_only_when_product_title_is_32gb_ddr4():
     assert good and good["configuration"]=="kit" and good["price_eur"]==198.95
     assert product_info('<script type="application/ld+json">'+product("Memória RAM Corsair 16GB DDR4 3200MHz")+"</script>","PCBox",url) is None
     assert product_info('<script type="application/ld+json">'+product("Memória RAM Corsair 32GB DDR5 6000MHz")+"</script>","PCBox",url) is None
+
+
+def test_alerts_require_direct_in_stock_2x16gb_kit():
+    from monitor import eligible_for_alert
+    base={"price_eur":189.99,"stock":"in_stock",
+          "configuration":"kit","units_to_buy":1}
+    assert eligible_for_alert(base,200)
+    assert not eligible_for_alert({**base,"price_eur":200.01},200)
+    assert not eligible_for_alert({**base,"stock":"unknown"},200)
+    assert not eligible_for_alert({**base,"stock":"out_of_stock"},200)
+    assert not eligible_for_alert({**base,"comparison_only":True},200)
+    assert not eligible_for_alert({**base,"catalogue_only":True},200)
+    assert not eligible_for_alert({**base,"configuration":"single_pair","units_to_buy":2},200)
+    assert not eligible_for_alert({**base,"units_to_buy":2},200)
