@@ -27,6 +27,8 @@ jobs:
       - run: pip install -r requirements.txt
       - name: Scan products and alert
         env:
+          # Scheduled runs, Actions manual dispatch, and repo-change runs are distinguishable.
+          RAM_DEAL_SCAN_TRIGGER: ${{ github.event_name == 'workflow_dispatch' && 'manual' || github.event_name == 'schedule' && 'scheduled' || 'push' }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python monitor.py
