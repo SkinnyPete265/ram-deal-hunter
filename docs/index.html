@@ -73,7 +73,7 @@ for(const h of (data.health||[])){
  const store=String(h.source||'Unknown').replace(/ (category|product|browser fallback)$/,'');
  const g=grouped[store]||(grouped[store]={
    store,blockedHome:false,blockedCloud:false,okHome:0,okCloud:0,
-   errors:0,products:0,fallback_attempted:0,fallback_recovered:0
+   errors:0,noPrice:0,notMatching:0,missingPage:0,fallback_attempted:0,fallback_recovered:0
  });
  const home=h.scan_origin==='Home PC';
  if(String(h.source).endsWith(' browser fallback')){
@@ -86,7 +86,9 @@ for(const h of (data.health||[])){
  }
  if(h.status==='ok'){if(home)g.okHome++;else g.okCloud++}
  if(h.status==='error')g.errors++;
- if(h.status==='no_verified_price')g.products++;
+ if(['no_verified_price','price_not_found'].includes(h.status))g.noPrice++;
+ if(h.status==='configuration_unverified')g.notMatching++;
+ if(['no_primary_product','non_eur_price'].includes(h.status))g.missingPage++;
 }
 E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b.store)).map(g=>{
  const found=curr.filter(o=>o.store===g.store).length;
@@ -102,7 +104,10 @@ E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b
  const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' browser retries worked':'';
  return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
  esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+
-     (g.errors?' · '+g.errors+' errors':'')+(g.products?' · '+g.products+' without price data':''))+
+     (g.errors?' · '+g.errors+' errors':'')+
+     (g.noPrice?' · '+g.noPrice+' matching RAM pages with unreadable prices':'')+
+     (g.notMatching?' · '+g.notMatching+' pages without verified 2×16GB desktop configuration':'')+
+     (g.missingPage?' · '+g.missingPage+' incomplete product pages':''))+
  '</small></div>';
 }).join('')||'<p class="muted">No checks recorded yet.</p>';
 }
