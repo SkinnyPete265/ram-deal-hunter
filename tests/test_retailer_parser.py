@@ -235,3 +235,42 @@ def test_related_product_only_price_not_accepted():
       <div class="product-wrap"><span class="product-price">196,00 €</span></div>
     </main></body></html>"""
     assert product_info(html,"ON4TECH","https://www.on4tech.pt/p3-p-487168") is None
+
+
+def test_real_chipman_tailwind_catalogue_price():
+    html = """
+    <article class="group relative card-hover flex flex-col h-full">
+       <a href="/memorias-ram-ddr4/kingston-fury-kf432c16bb-16"><img src="x.png"></a>
+       <a href="/memorias-ram-ddr4/kingston-fury-kf432c16bb-16">
+         Memória RAM KINGSTON FURY Beast KF432C16BB/16 (3200 MHz - 16 GB - DIMM)
+       </a>
+       <span class="text-[11px] text-gray-400 line-through">220,90 €</span>
+       <span class="text-xl font-black leading-none text-sale-600">198,81 €</span>
+    </article>
+    """
+    offers=category_card_offers(html,"Chipman","https://chipman.pt/categorias/memorias-ram-ddr4",matches,price,stock,stamp,allowed)
+    assert len(offers)==1
+    assert offers[0]["price_eur"]==397.62  # Two 16GB sticks, never one.
+    assert offers[0]["stock"]=="unknown"
+    assert offers[0]["catalogue_only"] is True
+
+
+def test_castro_custom_catalogue_online_price():
+    html = """
+    <div class="product-list-item">
+      <a href="/pt/product/memoria-ram-fury-beast-32gb-2x16gb-ddr4">
+         Memória RAM Fury Beast 32GB (2x16GB) DDR4-3200MHz
+      </a>
+      <div class="prod-list-bottom">
+        <div class="row mt-3">
+          <div class="prod-list-price-wrapper">
+            <span class="price-web lol">349,89 €</span>
+            <div class="price-store">Loja: 367,50 €</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    """
+    offers=category_card_offers(html,"Castro Electrónica","https://www.castroelectronica.pt/pt/loja-virtual/ddr4-1",matches,price,stock,stamp,allowed)
+    assert len(offers)==1 and offers[0]["price_eur"]==349.89
+    assert offers[0]["stock"]=="unknown"
