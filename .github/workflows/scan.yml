@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'monitor.py'
+      - 'requirements.txt'
       - 'config.json'
       - 'watchlist.csv'
       - '.github/workflows/scan.yml'
