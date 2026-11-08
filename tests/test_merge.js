@@ -33,7 +33,13 @@ const noHome = mergeSnapshots(cloud, null, now);
 assert.equal(noHome.offers.length, 2);
 assert.equal(noHome.sources.home_last_scan, null);
 
-const late = mergeSnapshots(cloud, home, now + 7 * 60 * 60 * 1000);
+// An eight-hour scan must remain usable until the next scheduled run.
+const betweenScans = mergeSnapshots(cloud, home, now + 9 * 60 * 60 * 1000);
+assert.equal(betweenScans.offers.filter(o => o.current).length, 2);
+assert(betweenScans.health.length > 0);
+
+// A missed update must eventually become stale rather than advertised as live.
+const late = mergeSnapshots(cloud, home, now + 13 * 60 * 60 * 1000);
 assert(late.offers.every(o => !o.current));
 assert.equal(late.health.length, 0);
 
