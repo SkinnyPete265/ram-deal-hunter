@@ -223,3 +223,26 @@ def test_failed_snapshot_swap_preserves_last_good_data(tmp_path, monkeypatch):
         monitor.save_snapshot(file,{"offers":["new"]})
     assert json.loads(file.read_text(encoding="utf-8"))["offers"]==["old"]
     assert not (tmp_path/"data.json.tmp").exists()
+
+def test_html_without_charset_uses_utf8_bytes(monkeypatch):
+    import monitor
+    from requests import Response
+    html="<html><h1>DDR4 32GB (2x16GB)</h1><p>Preço: 184,99 €</p></html>"
+    r=Response()
+    r.status_code=200
+    r._content=html.encode("utf-8")
+    r.url="https://www.pccomponentes.pt/example"
+    r.headers["Content-Type"]="text/html"
+    monkeypatch.setattr(monitor.requests,"get",lambda *a,**k:r)
+    got=monitor.download(r.url)
+    assert "184,99 €" in got
+    assert "â" not in got
+
+def test_known_kit_sku_from_url_only_when_product_title_is_32gb_ddr4():
+    def product(title):
+        return json.dumps({"@type":"Product","name":title,"offers":{"priceCurrency":"EUR","price":"198.95","availability":"https://schema.org/InStock"}})
+    url="https://www.pcbox.pt/product/cmk32gx4m2e3200c16-corsair-vengeance-32gb-ddr4-3200mhz"
+    good=product_info('<script type="application/ld+json">'+product("Memória RAM Corsair Vengeance 32GB DDR4 3200MHz")+"</script>","PCBox",url)
+    assert good and good["configuration"]=="kit" and good["price_eur"]==198.95
+    assert product_info('<script type="application/ld+json">'+product("Memória RAM Corsair 16GB DDR4 3200MHz")+"</script>","PCBox",url) is None
+    assert product_info('<script type="application/ld+json">'+product("Memória RAM Corsair 32GB DDR5 6000MHz")+"</script>","PCBox",url) is None
