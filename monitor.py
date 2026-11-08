@@ -455,6 +455,7 @@ def run():
                     # the same RAM configuration and gives an explicit result.
                     if (browser_offer and
                             browser_offer.get("configuration")==item.get("configuration") and
+                            abs(browser_offer.get("price_eur",0)-item.get("price_eur",0))<0.011 and
                             browser_offer.get("stock") in ("in_stock","out_of_stock")):
                         item["stock"]=browser_offer["stock"]
                         item["source"]+=" (stock checked in headless browser)"
