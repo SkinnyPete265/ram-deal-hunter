@@ -196,3 +196,9 @@ def test_disguised_dual_eight_gigabyte_kits_not_treated_as_singles():
     assert matches("Corsair Dominator CMT16GX4M2Z3200C16 DDR4 16GB DIMM") is None
     assert matches("Crucial CT2K8G4DFRA32A DDR4 16GB DIMM") is None
     assert matches("Kingston Fury RGB KF432C16BB2A/16 DDR4 16GB DIMM")=="single_pair"
+
+def test_no_partial_match_on_larger_stick_counts():
+    assert matches("DDR4 12x16GB DIMM 192GB") is None
+    assert matches("DDR4 11x16GB DIMM 176GB") is None
+    assert matches("DDR4 2x16GB DIMM 32GB") == "kit"
+    assert matches("DDR4 1x16GB DIMM") == "single_pair"
