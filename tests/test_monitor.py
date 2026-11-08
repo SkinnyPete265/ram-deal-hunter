@@ -190,6 +190,7 @@ def test_price_diagnostics_do_not_capture_form_values():
 
 
 def test_disguised_dual_eight_gigabyte_kits_not_treated_as_singles():
+    assert matches("Memória RAM PATRIOT PVS416G320C6K Viper Steel DDR4 (3200 MHz - 16 GB - DIMM)") is None
     assert matches("Memória RAM G.SKILL Aegis F4-3200C16D-16GIS (3200MHz - 16GB - DIMM) DDR4") is None
     assert matches("Kingston Fury RGB KF432C16BB2AK2/16 DDR4 16GB DIMM") is None
     assert matches("Corsair Dominator CMT16GX4M2Z3200C16 DDR4 16GB DIMM") is None
