@@ -9,8 +9,8 @@
       "title": "Memória Corsair Vengeance DDR4 32GB 2x16GB PC3600 RGB PRO - Preta",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 183.0,
-      "price_eur": 183.0,
+      "unit_price_eur": 183,
+      "price_eur": 183,
       "stock": "out_of_stock",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
@@ -21,7 +21,7 @@
       "history": [
         {
           "at": "2026-11-08T00:23:06+00:00",
-          "price_eur": 183.0,
+          "price_eur": 183,
           "stock": "out_of_stock"
         }
       ],
@@ -433,10 +433,6 @@
       "source": "PcComponentes product",
       "status": "error",
       "detail": "403 Client Error: Forbidden for url: https://www.pccomponentes.pt/kingston-hyperx-fury-black-32gb-ddr4-3000mhz-pc-24000-2x16gb-cl1"
-    },
-    {
-      "source": "Amazon.es / Keepa",
-      "status": "not_configured"
     }
   ],
   "note": "Prices observed on retailer pages. Stock and shipping to Portugal must be confirmed at checkout."
