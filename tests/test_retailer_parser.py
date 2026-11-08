@@ -189,3 +189,49 @@ def test_catalogue_card_ignores_untrusted_host_and_missing_price():
     </article>
     """
     assert category_card_offers(html,"Chipman","https://chipman.pt/categorias/memorias-ram-ddr4",matches,price,stock,stamp,allowed)==[]
+
+
+def test_chipman_real_sale_price_classes():
+    html = """
+    <html><head><meta name="description"
+      content="Crucial DDR4 32GB, 2 x 16 GB desktop kit"></head>
+    <body><main><h1>Kit Memória RAM CRUCIAL Pro CP2K16G4DFRA32A (3200MHz - 32GB - DIMM)</h1>
+      <span class="text-base text-gray-400 line-through">284,90 €</span>
+      <span class="text-3xl font-extrabold text-sale-600 dark:text-sale-400">270,66 €</span>
+      <div class="recommended"><span class="product-price">79,00 €</span></div>
+    </main></body></html>"""
+    p=product_info(html,"Chipman","https://chipman.pt/memorias-ram-ddr4/crucial-pro")
+    assert p is not None and p["price_eur"]==270.66 and p["stock"]=="unknown"
+
+
+def test_castro_online_price_takes_priority_over_physical_store():
+    html = """
+    <html><body><main>
+      <h1>Memória RAM Fury Beast 32GB (2x16GB) DDR4-3200 MHz CL16 - KINGSTON</h1>
+      <span class="product-store-price">367,50 €</span>
+      <span class="product-opportunity-new-price">349,89 €</span>
+      <div class="recommendations"><span class="price-web">50,99 €</span></div>
+    </main></body></html>"""
+    p=product_info(html,"Castro Electrónica","https://www.castroelectronica.pt/pt/product/fury-beast")
+    assert p is not None and p["price_eur"]==349.89
+
+
+def test_on4tech_primary_price_not_related_products():
+    html = """
+    <html><head><meta name="description" content="Memória Corsair Vengeance DDR4 32GB 2x16GB PC3600 RGB PRO"></head>
+    <body><main><h1>on4tech</h1>
+      <span class="product-detalhe-price">€183,00</span>
+      <div>Produto Esgotado</div>
+      <div class="product-wrap">Memória Corsair 1x16GB <div class="product-price">196,00 €</div></div>
+    </main></body></html>"""
+    p=product_info(html,"ON4TECH","https://www.on4tech.pt/p3-p-487168-memoria-corsair")
+    assert p is not None and p["price_eur"]==183.0 and p["stock"]=="out_of_stock"
+
+
+def test_related_product_only_price_not_accepted():
+    html = """
+    <html><head><meta name="description" content="Memória Corsair Vengeance DDR4 32GB (2x16GB)"></head>
+    <body><main><h1>on4tech</h1>
+      <div class="product-wrap"><span class="product-price">196,00 €</span></div>
+    </main></body></html>"""
+    assert product_info(html,"ON4TECH","https://www.on4tech.pt/p3-p-487168") is None
