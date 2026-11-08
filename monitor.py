@@ -509,7 +509,12 @@ def run():
         item["alerted_price_eur"]=alerted
     for ident,item in earlier.items():
         if ident not in offers: offers[ident]={**item,"current":False}
-    output={"last_scan":stamp(),"budget_eur":cfg["budget_eur"],"offers":sorted(offers.values(),key=lambda x:(not x["current"],x["price_eur"])),"health":health,"note":"Prices observed on retailer pages. Stock and shipping to Portugal must be confirmed at checkout."}
+    # Public, non-identifying run provenance for dashboard timestamps.
+    # Direct Python runs without launcher/workflow context are "unknown".
+    trigger=os.getenv("RAM_DEAL_SCAN_TRIGGER","").strip().lower()
+    if trigger not in ("manual","scheduled","push"):
+        trigger="unknown"
+    output={"last_scan":stamp(),"scan_trigger":trigger,"budget_eur":cfg["budget_eur"],"offers":sorted(offers.values(),key=lambda x:(not x["current"],x["price_eur"])),"health":health,"note":"Prices observed on retailer pages. Stock and shipping to Portugal must be confirmed at checkout."}
     save_snapshot(DATA,output)
     print("Scan complete:",len(offers),"tracked offers;",len(health),"source checks")
 
