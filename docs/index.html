@@ -10,7 +10,18 @@ h2{margin:25px 0 12px;font-size:1.1rem}.muted,small{color:var(--muted)}.brand{fo
 p{line-height:1.5}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px 0}
 .card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px}
 .card small{display:block;margin-bottom:9px}.card strong{display:block;font-size:1.8rem}
-.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:24px 0}
+.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:18px 0}
+.quickfilters{display:flex;flex-wrap:wrap;gap:8px;margin-top:23px}
+.quickfilter{font-size:.86rem;padding:9px 12px;display:flex;align-items:center;gap:8px}
+.quickfilter[aria-pressed="true"]{background:#183b32;border-color:var(--accent);color:#d6ffe9}
+.quickfilter .quickcount{background:#303c4a;border-radius:999px;padding:2px 7px;min-width:23px;text-align:center;font-variant-numeric:tabular-nums}
+.quickfilter[aria-pressed="true"] .quickcount{background:#265d4c}
+.filter-help{font-size:.84rem;margin:8px 0 0}
+.opportunity{border:1px solid var(--line);border-radius:14px;padding:14px 16px;background:var(--panel);margin:15px 0 0}
+.opportunity strong{display:block;margin-bottom:6px}
+.opportunity .detail{font-size:.91rem;color:var(--muted);line-height:1.5}
+.opportunity a{color:var(--accent);text-decoration:none}
+.opportunity .difference{font-variant-numeric:tabular-nums;font-weight:650}
 input,select,button{background:var(--panel);color:#edf4fc;border:1px solid #374455;border-radius:10px;padding:11px;font:inherit}
 button{cursor:pointer}button:hover{border-color:var(--accent)}button:disabled{opacity:.5}
 input{flex:1;min-width:160px}.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:15px}
@@ -47,6 +58,19 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 <div class="card"><small>Listed in stock ≤€200</small><strong id="deals">0</strong></div>
 <div class="card"><small>Lowest available</small><strong id="lowest">—</strong></div>
 <div class="card"><small>Tracked offers</small><strong id="tracked">0</strong></div></section>
+<div class="opportunity" id="opportunity">
+  <strong>Cheapest retailer-listed in-stock kit</strong>
+  <span class="detail" id="opportunity-detail">Checking latest offers…</span>
+  <a id="opportunity-link" href="#" target="_blank" rel="noopener noreferrer" hidden>View listing</a>
+</div>
+<div class="quickfilters" role="group" aria-label="Quick offer filters">
+  <button class="quickfilter" type="button" data-offer-filter="all" aria-pressed="true">All <span class="quickcount" id="filter-all-count">0</span></button>
+  <button class="quickfilter" type="button" data-offer-filter="available" aria-pressed="false">In stock <span class="quickcount" id="filter-available-count">0</span></button>
+  <button class="quickfilter" type="button" data-offer-filter="budget" aria-pressed="false">≤€200 <span class="quickcount" id="filter-budget-count">0</span></button>
+  <button class="quickfilter" type="button" data-offer-filter="unknown" aria-pressed="false">Stock unverified <span class="quickcount" id="filter-unknown-count">0</span></button>
+  <button class="quickfilter" type="button" data-offer-filter="out" aria-pressed="false">Out of stock <span class="quickcount" id="filter-out-count">0</span></button>
+</div>
+<p id="filter-help" class="muted filter-help">Quick filters apply to current offers. The ≤€200 filter includes unavailable listings and comparison prices; only confirmed in-stock direct kits qualify as deals.</p>
 <div class="controls"><input id="search" placeholder="Search RAM models or specs">
 <select id="store"><option value="">All stores</option></select>
 <select id="sort"><option value="price">Lowest price</option><option value="recent">Newest checked</option><option value="store">Store A–Z</option></select>
@@ -58,8 +82,8 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 <div class="tablewrap"><table><thead><tr><th>Model & specs</th><th>Store</th><th>Price for 32 GB</th><th>Stock</th><th>Checked</th><th></th></tr></thead><tbody id="rows"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody></table></div>
 <h2>Source status</h2><div id="health"></div>
 <footer>"Listed in stock" reflects retailer-reported availability only, not confirmed checkout delivery. CHIP7 financing PVP is an indicative credit example, not a confirmed online checkout price. Some listings are independent retailer prices; "comparison" entries are the lowest advertised price across sellers and must be verified before purchase. Listed prices do not guarantee stock or delivery to Portugal. For two separate 16 GB modules, the displayed total is twice the unit price. Checkout, shipping and two-unit availability require verification. Unknown/stale items are labeled accordingly.</footer>
-</main><script src="merge.js"></script><script>
-let data={offers:[],health:[],budget_eur:200},visible=[];
+</main><script src="merge.js"></script><script src="offer-filters.js"></script><script>
+let data={offers:[],health:[],budget_eur:200},visible=[],activeQuickFilter='all';
 const E=id=>document.getElementById(id);
 const euro=n=>Number.isFinite(n)?new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n):'—';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -93,13 +117,42 @@ function drawScanInfo(){
 function draw(){
 let offers=data.offers||[],curr=offers.filter(o=>o.current),budget=data.budget_eur||200;
 E('tracked').textContent=curr.length;
-E('deals').textContent=curr.filter(o=>o.price_eur<=budget&&o.stock==='in_stock'&&!o.comparison_only&&!o.catalogue_only&&!o.indicative_only).length;
-let available=curr.filter(o=>o.stock==='in_stock');E('lowest').textContent=available.length?euro(Math.min(...available.map(o=>o.price_eur))):'—';
+const quickCounts=RAMHunterFilters.counts(curr,budget);
+E('deals').textContent=quickCounts.deals;
+const best=RAMHunterFilters.closestAvailable(curr);
+E('lowest').textContent=best?euro(Number(best.price_eur)):'—';
+for(const mode of RAMHunterFilters.MODES){
+ E('filter-'+mode+'-count').textContent=quickCounts[mode];
+}
+const gap=best?Number(best.price_eur)-budget:null;
+if(best){
+ const relative=gap>0?' · '+euro(gap)+' over the '+euro(budget)+' product-price budget'
+   :' · '+euro(Math.abs(gap))+' within the '+euro(budget)+' product-price budget';
+ E('opportunity-detail').textContent=best.store+' — '+best.title+' — '+euro(Number(best.price_eur))+relative+'. Delivery costs are not included.';
+ const url=/^https:\/\//.test(best.url)?best.url:null;
+ E('opportunity-link').hidden=!url;
+ if(url)E('opportunity-link').href=url;
+}else{
+ E('opportunity-detail').textContent='No current in-stock retailer-listed 2 × 16 GB kit could be verified. Stock-unverified offers remain separate.';
+ E('opportunity-link').hidden=true;
+ E('opportunity-link').removeAttribute('href');
+}
 let q=E('search').value.toLowerCase(),st=E('store').value;
-visible=offers.filter(o=>(E('stale').checked||o.current)&&(!st||o.store===st)&&[o.title,o.store,o.speed_mhz,o.cas_latency].join(' ').toLowerCase().includes(q));
+visible=offers.filter(o=>(E('stale').checked||o.current)&&RAMHunterFilters.matching(o,activeQuickFilter,budget)&&(!st||o.store===st)&&[o.title,o.store,o.speed_mhz,o.cas_latency].join(' ').toLowerCase().includes(q));
 let s=E('sort').value;
 visible.sort((a,b)=>s==='recent'?String(b.observed_at).localeCompare(String(a.observed_at)):s==='store'?a.store.localeCompare(b.store)||a.price_eur-b.price_eur:a.price_eur-b.price_eur);
-E('count').textContent='('+visible.length+')';
+E('count').textContent='('+visible.length+' shown)';
+const help={
+ all:'Showing all eligible RAM listings, including unavailable and unverified results.',
+ available:'Direct retailer listings of complete 2 × 16 GB kits reported in stock. Not a checkout guarantee.',
+ budget:'Product price ≤'+euro(budget)+'. Includes out-of-stock, comparison and indicative listings; check the stock column.',
+ unknown:'Stock cannot be verified. Includes comparison-only, catalogue and finance-reference prices.',
+ out:'Currently listed as out of stock by the retailer.'
+};
+E('filter-help').textContent=help[activeQuickFilter]+' Quick-filter counts use current scans; the Show stale checkbox also includes older observations.';
+for(const btn of document.querySelectorAll('[data-offer-filter]')){
+ btn.setAttribute('aria-pressed',String(btn.dataset.offerFilter===activeQuickFilter));
+}
 E('rows').innerHTML=visible.length?visible.map(o=>{
 let specs=['DDR4',o.configuration==='single_pair'?'2 identical individual modules':'2 × 16 GB kit',o.speed_mhz?o.speed_mhz+' MHz':null,o.cas_latency?'CL'+o.cas_latency:null,o.configuration==='single_pair'?'2 × '+euro(o.unit_price_eur):null,o.comparison_only?'LOWEST LISTED · unverified':null,o.catalogue_only?'CATALOGUE PRICE · verify product page':null,o.indicative_only?'FINANCING PVP · contact shop':null,o.scan_origin||null].filter(Boolean).join(' · ');
 let state=o.comparison_only?'Comparison price — seller unverified':o.catalogue_only?'Catalogue price — stock unverified':o.indicative_only?'Indicative credit PVP — contact store':o.stock==='in_stock'?'In stock':o.stock==='out_of_stock'?'Out of stock':'Stock unverified';
@@ -178,6 +231,9 @@ let selected=E('store').value,stores=[...new Set((data.offers||[]).map(o=>o.stor
 E('store').innerHTML='<option value="">All stores</option>'+stores.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');E('store').value=stores.includes(selected)?selected:'';draw()}catch(err){E('updated').textContent='Could not load data: '+err.message}}
 E('refresh').onclick=load;
 ['search','sort','store','stale'].forEach(id=>E(id).addEventListener(id==='search'?'input':'change',draw));
+document.querySelectorAll('[data-offer-filter]').forEach(btn=>{
+ btn.addEventListener('click',()=>{activeQuickFilter=btn.dataset.offerFilter;draw();});
+});
 E('export').onclick=()=>{let rows=[['Store','RAM','Price EUR','Stock','Updated','Link'],...visible.map(o=>[o.store,o.title,o.price_eur,o.stock,o.observed_at,o.url])];let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'}));a.download='ram-offers.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 async function status(){try{let r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)return;let s=await r.json();E('scan').hidden=false;E('scan').disabled=!!s.running;E('scan').textContent=s.running?'Scanning…':'Scan now';E('scan-status').textContent=s.last_error?'Scan error: '+s.last_error:s.running?'Checking stores…':'';if(s.completed_at&&s.completed_at!==window._done){window._done=s.completed_at;load()}}catch(_){}}
 E('scan').onclick=async()=>{await fetch('/api/scan',{method:'POST'});status()};
