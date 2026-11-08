@@ -489,3 +489,49 @@ def test_pccomponentes_recommended_item_stock_notice_not_applied_to_main_item():
     o=product_info(html,"PcComponentes",
         "https://www.pccomponentes.pt/kingston-fury-beast-rgb-ddr4-3200-mhz-32gb-2x16gb-cl16")
     assert o is not None and o["stock"]=="unknown"
+
+
+def test_chip7_financing_pvp_is_indicative_and_not_checkout_price():
+    html="""
+    <html><head><meta name="description" content="32GB (kit de 2x16GB) DDR4 PC DIMM"></head>
+      <body><main>
+        <h1>32GB 3600MHZ DDR4 CL18 DIMM (KIT OF 2) FURY Beast Black</h1>
+        <span>Disponível</span>
+        <p>Contacte a loja CHIP7 mais próxima</p>
+        <section><h3>Crédito / Prestações</h3>
+        <div>Prestação 30,74 €</div>
+        <div>PVP 347,90 €</div>
+        <div>Prazo 12 Meses</div>
+        <div>Montante Financiado 347,90 €</div></section>
+        <div class="recommendations"><span>Memória 16GB</span><span>79,99 €</span></div>
+      </main></body></html>
+    """
+    offer=product_info(html,"CHIP7",
+        "https://chip7.pt/componentes-hardware/memoria-ram/kingston/32gb-3600mhz-ddr4-cl18-dimm-kit-of-2-fury-beast-black-kf436c18bbk232")
+    assert offer and offer["price_eur"] == 347.9
+    assert offer["stock"] == "unknown"  # Store contact and credit example don't prove checkout.
+    assert offer["indicative_only"] is True
+    assert "financing PVP" in offer["source"]
+
+
+def test_chip7_financing_pvp_rejects_mismatched_financed_amount():
+    html="""
+    <html><head><meta name="description" content="DDR4 32GB (2x16GB)"></head>
+      <body><main><h1>Kingston DDR4 32GB (2x16GB) DIMM</h1>
+      <p>Contacte a loja CHIP7 mais próxima</p><h3>Crédito / Prestações</h3>
+      <p>Prestação 28,00 €</p><p>PVP 347,90 €</p>
+      <p>Montante Financiado 500,00 €</p>
+      </main></body></html>
+    """
+    assert product_info(html,"CHIP7","https://chip7.pt/ram/kit-2x16") is None
+
+
+def test_chip7_financing_pvp_rejects_related_product_only():
+    html="""
+    <html><head><meta name="description" content="DDR4 32GB (2x16GB)"></head>
+      <body><main><h1>Kingston DDR4 32GB (2x16GB) DIMM</h1>
+      <h2>Recommended products</h2><div>Crédito / Prestações PVP 99,90 €</div>
+      <p>Montante Financiado 99,90 €</p>
+      </main></body></html>
+    """
+    assert product_info(html,"CHIP7","https://chip7.pt/ram/kit-2x16") is None
