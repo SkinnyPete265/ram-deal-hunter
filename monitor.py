@@ -141,6 +141,12 @@ def run():
         except (requests.RequestException,ValueError) as e:
             health.append({"source":store+" product","status":"error","detail":str(e)[:130]})
         time.sleep(0.3)
+    # Keepa is optional; Amazon listings remain unverified for delivery to Portugal.
+    from amazon import amazon_offers
+    amazon, amazon_health = amazon_offers()
+    health.append(amazon_health)
+    for item in amazon:
+        offers[item['id']] = item
     # Keep observations only when freshly confirmed. Older entries remain visible but stale.
     for ident,item in offers.items():
         old=earlier.get(ident,{})
