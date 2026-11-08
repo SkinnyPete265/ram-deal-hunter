@@ -294,3 +294,18 @@ def test_elshop_current_catalogue_card_price():
         matches,price,stock,stamp,allowed)
     assert len(o)==1 and o[0]["price_eur"]==199.99
     assert o[0]["stock"]=="unknown" and o[0]["catalogue_only"]
+
+
+def test_fnac_marketplace_main_price_uses_verified_crucial_sku():
+    html = """
+    <html><head><meta name="description" content="Compra Módulo de Memória Crucial CT2K16G4DFRA32A"></head>
+    <body><main>
+      <h1>Módulo de Memória Crucial CT2K16G4DFRA32A</h1>
+      <div class="f-faPriceBox__content js-ProductBuyBoxStd">
+        <span class="f-faPriceBox__price userPrice checked">588,71 €</span>
+      </div>
+      <span class="f-faMpSeller__price">630,19 €</span>
+    </main></body></html>"""
+    o=product_info(html,"Fnac","https://www.fnac.pt/mp18882069/Modulo-de-memoria-Crucial-CT2K16G4DFRA32A")
+    assert o is not None and o["price_eur"]==588.71 and o["configuration"]=="kit"
+    assert "HTML fallback" in o["source"]
