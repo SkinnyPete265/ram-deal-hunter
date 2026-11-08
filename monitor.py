@@ -38,6 +38,11 @@ BROWSER_LANGUAGE = "pt-PT,pt;q=0.9,es;q=0.8,en;q=0.5"
 def stamp():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
+def scan_trigger():
+    """Public run source: never store usernames or device information."""
+    value=os.getenv("RAM_DEAL_SCAN_TRIGGER","").strip().lower()
+    return value if value in ("manual","scheduled","push") else "unknown"
+
 def matches(name):
     s = re.sub(r"\s+","",str(name).lower().replace("×","x").replace("*","x"))
     # Preserve a module-count boundary after DDR4 when the space was removed:
@@ -509,12 +514,8 @@ def run():
         item["alerted_price_eur"]=alerted
     for ident,item in earlier.items():
         if ident not in offers: offers[ident]={**item,"current":False}
-    # Public, non-identifying run provenance for dashboard timestamps.
-    # Direct Python runs without launcher/workflow context are "unknown".
-    trigger=os.getenv("RAM_DEAL_SCAN_TRIGGER","").strip().lower()
-    if trigger not in ("manual","scheduled","push"):
-        trigger="unknown"
-    output={"last_scan":stamp(),"scan_trigger":trigger,"budget_eur":cfg["budget_eur"],"offers":sorted(offers.values(),key=lambda x:(not x["current"],x["price_eur"])),"health":health,"note":"Prices observed on retailer pages. Stock and shipping to Portugal must be confirmed at checkout."}
+    # Direct Python runs without launcher/workflow context remain "unknown".
+    output={"last_scan":stamp(),"scan_trigger":scan_trigger(),"budget_eur":cfg["budget_eur"],"offers":sorted(offers.values(),key=lambda x:(not x["current"],x["price_eur"])),"health":health,"note":"Prices observed on retailer pages. Stock and shipping to Portugal must be confirmed at checkout."}
     save_snapshot(DATA,output)
     print("Scan complete:",len(offers),"tracked offers;",len(health),"source checks")
 
