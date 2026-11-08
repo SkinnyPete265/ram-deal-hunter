@@ -8,6 +8,8 @@ import json
 import re
 from collections import defaultdict
 from pathlib import Path
+import sys
+sys.path.insert(0,str(Path(__file__).resolve().parent.parent))
 from bs4 import BeautifulSoup
 from monitor import ROOT, allowed, download, links, product_info
 from retailer_parser import extract_html_offer, _name_and_metadata
