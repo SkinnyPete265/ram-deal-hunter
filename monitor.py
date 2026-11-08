@@ -12,6 +12,10 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
+try:
+    from curl_cffi import requests as browser_requests
+except ImportError:
+    browser_requests = None
 
 ROOT = Path(__file__).parent
 DATA = ROOT / "docs/data.json"
@@ -26,6 +30,8 @@ HOSTS = {
 }
 NEG = ("outofstock","soldout","esgotado","sem stock","agotado","indisponivel","indisponível")
 POS = ("instock","in stock","em stock","disponivel","disponível","en stock")
+FETCH_META = {}
+BROWSER_LANGUAGE = "pt-PT,pt;q=0.9,es;q=0.8,en;q=0.5"
 
 def stamp():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
@@ -111,10 +117,36 @@ def product_info(html,store,url):
     return None
 
 def download(url):
-    r=requests.get(url,headers=AGENT,timeout=18)
-    r.raise_for_status()
-    if "html" not in r.headers.get("Content-Type","").lower() or len(r.content)>5000000: raise ValueError("Unsupported response")
-    return r.text
+    """Request a public product page; retry one blocked request with a browser-like TLS client.
+
+    This does not solve CAPTCHA/JS challenges, authenticate, or use proxy services.
+    Unsuccessful attempts remain visible as blocked rather than as product data.
+    """
+    host=urlparse(url).hostname or ""
+    record=FETCH_META.setdefault(host,{"attempted":0,"recovered":0,"still_blocked":0})
+    response=requests.get(url,headers=AGENT,timeout=18)
+    if response.status_code in (403,429):
+        record["attempted"]+=1
+        browser=None
+        if browser_requests is not None:
+            try:
+                browser=browser_requests.get(url,impersonate="chrome",headers={"Accept-Language":BROWSER_LANGUAGE},timeout=20)
+            except Exception:
+                # Some websites reject both transports. Preserve the original HTTP status.
+                browser=None
+        if browser is not None and browser.status_code==200:
+            record["recovered"]+=1
+            response=browser
+        else:
+            record["still_blocked"]+=1
+    response.raise_for_status()
+    if "html" not in response.headers.get("Content-Type","").lower() or len(response.content)>5000000:
+        raise ValueError("Unsupported response")
+    body=response.text
+    # A successful HTTP response can still be an anti-bot challenge, not a product.
+    if re.search(r"<title>\s*(just a moment|attention required|access denied)[^<]*</title>",body,re.I):
+        raise ValueError("Browser challenge shown instead of a retailer page")
+    return body
 
 def links(html,base,store):
     """Collect candidates; the product page itself must independently prove the configuration."""
@@ -158,6 +190,7 @@ def run():
         for row in csv.DictReader(f):
             if allowed(row["store"],row["url"]): targets[(row["store"],row["url"])]=True
     health=[]
+    FETCH_META.clear()
     blocked_stores=set()
     for store,url in cfg["retailer_pages"]:
         try:
@@ -191,7 +224,15 @@ def run():
             health.append({"source":store+" product","status":"blocked_403_or_429" if is_blocked else "error","detail":str(e)[:130]})
         time.sleep(0.3)
     for store in sorted(blocked_stores):
-        health.append({"source":store,"status":"automated_access_blocked","detail":"Host refused automated requests. Other stores continue; no bypass attempted."})
+        health.append({"source":store,"status":"automated_access_blocked","detail":"Both standard and browser-like requests failed; this store remains a coverage gap."})
+    for store,host in HOSTS.items():
+        counts={"attempted":0,"recovered":0,"still_blocked":0}
+        for actual,record in FETCH_META.items():
+            if actual==host or actual.endswith("."+host):
+                for key in counts: counts[key]+=record[key]
+        if counts["attempted"]:
+            health.append({"source":store+" browser fallback","status":"ok" if counts["recovered"] else "blocked",
+                           "found":counts["recovered"],"detail":str(counts["attempted"])+" retries"})
     # No paid API services are used. Only configured retailer pages are scanned.
     # Keep observations only when freshly confirmed. Older entries remain visible but stale.
     for ident,item in offers.items():
