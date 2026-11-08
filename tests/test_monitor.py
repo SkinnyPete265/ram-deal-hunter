@@ -136,3 +136,10 @@ def test_comparison_offers_are_unverified():
     assert o["shipping_to_pt"]=="unverified"
     assert o["configuration"]=="kit"
     assert o["url"].startswith("https://www.kuantokusta.pt/p/78706/")
+
+def test_mislabeled_kingston_laptop_sodimm():
+    # Official Kingston data sheet identifies this as a 260-pin laptop SO-DIMM,
+    # even when sellers use the generic word "DIMM".
+    assert matches("Kingston ValueRAM 16GB DDR4 (1x16GB) 3200HZ (KVR32S22D8/16)") is None
+    assert matches("Kingston 16GB DDR4 3200MHz DIMM KVR32S22S8/16") is None
+    assert matches("Kingston 16GB DDR4 UDIMM KVR32N22D8/16") == "single_pair"
