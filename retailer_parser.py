@@ -428,6 +428,18 @@ def browser_stock_only(html, store, expected_title, classify):
     if heading is None:
         return "unknown", "rendered_heading_missing"
     name=heading.get_text(" ",strip=True)
+    document_title=doc.title.get_text(" ",strip=True) if doc.title else ""
+    # Distinguish access challenges from ordinary title mismatches without
+    # storing user/session data, page contents, or challenge tokens.
+    challenge_text=(document_title+" "+name).lower()
+    if re.search(
+        r"just a moment|attention required|access denied|acesso negado|"
+        r"verif(?:y|ique|ica)(?:ndo|[cç][aã]o)? (?:you are human|que [ée] humano|"
+        r"o seu navegador)|checking your browser|verifying your browser|"
+        r"human verification|captcha|cloudflare",
+        challenge_text,re.I
+    ):
+        return "unknown","rendered_access_challenge"
     def words(value):
         return set(re.findall(r"[a-z0-9]{3,}",str(value).casefold()))
     expected=words(expected_title)
