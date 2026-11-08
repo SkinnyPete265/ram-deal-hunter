@@ -1,6 +1,9 @@
 name: Test
 on:
   push:
+    paths-ignore:
+      - 'docs/data.json'
+      - 'docs/local-data.json'
   pull_request:
 permissions:
   contents: read
@@ -14,3 +17,5 @@ jobs:
           python-version: '3.12'
       - run: pip install -r requirements.txt
       - run: python -m pytest -q
+      - run: node --check docs/merge.js
+      - run: node tests/test_merge.js
