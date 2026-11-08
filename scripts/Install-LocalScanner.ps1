@@ -40,16 +40,16 @@ $powershellPath = Join-Path $PSHOME "powershell.exe"
 $arguments = '-NoProfile -NonInteractive -ExecutionPolicy Bypass -File "' + $scriptPath + '" -Unattended'
 
 $action = New-ScheduledTaskAction -Execute $powershellPath -Argument $arguments -WorkingDirectory $root
-$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(30) -RepetitionInterval (New-TimeSpan -Minutes 30) -RepetitionDuration (New-TimeSpan -Days 3650)
+$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddHours(8) -RepetitionInterval (New-TimeSpan -Hours 8) -RepetitionDuration (New-TimeSpan -Days 3650)
 $settings = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Minutes 25) -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
 $user = [Security.Principal.WindowsIdentity]::GetCurrent().Name
 $principal = New-ScheduledTaskPrincipal -UserId $user -LogonType Interactive -RunLevel Limited
 
-Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Description "Scan desktop DDR4 prices every 30 minutes from this PC; publish public listing data to GitHub." -Force | Out-Null
+Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Description "Scan desktop DDR4 prices every 8 hours from this PC; publish public listing data to GitHub." -Force | Out-Null
 
 Write-Host ""
 Write-Host "SUCCESS: $taskName installed."
-Write-Host "The first scan was uploaded; the next is scheduled in about 30 minutes."
+Write-Host "The first scan was uploaded; the next is scheduled in about 8 hours."
 Write-Host "Task runs while this Windows user is signed in, even if the PC is locked."
 Write-Host "You can inspect it in Windows Task Scheduler or read logs\local-scanner.log."
 Write-Host "Public dashboard: https://skinnypete265.github.io/ram-deal-hunter/"
