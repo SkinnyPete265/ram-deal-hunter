@@ -1,5 +1,5 @@
 """Safety regression tests for bounded Windows stock-only browser checks."""
-from monitor import compatible_browser_stock
+from monitor import compatible_browser_stock, browser_stock_reason
 from browser_render import _ALLOWED_HOSTS
 
 
@@ -36,3 +36,13 @@ def test_browser_hosts_are_explicitly_limited_to_supported_retailers():
     assert {"pccomponentes.pt", "chip7.pt", "pcdiga.com",
             "chipman.pt", "castroelectronica.pt"}.issubset(set(_ALLOWED_HOSTS))
     assert "amazon.es" not in _ALLOWED_HOSTS
+
+
+def test_browser_stock_diagnostics_are_specific_and_do_not_expose_html():
+    original=offer()
+    assert browser_stock_reason(original, None, False)=="browser_render_unavailable"
+    assert browser_stock_reason(original, None)=="rendered_product_or_price_unreadable"
+    assert browser_stock_reason(original, offer(stock="unknown"))=="rendered_stock_unverified"
+    assert browser_stock_reason(original, offer(price_eur=199,stock="in_stock"))=="rendered_price_mismatch"
+    assert browser_stock_reason(original, offer(store="CHIP7",stock="in_stock"))=="rendered_product_mismatch"
+    assert browser_stock_reason(original, offer(title="Different DDR4 kit",stock="in_stock"))=="rendered_identity_unverified"
