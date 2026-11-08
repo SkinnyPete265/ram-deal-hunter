@@ -57,7 +57,10 @@ def matches(name):
     if (re.search(r"\bf4-[a-z0-9]+d-16[a-z0-9]*\b",raw) or
         re.search(r"\bkf4\d{2}[a-z0-9]+k2[/\-]16\b",raw) or
         re.search(r"\bcm[a-z]+16gx4m2[a-z0-9]+\b",raw) or
-        re.search(r"\b(?:cp|ct)2k8g4[a-z0-9]+\b",raw)):
+        re.search(r"\b(?:cp|ct)2k8g4[a-z0-9]+\b",raw) or
+        # Patriot 16GB Viper Steel "PVS416G...K" is a kit of 2x8GB,
+        # despite shops labelling it generically as a 16GB DIMM.
+        re.search(r"\bpvs416g[a-z0-9]+k\b",raw)):
         return None
     if re.search(r"(?:2x16(?:gb)?|16gbx2)(?!\d)",s):
         return "kit"
