@@ -230,6 +230,32 @@ def comparison_offers(html, base, source="KuantoKusta"):
             observed_at=stamp(),current=True,comparison_only=True)
     return list(found.values())
 
+def price_diagnostic(html,url):
+    """Store a small public-page diagnostic; never store HTML, cookies or form data."""
+    doc=BeautifulSoup(html,"html.parser")
+    title=doc.select_one("h1")
+    output={"url":url.split("?")[0][:180],
+            "heading":title.get_text(" ",strip=True)[:140] if title else ""}
+    found=[]
+    for node in doc.select("[class*='price'],[id*='price'],[itemprop='price']"):
+        if node.name in ("script","input","textarea"):continue
+        value=node.get("content") or node.get("data-price-amount") or node.get_text(" ",strip=True)
+        if not value or len(value)>90 or not re.search(r"(?i)(?:€|EUR|[0-9][.,][0-9]{2})",value):
+            continue
+        classes=" ".join(node.get("class",[]))[:100]
+        item=[node.name,classes,node.get("id","")[:50],str(value)[:80]]
+        if item not in found:found.append(item)
+        if len(found)>=7:break
+    output["price_nodes"]=found
+    prices=[]
+    for meta in doc.select("meta"):
+        key=meta.get("property") or meta.get("name") or meta.get("itemprop") or ""
+        if "price" in key.lower():
+            prices.append([key[:75],str(meta.get("content",""))[:70]])
+        if len(prices)>=6:break
+    output["price_meta"]=prices
+    return output
+
 def notify(o):
     token=os.getenv("TELEGRAM_BOT_TOKEN"); chat=os.getenv("TELEGRAM_CHAT_ID")
     if not token or not chat: return False
@@ -276,6 +302,7 @@ def run():
         for store,urls in grouped.items():
             if urls and len(queue)<120: queue.append((store,urls.pop(0)))
     offers=dict(catalogue_offers)
+    debug_counts={}
     for store,url in queue:
         if store in blocked_stores:
             continue
@@ -286,7 +313,11 @@ def run():
                 offers[item["id"]]=item
             else:
                 _,reason=extract_html_offer(html,store,url,matches,price,stock,stamp)
-                health.append({"source":store+" product","status":reason})
+                detail={"source":store+" product","status":reason}
+                if debug_counts.get(store,0)<2:
+                    detail["sample"]=price_diagnostic(html,url)
+                    debug_counts[store]=debug_counts.get(store,0)+1
+                health.append(detail)
         except (requests.RequestException,ValueError) as e:
             is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
             if is_blocked: blocked_stores.add(store)
