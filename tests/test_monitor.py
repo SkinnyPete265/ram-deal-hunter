@@ -156,3 +156,13 @@ def test_explicit_natural_language_module_counts():
     assert matches("DDR4 32GB composto por 2 módulos de 16 GB") == "kit"
     assert matches("DDR4 16GB composto por dois módulos de 8GB") is None
     assert matches("DDR5 32GB composto por dois módulos de 16GB") is None
+
+
+def test_well_defined_dual_16gb_ddr4_kit_skus():
+    assert matches("Kingston DDR4 32GB DIMM KF432C16BBK2/32")=="kit"
+    assert matches("G.Skill DDR4 32GB F4-3200C16D-32GIS")=="kit"
+    assert matches("Crucial DDR4 32GB Pro CP2K16G4DFRA32A")=="kit"
+    assert matches("Corsair DDR4 32GB CMK32GX4M2B3200C16")=="kit"
+    assert matches("Kingston DDR4 32GB DIMM KF432C16BB/32") is None
+    assert matches("G.Skill DDR4 16GB F4-3200C16D-16GIS") is None
+    assert matches("Corsair DDR5 32GB CMK32GX5M2B6000C36") is None
