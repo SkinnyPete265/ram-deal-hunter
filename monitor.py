@@ -18,7 +18,7 @@ except ImportError:
     browser_requests = None
 
 ROOT = Path(__file__).parent
-DATA = ROOT / "docs/data.json"
+DATA = Path(os.environ.get("RAM_DEAL_DATA_FILE") or (ROOT / "docs/data.json")).expanduser().resolve()
 AGENT = {"User-Agent": "RAMDealHunter/1.0 (personal price research; low frequency)", "Accept-Language": "pt-PT,pt;q=0.9,es;q=0.7"}
 HOSTS = {
     "PCDIGA": "pcdiga.com", "PcComponentes": "pccomponentes.pt",
