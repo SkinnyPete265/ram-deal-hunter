@@ -98,3 +98,16 @@ def test_stock_only_chipman_rejects_recommendation_stock():
       <span class="product-availability">Esgotado</span>
     </main></body></html>"""
     assert browser_stock_only(html,"Chipman",title,stock)[0]=="out_of_stock"
+
+
+def test_browser_stock_distinguishes_access_challenge_from_product_mismatch():
+    from retailer_parser import browser_stock_only
+    from monitor import stock
+    challenge="""<html><head><title>Just a moment...</title></head>
+    <body><main><h1>Checking your browser</h1></main></body></html>"""
+    assert browser_stock_only(challenge,"PcComponentes",offer()["title"],stock)==(
+        "unknown","rendered_access_challenge")
+    normal="""<html><body><main><h1>Different DDR4 kit, 2x16GB</h1></main>
+    </body></html>"""
+    assert browser_stock_only(normal,"PcComponentes",offer()["title"],stock)==(
+        "unknown","rendered_heading_mismatch")
