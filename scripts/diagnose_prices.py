@@ -133,7 +133,7 @@ def main():
             seen[store]=list(dict.fromkeys(seen[store]+urls))
             print(json.dumps({"store":store,"kind":"category","url":url,"products_found":len(urls),
                               "cards":len(BeautifulSoup(html,"html.parser").select("article, .product-card, .product-miniature"))},ensure_ascii=False))
-            if store in ("Chipman","Castro Electrónica"):
+            if store in ("Chipman","Castro Electrónica","Novo Atalho","El Shop","PCBox"):
                 summarize(html,store,url,"category")
         except Exception as e:
             print(json.dumps({"store":store,"kind":"category","error":str(e)[:170]}))
