@@ -55,6 +55,14 @@ def matches(name):
     if re.search(r"\b(?:2|dois|duas|two)\s+(?:m[oó]dulos?|dimms?|sticks?)\s*(?:(?:de|of|com|x)\s*)?16\s*gb\b",
                  str(name).lower(),re.I):
         return "kit"
+    # Well-defined matched-kit part-number families (DDR4 only). The suffix
+    # identifies the *total* 32GB kit and K2/M2/D the two-module package.
+    # A single 32GB stick such as KF432C16BB/32 must not match.
+    if (re.search(r"\bkf4\d{2}[a-z0-9]+k2[/\-]32\b",str(name).lower()) or
+        re.search(r"\bf4-[a-z0-9]+d-32[a-z0-9]+\b",str(name).lower()) or
+        re.search(r"\b(?:cp|ct)2k16g4[a-z0-9]+\b",str(name).lower()) or
+        re.search(r"\bcm[a-z]+32gx4m2[a-z0-9]+\b",str(name).lower())):
+        return "kit"
     if re.search(r"(?:1x16(?:gb)?|16gbx1)(?!\d)",s) and "32gb" not in s:
         return "single_pair"
     # A clearly named single 16GB desktop DIMM is also eligible, purchased twice.
