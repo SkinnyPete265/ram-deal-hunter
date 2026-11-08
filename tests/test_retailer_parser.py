@@ -346,3 +346,50 @@ def test_pccomponentes_incomplete_price_fraction_is_not_guessed():
       <div class="product-card__price-container">9,99€</div>
     </main></body></html>"""
     assert product_info(html,"PcComponentes","https://www.pccomponentes.pt/ram-32gb-ddr4") is None
+
+
+def test_headless_browser_dom_parser_can_extract_primary_buybox():
+    # DOM rendered by Chrome/Edge after JavaScript executes.
+    html = """
+    <html><body><main>
+       <h1>Kingbank 32 GB DDR4 3200MHz (2x16GB) UDIMM CL16</h1>
+       <div data-e2e="pdp-price-current">
+         <span data-e2e="pdp-price-current-integer">190</span>
+         <span data-e2e="pdp-price-current-decimals">05</span>
+       </div>
+       <article class="product-card__price-container"><span class="priceBase">19,99€</span></article>
+    </main></body></html>
+    """
+    o=product_info(html,"PcComponentes","https://www.pccomponentes.pt/kingbank-32gb-ddr4-2x16gb")
+    assert o is not None and o["price_eur"]==190.05
+
+
+def test_browser_renderer_uses_only_isolated_allowed_retailer_and_never_cloud(monkeypatch):
+    import browser_render
+    from types import SimpleNamespace
+    calls=[]
+    monkeypatch.setattr(browser_render,"_browser_path",lambda:"C:/Program Files/Google/Chrome/Application/chrome.exe")
+    def runner(command,**kwargs):
+        calls.append((command,kwargs))
+        return SimpleNamespace(returncode=0,stdout="<html><body><h1>DDR4 kit</h1></body></html>")
+    monkeypatch.setattr(browser_render.subprocess,"run",runner)
+    assert browser_render.render_dom("https://notpccomponentes.pt/product/ddr4") is None
+    assert browser_render.render_dom("http://www.pccomponentes.pt/ram") is None
+    assert browser_render.render_dom("https://pccomponentes.pt.evil.test/ram") is None
+    assert calls==[]
+    body=browser_render.render_dom("https://www.pccomponentes.pt/ram-ddr4")
+    assert "<h1>" in body and len(calls)==1
+    command,params=calls[0]
+    assert "--headless=new" in command and "--dump-dom" in command
+    assert any(x.startswith("--user-data-dir=") for x in command)
+    assert command[-1]=="https://www.pccomponentes.pt/ram-ddr4"
+    assert params["timeout"]==24
+
+
+def test_browser_renderer_returns_none_on_unrendered_page(monkeypatch):
+    import browser_render
+    from types import SimpleNamespace
+    monkeypatch.setattr(browser_render,"_browser_path",lambda:"chrome.exe")
+    monkeypatch.setattr(browser_render.subprocess,"run",
+        lambda *a,**k:SimpleNamespace(returncode=0,stdout="<html><body>Challenge</body></html>"))
+    assert browser_render.render_dom("https://chip7.pt/ram-ddr4") is None
