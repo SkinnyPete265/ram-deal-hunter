@@ -173,3 +173,17 @@ def test_crucial_2x16_sku_when_retailer_omits_ddr4():
     assert matches("Kit de Memória Crucial CP2K16G4DFRA32A")=="kit"
     assert matches("Crucial CT2K16G5DFRA32A") is None  # DDR5-like code not proven
     assert matches("Crucial CT2K16G4DFRA32A DDR5") is None
+
+
+def test_price_diagnostics_do_not_capture_form_values():
+    from monitor import price_diagnostic
+    html="""<html><body><h1>DDR4 RAM kit</h1>
+       <form><input type="password" name="secret" value="SHOULD_NOT_APPEAR"></form>
+       <span class="buybox-price">199,90 €</span>
+       <div class="recommended-price">1.00 €</div>
+    </body></html>"""
+    diagnostic=price_diagnostic(html,"https://www.pccomponentes.pt/ddr4-kit?token=PRIVATE")
+    assert "SHOULD_NOT_APPEAR" not in str(diagnostic)
+    assert "PRIVATE" not in str(diagnostic)
+    assert diagnostic["heading"]=="DDR4 RAM kit"
+    assert diagnostic["price_nodes"][0][3]=="199,90 €"
