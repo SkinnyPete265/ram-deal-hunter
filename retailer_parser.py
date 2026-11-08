@@ -7,6 +7,7 @@ import hashlib
 import re
 
 from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
 MONEY_RE = re.compile(r"(?<![\d])(?:\d{1,3}(?:[.\s\u00a0]\d{3})+|\d{1,5})(?:[,.]\d{2})(?!\d)")
 PRIMARY_PRICE_SELECTORS = (
@@ -80,6 +81,86 @@ def _primary_price(doc, convert):
     return None, None
 
 
+def _chipman_tax_price(doc, convert):
+    """Fallback for Chipman product pages showing '189,90 € Com IVA'.
+
+    Only inspect the product text immediately following the main heading,
+    never unrelated recommendation cards elsewhere on the page.
+    """
+    main = doc.select_one("#product") or doc.select_one("#main") or doc.select_one("main")
+    if main is None:
+        return None
+    heading = main.select_one("h1")
+    if heading is None:
+        return None
+    full = main.get_text(" ", strip=True)
+    name = heading.get_text(" ", strip=True)
+    start = full.find(name)
+    if start < 0:
+        return None
+    excerpt = full[start + len(name):start + len(name) + 1800]
+    # Prefer the price immediately followed by the product's VAT label.
+    for match in re.finditer(r"(?<!\d)(\d{1,5}(?:[.,]\d{2}))\s*€\s*Com\s+IVA\b",excerpt,re.I):
+        number = _amount(match.group(1),convert)
+        if number is not None:
+            return number
+    return None
+
+
+def category_card_offers(html, store, base, matches, price, stock, stamp, allowed):
+    """Extract explicitly matching RAM cards only; mark stock unverified.
+
+    A catalogue card is usable product price evidence but does not prove
+    stock or checkout delivery, even when the card has an add-to-cart control.
+    """
+    doc=BeautifulSoup(html,"html.parser")
+    found={}
+    selectors=("article.product-miniature", ".product-miniature", ".product-card",
+               ".product-item", ".js-product-miniature", "li.ajax_block_product")
+    for card in doc.select(", ".join(selectors)):
+        anchor=card.select_one("h2.product-title a[href], h3.product-title a[href], .product-title a[href], a.product-name[href], a.product-thumbnail[href]")
+        if anchor is None:
+            continue
+        url=urljoin(base,anchor.get("href","")).split("#")[0].split("?")[0]
+        if not allowed(store,url) or url.rstrip("/")==base.rstrip("/"):
+            continue
+        name=anchor.get_text(" ",strip=True)
+        if not name:
+            heading=card.select_one(".product-title")
+            name=heading.get_text(" ",strip=True) if heading else ""
+        description=card.select_one(".product-description, .product-desc")
+        details=name+(" "+description.get_text(" ",strip=True)[:350] if description else "")
+        kind=matches(details)
+        if kind is None:
+            continue
+        node=card.select_one(".product-price-and-shipping .price:not(.regular-price), .current-price .price, .price-final_price .price, .product-price, .price:not(.regular-price)")
+        if node is None:
+            continue
+        unit=None
+        for value in (node.get("content"),node.get("data-price-amount"),node.get_text(" ",strip=True)[:120]):
+            unit=_amount(value,price)
+            if unit is not None:
+                break
+        if unit is None:
+            continue
+        availability="unknown"
+        indicator=card.select_one(".product-availability, .out-of-stock, .product-flags .out_of_stock")
+        if indicator and stock(indicator.get_text(" ",strip=True))=="out_of_stock":
+            availability="out_of_stock"
+        total=round(unit*(2 if kind=="single_pair" else 1),2)
+        ident=hashlib.sha256((store+":"+url).encode()).hexdigest()[:16]
+        mhz=re.search(r"\b(2133|2400|2666|2933|3000|3200|3466|3600|3733|4000|4266)\b",name)
+        cl=re.search(r"\bCL\s*(\d\d)\b",name,re.I)
+        found[ident]=dict(id=ident,store=store,url=url,title=name,configuration=kind,
+            units_to_buy=2 if kind=="single_pair" else 1,
+            unit_price_eur=unit,price_eur=total,stock=availability,
+            shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,
+            cas_latency=int(cl[1]) if cl else None,
+            source="Retailer catalogue price (verify product page)",observed_at=stamp(),
+            current=True,catalogue_only=True)
+    return list(found.values())
+
+
 def _primary_stock(doc, classify):
     for selector in ("#product-availability", ".product-availability", "#availability", "[itemprop='availability']"):
         for node in doc.select(selector):
@@ -105,6 +186,10 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
     if kind is None:
         return None, "configuration_unverified"
     unit, source = _primary_price(doc, price)
+    if unit is None and store=="Chipman":
+        unit=_chipman_tax_price(doc,price)
+        if unit is not None:
+            source="Chipman primary VAT-inclusive price"
     if unit is None:
         return None, "price_not_found"
     currency = doc.select_one("meta[property='product:price:currency'], meta[itemprop='priceCurrency']")
