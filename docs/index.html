@@ -33,7 +33,7 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 <p class="muted">Desktop DDR4 · exactly 2 × 16 GB · Portugal-friendly shops · €200 maximum</p></div>
 <p class="muted" id="updated">No live scan yet</p></header>
 <section class="summary"><div class="card"><small>Budget</small><strong>€200</strong></div>
-<div class="card"><small>Current candidates</small><strong id="deals">0</strong></div>
+<div class="card"><small>Listed in stock ≤€200</small><strong id="deals">0</strong></div>
 <div class="card"><small>Lowest available</small><strong id="lowest">—</strong></div>
 <div class="card"><small>Tracked offers</small><strong id="tracked">0</strong></div></section>
 <div class="controls"><input id="search" placeholder="Search RAM models or specs">
@@ -42,10 +42,11 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 <label><input id="stale" type="checkbox"> Show stale</label>
 <button id="refresh">Refresh</button><button id="export">Export CSV</button><button id="scan" hidden>Scan now</button>
 <span class="muted" id="scan-status"></span></div>
+<p class="muted" style="font-size:.85rem">Automatic checks: every 8 hours. Manual check: <a style="color:var(--accent)" href="https://github.com/SkinnyPete265/ram-deal-hunter/actions/workflows/scan.yml" target="_blank" rel="noopener noreferrer">GitHub Actions → Run workflow</a>, or run <code>RUN_LOCAL_SCAN.bat</code> on your PC. The public dashboard itself is read-only.</p>
 <h2>Tracked RAM offers <span class="muted" id="count"></span></h2>
 <div class="tablewrap"><table><thead><tr><th>Model & specs</th><th>Store</th><th>Price for 32 GB</th><th>Stock</th><th>Checked</th><th></th></tr></thead><tbody id="rows"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody></table></div>
 <h2>Source status</h2><div id="health"></div>
-<footer>Some listings are independent retailer prices; "comparison" entries are the lowest advertised price across sellers and must be verified before purchase. Listed prices do not guarantee stock or delivery to Portugal. For two separate 16 GB modules, the displayed total is twice the unit price. Checkout, shipping and two-unit availability require verification. Unknown/stale items are labeled accordingly.</footer>
+<footer>"Listed in stock" reflects retailer-reported availability only, not confirmed checkout delivery. Some listings are independent retailer prices; "comparison" entries are the lowest advertised price across sellers and must be verified before purchase. Listed prices do not guarantee stock or delivery to Portugal. For two separate 16 GB modules, the displayed total is twice the unit price. Checkout, shipping and two-unit availability require verification. Unknown/stale items are labeled accordingly.</footer>
 </main><script src="merge.js"></script><script>
 let data={offers:[],health:[],budget_eur:200},visible=[];
 const E=id=>document.getElementById(id);
@@ -55,7 +56,7 @@ const date=s=>s?new Date(s).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon'}):'
 function draw(){
 let offers=data.offers||[],curr=offers.filter(o=>o.current),budget=data.budget_eur||200;
 E('tracked').textContent=curr.length;
-E('deals').textContent=curr.filter(o=>o.price_eur<=budget&&o.stock!=='out_of_stock').length;
+E('deals').textContent=curr.filter(o=>o.price_eur<=budget&&o.stock==='in_stock'&&!o.comparison_only&&!o.catalogue_only).length;
 let available=curr.filter(o=>o.stock==='in_stock');E('lowest').textContent=available.length?euro(Math.min(...available.map(o=>o.price_eur))):'—';
 let q=E('search').value.toLowerCase(),st=E('store').value;
 visible=offers.filter(o=>(E('stale').checked||o.current)&&(!st||o.store===st)&&[o.title,o.store,o.speed_mhz,o.cas_latency].join(' ').toLowerCase().includes(q));
