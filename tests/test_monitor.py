@@ -321,3 +321,62 @@ def test_crucial_ct_g4s_laptop_sodimm_is_never_desktop_pair():
     assert matches("Crucial CT16G4SFRA32AT 16GB 1x16GB DDR4 3200MHz CL22") is None
     assert matches("Crucial CT16G4SFD824A DDR4 16GB DIMM") is None
     assert matches("Crucial CT16G4DFRA32A DDR4 16GB DIMM") == "single_pair"
+
+
+def test_castro_502_recovers_with_independent_tls_transport(monkeypatch):
+    import monitor
+    from types import SimpleNamespace
+    from requests import Response
+    url="https://www.castroelectronica.pt/pt/product/ram-ddr4-kit"
+    failed=Response()
+    failed.status_code=502
+    failed.url=url
+    successful=Response()
+    successful.status_code=200
+    successful.url=url
+    successful._content=b"<html><h1>DDR4 32GB 2x16GB</h1></html>"
+    successful.headers["Content-Type"]="text/html"
+    calls=[]
+    monkeypatch.setattr(monitor,"_request_with_transient_retry",lambda *_:failed)
+    monkeypatch.setattr(monitor,"browser_requests",SimpleNamespace(
+        get=lambda *a,**k:(calls.append((a,k)) or successful)))
+    monitor.FETCH_META.clear()
+    assert "DDR4 32GB" in monitor.download(url)
+    assert len(calls)==1
+    assert monitor.FETCH_META["www.castroelectronica.pt"]["transient_recovered"]==1
+
+
+def test_castro_timeout_can_recover_without_ignoring_product_validation(monkeypatch):
+    import monitor
+    from types import SimpleNamespace
+    from requests import Response, ReadTimeout
+    url="https://www.castroelectronica.pt/pt/product/ram-ddr4-kit"
+    good=Response()
+    good.status_code=200
+    good.url=url
+    good._content=b"<html><h1>RAM DDR4 32GB 2x16GB</h1></html>"
+    good.headers["Content-Type"]="text/html"
+    monkeypatch.setattr(monitor,"_request_with_transient_retry",
+        lambda *_:(_ for _ in ()).throw(ReadTimeout("simulated timeout")))
+    monkeypatch.setattr(monitor,"browser_requests",SimpleNamespace(
+        get=lambda *a,**k:good))
+    monitor.FETCH_META.clear()
+    assert monitor.download(url).startswith("<html>")
+    assert monitor.FETCH_META["www.castroelectronica.pt"]["transient_attempted"]==1
+
+
+def test_castro_transient_fallback_does_not_make_502_a_valid_page(monkeypatch):
+    import monitor
+    from requests import Response, HTTPError
+    url="https://www.castroelectronica.pt/pt/product/ram-ddr4-kit"
+    failed=Response()
+    failed.status_code=502
+    failed.url=url
+    monitor.FETCH_META.clear()
+    monkeypatch.setattr(monitor,"_request_with_transient_retry",lambda *_:failed)
+    monkeypatch.setattr(monitor,"browser_requests",None)
+    import pytest
+    with pytest.raises(HTTPError):
+        monitor.download(url)
+    assert monitor.FETCH_META["www.castroelectronica.pt"]["transient_attempted"]==1
+    assert monitor.FETCH_META["www.castroelectronica.pt"]["transient_recovered"]==0
