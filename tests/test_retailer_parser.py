@@ -535,3 +535,19 @@ def test_chip7_financing_pvp_rejects_related_product_only():
       </main></body></html>
     """
     assert product_info(html,"CHIP7","https://chip7.pt/ram/kit-2x16") is None
+
+
+def test_chip7_contact_store_without_financing_price_reports_no_public_quote():
+    from retailer_parser import extract_html_offer
+    from monitor import matches, price, stock, stamp
+    html="""
+    <html><head><meta name="description" content="DDR4 32 GB 2x16GB"></head>
+    <body><main>
+      <h1>32GB 3600MHz DDR4 DIMM (KIT OF 2) Kingston FURY</h1>
+      <p>Contacte a loja CHIP7 mais próxima</p>
+      <div>Crédito / Prestações</div>
+      <div>Montante Financiado apenas mediante consulta</div>
+    </main></body></html>"""
+    offer,reason=extract_html_offer(html,"CHIP7","https://chip7.pt/ram/fury",
+        matches,price,stock,stamp)
+    assert offer is None and reason=="contact_store_for_price"
