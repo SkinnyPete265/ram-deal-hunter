@@ -551,3 +551,71 @@ def test_chip7_contact_store_without_financing_price_reports_no_public_quote():
     offer,reason=extract_html_offer(html,"CHIP7","https://chip7.pt/ram/fury",
         matches,price,stock,stamp)
     assert offer is None and reason=="contact_store_for_price"
+
+
+def test_castro_online_in_stock_is_independent_of_physical_shops():
+    html = """
+    <html><body><main>
+      <h1>Memória RAM Fury Beast 32GB (2x16GB) DDR4-3200 MHz CL16 - KINGSTON</h1>
+      <span class="product-opportunity-new-price">359,59 €</span>
+      <p>Comprar</p><p>Envio previsto até 16 Novembro</p>
+      <div>Disponibilidade Online: Disponivel (2 a 5 Dias úteis)</div>
+      <div>Mozelos: Consulte-nos</div><div>Porto: Indisponível</div>
+      <div>Stock atualizado às 03:02:51</div>
+    </main></body></html>"""
+    offer=product_info(html,"Castro Electrónica",
+        "https://www.castroelectronica.pt/pt/product/memoria-ram-fury-beast-32gb-2x16gb-ddr4-3200-mhz-cl16-preto--kingston")
+    assert offer and offer["stock"]=="in_stock" and offer["price_eur"]==359.59
+
+
+def test_castro_out_of_stock_online_not_overruled_by_physical_shop():
+    html = """
+    <html><body><main><h1>G.SKILL Aegis 32GB (2x16GB) DDR4 3200 MHz</h1>
+      <span class="product-opportunity-new-price">277,79 €</span>
+      <p>Disponibilidade Online: Sem stock</p>
+      <p>Mozelos: Disponivel</p><p>Porto: Disponivel</p>
+    </main></body></html>"""
+    offer=product_info(html,"Castro Electrónica",
+        "https://www.castroelectronica.pt/pt/product/memoria-ram-aegis-32gb-ddr4")
+    assert offer and offer["stock"]=="out_of_stock"
+
+
+def test_castro_contact_shop_does_not_count_as_online_available():
+    html = """
+    <html><body><main><h1>Memória DDR4 32GB 2x16GB CL16</h1>
+      <span class="product-opportunity-new-price">275,99 €</span>
+      <p>Disponibilidade Online: Consulte-nos</p>
+      <p>Mozelos: Disponivel</p><p>Porto: Disponivel</p>
+    </main></body></html>"""
+    offer=product_info(html,"Castro Electrónica",
+        "https://www.castroelectronica.pt/pt/product/memoria-ram-aegis")
+    assert offer and offer["stock"]=="unknown"
+
+
+def test_castro_related_items_never_set_main_product_stock():
+    html = """
+    <html><body><main><h1>Memória DDR4 32GB 2x16GB CL16</h1>
+      <span class="product-opportunity-new-price">277,79 €</span>
+      <p>Comprar</p>
+      <p>Disponibilidade Mozelos: Disponivel Porto: Disponivel</p>
+      <p>Mais informações</p>
+      <div class="product-recommendations">""" + ("Other recommended products "*220) + """
+        <div>Disponibilidade Online: Disponivel</div>
+      </div>
+    </main></body></html>"""
+    offer=product_info(html,"Castro Electrónica",
+        "https://www.castroelectronica.pt/pt/product/memoria-ram-aegis")
+    assert offer and offer["stock"]=="unknown"
+
+
+def test_castro_single_dimm_requires_quantity_two_even_if_online_available():
+    html = """
+    <html><body><main><h1>GOODRAM DDR4 16GB 1x16GB DIMM 2666 MHz</h1>
+      <span class="product-opportunity-new-price">125,29 €</span>
+      <p>Disponibilidade Online: Disponível</p>
+      <p>Mozelos: Consulte-nos</p>
+    </main></body></html>"""
+    offer=product_info(html,"Castro Electrónica",
+        "https://www.castroelectronica.pt/pt/product/memoria-ram-goodram")
+    assert offer and offer["configuration"]=="single_pair"
+    assert offer["price_eur"]==250.58 and offer["stock"]=="unknown"
