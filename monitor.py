@@ -39,6 +39,9 @@ def stamp():
 
 def matches(name):
     s = re.sub(r"\s+","",str(name).lower().replace("×","x").replace("*","x"))
+    # Preserve a module-count boundary after DDR4 when the space was removed:
+    # "DDR4 2x16GB" must not become "DDR42x16GB" (nor 11x16 become 1x16).
+    s = re.sub(r"(?<=ddr4)(?=\d+x)"," ",s)
     # An unambiguous Crucial CP2K16G4/CT2K16G4 DDR4 model can validate
     # listings (e.g. Fnac marketplace) that omit "DDR4" from their headings.
     trusted_ddr4_sku=bool(re.search(r"\b(?:cp|ct)2k16g4[a-z0-9]+\b",str(name).lower()))
