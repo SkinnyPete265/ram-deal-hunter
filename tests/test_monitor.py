@@ -143,3 +143,8 @@ def test_mislabeled_kingston_laptop_sodimm():
     assert matches("Kingston ValueRAM 16GB DDR4 (1x16GB) 3200HZ (KVR32S22D8/16)") is None
     assert matches("Kingston 16GB DDR4 3200MHz DIMM KVR32S22S8/16") is None
     assert matches("Kingston 16GB DDR4 UDIMM KVR32N22D8/16") == "single_pair"
+
+def test_unregistered_desktop_ddr4_not_mistaken_for_rdimm():
+    assert matches("Crucial DDR4 32GB 2x16GB Unregistered (unbuffered)") == "kit"
+    assert matches("Corsair DDR4 32GB 2x16GB RDIMM Registered") is None
+    assert matches("Kingston DDR4 32GB 2x16GB 260-pin SO-DIMM") is None
