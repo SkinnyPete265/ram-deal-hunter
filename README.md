@@ -30,11 +30,15 @@ python monitor.py
 python app.py
 ```
 
-GitHub Actions uses `.github/workflows/scan.yml`, scheduled at minute 17 and 47 each hour. GitHub may delay or skip runs, especially on inactive repositories. Use **Actions → Scan RAM prices → Run workflow** to request a scan. See the **Test** workflow for automated parser tests.
+GitHub Actions uses `.github/workflows/scan.yml`, scheduled at minute 17 and 47 each hour (with an additional scan on changes to scanner source/configuration). GitHub may delay or skip runs, especially on inactive repositories. Use **Actions → Scan RAM prices → Run workflow** to request a scan. See the **Test** workflow for automated parser tests.
 
 ## Retailers and API setup
 
-The scanner attempts a small watchlist and category-page discovery for PCDIGA, PcComponentes, Globaldata and CHIP7; ON4TECH is also on the watchlist. Retailers frequently change HTML, URLs and access policies, so entries may fail and should not be interpreted as a full-market comparison.
+The scanner uses a small seeded watchlist plus category-page discovery across **PCDIGA, PcComponentes, Globaldata, CHIP7, Novo Atalho, Castro Electrónica, Chipman, You Get, KIBO, El Shop (Spain), and PCBox**. Additional direct-product watchlist URLs cover **ON4TECH, Switch Technology, and Fnac.pt**. The Spain-based El Shop explicitly lists Portugal as a supported destination; other included retailers have Portuguese storefronts and/or published Portugal delivery options. Marketplace shipping depends on the individual seller.
+
+**Known coverage gaps:** PCDIGA, PcComponentes and CHIP7 returned HTTP 403 from GitHub-hosted scans on 8 November 2026. The monitor records blocked status, skips further attempts to that store *during the same run*, and checks again on later scheduled runs. This is **not** a workaround for blocked automated access, and those shops may remain unmonitored until they provide an accessible feed or change their access rules. Other sources may omit structured product data or block requests too. The tracker does not claim total market coverage.
+
+The scanner checks direct product pages for Product JSON-LD, and accepts only explicitly qualifying RAM configurations. A product link found on a category page is **not** considered a verified offer until the product page independently proves its specification, price and stock status. The public dashboard reports failed source checks and keeps old observations marked stale.
 
 **Amazon.es is deliberately excluded from unattended GitHub scans.** Reliable automated Amazon prices and delivery-to-Portugal checks are not provided by this free scanner, and no Keepa subscription is required. You can still search Amazon.es manually or use the separate ChatGPT hourly watch for best-effort public web listing research. These results should never be interpreted as confirmed checkout totals.
 
@@ -48,7 +52,7 @@ Configure secrets through **Settings → Secrets and variables → Actions → N
 - `app.py`: local-only dashboard server and scan control
 - `docs/index.html`: responsive dashboard (search, filters, CSV export)
 - `docs/data.json`: last scan and historical offers
-- `config.json` / `watchlist.csv`: stores and product URLs
+- `config.json` / `watchlist.csv`: allowed retailers, category URLs, and direct product URLs
 - `tests/`: automated parser tests
 - `.github/workflows/`: scheduled scan and test suite
 
