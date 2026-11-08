@@ -19,3 +19,17 @@ jobs:
       - run: python -m pytest -q
       - run: node --check docs/merge.js
       - run: node tests/test_merge.js
+      - name: Check Windows PowerShell script syntax
+        shell: pwsh
+        run: |
+          $paths = @('scripts/Run-LocalScan.ps1', 'scripts/Install-LocalScanner.ps1', 'scripts/Uninstall-LocalScanner.ps1')
+          foreach ($path in $paths) {
+            $tokens = $null
+            $errors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile($path, [ref]$tokens, [ref]$errors) | Out-Null
+            if ($errors.Count -gt 0) {
+              $errors | ForEach-Object { Write-Error "${path}: $_" }
+              exit 1
+            }
+            Write-Host "OK: $path"
+          }
