@@ -373,6 +373,22 @@ def notify(o):
         return r.ok and r.json().get("ok",False)
     except (requests.RequestException,ValueError): return False
 
+def browser_stock_reason(original, rendered, rendered_html_present=True):
+    """Return a bounded, non-sensitive reason for an unverified stock check."""
+    if not rendered_html_present:
+        return "browser_render_unavailable"
+    if not rendered:
+        return "rendered_product_or_price_unreadable"
+    if (original.get("store")!=rendered.get("store") or
+            original.get("configuration")!=rendered.get("configuration")):
+        return "rendered_product_mismatch"
+    if abs(original.get("price_eur",0)-rendered.get("price_eur",0))>0.011:
+        return "rendered_price_mismatch"
+    if rendered.get("stock") not in ("in_stock","out_of_stock"):
+        return "rendered_stock_unverified"
+    return "rendered_identity_unverified"
+
+
 def compatible_browser_stock(original, rendered):
     """Browser results may supplement stock, never replace a verified price.
 
@@ -486,7 +502,7 @@ def run():
                     else:
                         health.append({"source":store+" browser stock",
                                        "status":"unverified",
-                                       "detail":"Rendered product availability remains uncertain"})
+                                       "detail":browser_stock_reason(item,browser_offer, bool(rendered))})
                 elif browser_offer is not None:
                     browser_offer["source"]+=" (headless browser render)"
                     item=browser_offer
