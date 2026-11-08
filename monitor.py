@@ -40,6 +40,11 @@ def matches(name):
     s = re.sub(r"\s+","",str(name).lower().replace("×","x").replace("*","x"))
     if "ddr4" not in s or "ddr5" in s or any(t in s for t in ("sodimm","so-dimm","laptop","rdimm","registered","eccreg","260pin")):
         return None
+    # Kingston KVRxxS... part numbers describe laptop SO-DIMMs even when
+    # a seller's title incorrectly calls the module a generic DIMM.
+    # E.g. Kingston KVR32S22D8/16 is officially a 260-pin SO-DIMM.
+    if re.search(r"kvr\d{2}s\d{2}[a-z0-9]+[/_]\d{1,3}(?!\d)",str(name).lower()):
+        return None
     if any(re.search(p,s) for p in (r"1x32(?:gb)?",r"4x8(?:gb)?",r"2x8(?:gb)?",r"4x4(?:gb)?",r"2x32(?:gb)?",r"4x16(?:gb)?",r"8x4(?:gb)?")):
         return None
     if re.search(r"(?:2x16(?:gb)?|16gbx2)(?![a-z0-9])",s):
