@@ -20,7 +20,12 @@ td a{color:var(--accent);text-decoration:none;white-space:nowrap}
 .price{font-size:1.05rem;font-weight:800;white-space:nowrap}.good{color:var(--accent)}.bad{color:#fb9494}
 .pill{display:inline-block;border-radius:99px;background:#303c4a;padding:5px 9px;font-size:.75rem}
 .name{font-weight:700}.spec{font-size:.8rem;color:var(--muted);margin-top:5px}
-#health{font-size:.82rem;line-height:2;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:45px}
+#health{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px;font-size:.82rem}
+.source{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px}
+.source strong{display:block;color:#edf4fc;margin-bottom:7px}
+.source small{display:block;color:var(--muted);line-height:1.45}
+.source.blocked{border-color:#85514f}
+.source.active{border-color:#326952}.empty{text-align:center;color:var(--muted);padding:45px}
 footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 @media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}header{display:block}}
 </style></head><body><main>
@@ -63,7 +68,23 @@ let state=o.stock==='in_stock'?'In stock':o.stock==='out_of_stock'?'Out of stock
 let safe=/^https:\/\//.test(o.url)?o.url:'#';
 return '<tr><td><div class="name">'+esc(o.title)+'</div><div class="spec">'+esc(specs)+'</div></td><td>'+esc(o.store)+'</td><td class="price '+(o.price_eur<=budget&&o.stock!=='out_of_stock'?'good':'')+'">'+euro(o.price_eur)+'</td><td><span class="pill">'+state+'</span>'+(!o.current?' <span class="pill bad">Stale</span>':'')+'</td><td class="muted">'+date(o.observed_at)+'</td><td><a target="_blank" rel="noopener noreferrer" href="'+esc(safe)+'">View listing</a></td></tr>'
 }).join(''):'<tr><td colspan="6" class="empty">No matching offers. Check source status and retry later.</td></tr>';
-E('health').textContent=(data.health||[]).map(h=>h.source+': '+h.status).join(' · ')||'No checks recorded.';
+const grouped={};
+for(const h of (data.health||[])){
+  const store=String(h.source||'Unknown').replace(/ (category|product)$/,'');
+  const g=grouped[store]||(grouped[store]={store,blocked:false,errors:0,ok:0,products:0});
+  if(['blocked_403_or_429','automated_access_blocked'].includes(h.status))g.blocked=true;
+  if(h.status==='error')g.errors++;
+  if(h.status==='ok')g.ok++;
+  if(h.status==='no_verified_price')g.products++;
+}
+E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b.store)).map(g=>{
+ const found=curr.filter(o=>o.store===g.store).length;
+ const state=g.blocked?'Blocked by retailer':g.ok||found?'Checked':'Unverified';
+ const css=g.blocked?'blocked':g.ok||found?'active':'';
+ return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
+ esc(state+' · '+found+' offer'+(found===1?'':'s')+(g.errors?' · '+g.errors+' errors':'')+(g.products?' · '+g.products+' without price data':''))+
+ '</small></div>';
+}).join('')||'<p class="muted">No checks recorded yet.</p>';
 }
 async function load(){
 try{let r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);data=await r.json();E('updated').textContent=data.last_scan?'Last scan '+date(data.last_scan):'No live scan yet';
