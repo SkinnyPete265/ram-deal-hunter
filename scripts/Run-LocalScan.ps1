@@ -59,6 +59,19 @@ try {
         throw "Local Git checkout cannot fast-forward. Resolve local changes before running automated scans."
     }
 
+    # Auto-migrate the installed 30-minute task to the new 8-hour schedule.
+    # Existing PowerShell processes retain their old code, so migration may
+    # happen on the second scheduled invocation after this update is fetched.
+    $scheduleUpdater = Join-Path $root "scripts\Update-LocalSchedule.ps1"
+    if (Test-Path $scheduleUpdater) {
+        try {
+            & $scheduleUpdater
+        } catch {
+            Write-Warning ("Could not update Task Scheduler interval: " + $_.Exception.Message)
+            # This must not stop a legitimate scan or its upload.
+        }
+    }
+
     $env:RAM_DEAL_DATA_FILE = Join-Path $root "docs\local-data.json"
     $env:PYTHONDONTWRITEBYTECODE = "1"
 
