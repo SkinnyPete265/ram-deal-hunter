@@ -50,6 +50,11 @@ def matches(name):
         return None
     if re.search(r"(?:2x16(?:gb)?|16gbx2)(?!\d)",s):
         return "kit"
+    # Retailer descriptions sometimes express the actual kit as
+    # "dois módulos de 16 GB" instead of "2x16GB".
+    if re.search(r"\b(?:2|dois|duas|two)\s+(?:m[oó]dulos?|dimms?|sticks?)\s*(?:(?:de|of|com|x)\s*)?16\s*gb\b",
+                 str(name).lower(),re.I):
+        return "kit"
     if re.search(r"(?:1x16(?:gb)?|16gbx1)(?!\d)",s) and "32gb" not in s:
         return "single_pair"
     # A clearly named single 16GB desktop DIMM is also eligible, purchased twice.
