@@ -19,6 +19,7 @@ jobs:
       - run: python -m pytest -q
       - run: node --check docs/merge.js
       - run: node tests/test_merge.js
+      - run: node tests/test_dashboard.js
       - name: Check Windows PowerShell script syntax
         shell: pwsh
         run: |
