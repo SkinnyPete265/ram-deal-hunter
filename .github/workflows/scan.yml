@@ -30,15 +30,36 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python monitor.py
-      - name: Save price history and dashboard snapshot
+      - name: Save price history and dashboard snapshot safely
+        shell: bash
         run: |
+          set -euo pipefail
+          snapshot="$(mktemp)"
+          cp docs/data.json "$snapshot"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/data.json
-          if ! git diff --cached --quiet; then
+          # The scanner may have started before a code/docs commit landed.
+          # Always base its snapshot commit on current main instead of using a stale HEAD.
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            cp "$snapshot" docs/data.json
+            git add docs/data.json
+            if git diff --cached --quiet; then
+              echo "No new scan data to save"
+              break
+            fi
             git commit -m 'chore: refresh RAM scan'
-            git push
-          fi
+            if git push origin HEAD:main; then
+              echo "Saved scan data on current main"
+              break
+            fi
+            if [ "$attempt" -eq 3 ]; then
+              echo "Repeated concurrent GitHub updates prevented saving scan data" >&2
+              exit 1
+            fi
+            echo "Remote changed during scan; retrying against newest main"
+          done
 
   publish:
     name: Publish dashboard to GitHub Pages
