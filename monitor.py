@@ -337,9 +337,14 @@ def run():
             else:
                 _,reason=extract_html_offer(html,store,url,matches,price,stock,stamp)
                 detail={"source":store+" product","status":reason}
-                if debug_counts.get(store,0)<2:
+                # Collect useful diagnostics for price failures, without
+                # allowing unrelated products to exhaust each store's quota.
+                limit={"price_not_found":2,"configuration_unverified":1,
+                       "no_primary_product":1}.get(reason,0)
+                sample_key=(store,reason)
+                if debug_counts.get(sample_key,0)<limit:
                     detail["sample"]=price_diagnostic(html,url)
-                    debug_counts[store]=debug_counts.get(store,0)+1
+                    debug_counts[sample_key]=debug_counts.get(sample_key,0)+1
                 health.append(detail)
         except (requests.RequestException,ValueError) as e:
             is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
