@@ -429,29 +429,52 @@ def run():
         try:
             html=download(url)
             item=product_info(html,store,url)
-            if item:
-                offers[item["id"]]=item
-            else:
+            # A readable price doesn't prove that the product is available.
+            # On Windows, selectively render unknown-stock product pages too.
+            # Reuse the original verified price; never substitute a price from
+            # an unrelated recommendation or a JavaScript-rendered advert.
+            budget={"PcComponentes":6,"CHIP7":3,"PCDIGA":3,
+                    "Chipman":3,"Castro Electrónica":3}.get(store,0)
+            should_render = (os.name=="nt" and
+                browser_attempts.get(store,0)<budget and
+                ((item is not None and item.get("stock")=="unknown" and
+                  item.get("configuration")=="kit" and
+                  not item.get("indicative_only")) or
+                 item is None))
+            reason=None
+            if item is None:
                 _,reason=extract_html_offer(html,store,url,matches,price,stock,stamp)
-                # Some PcComponentes/CHIP7 purchase boxes are filled by JavaScript.
-                # A limited number of *Windows-only* Chrome/Edge DOM renders are
-                # attempted after a normal page proved its product identity.
-                # Never infer the main item's price from recommendation cards.
-                budget={"PcComponentes":6,"CHIP7":3}.get(store,0)
-                if (reason=="price_not_found" and os.name=="nt" and
-                        browser_attempts.get(store,0)<budget):
-                    browser_attempts[store]=browser_attempts.get(store,0)+1
-                    rendered=render_dom(url)
-                    if rendered:
-                        browser_offer=product_info(rendered,store,url)
-                        if browser_offer is not None:
-                            browser_offer["source"]+=" (headless browser render)"
-                            offers[browser_offer["id"]]=browser_offer
-                            health.append({"source":store+" browser render","status":"ok","found":1})
-                            continue
+                should_render = should_render and reason=="price_not_found"
+            if should_render:
+                browser_attempts[store]=browser_attempts.get(store,0)+1
+                rendered=render_dom(url)
+                browser_offer=product_info(rendered,store,url) if rendered else None
+                if item is not None:
+                    # The price and identity came from the original product
+                    # page. Only enrich availability if a rendered page proves
+                    # the same RAM configuration and gives an explicit result.
+                    if (browser_offer and
+                            browser_offer.get("configuration")==item.get("configuration") and
+                            browser_offer.get("stock") in ("in_stock","out_of_stock")):
+                        item["stock"]=browser_offer["stock"]
+                        item["source"]+=" (stock checked in headless browser)"
+                        health.append({"source":store+" browser stock",
+                                       "status":"ok","found":1})
+                    else:
+                        health.append({"source":store+" browser stock",
+                                       "status":"unverified",
+                                       "detail":"Rendered product availability remains uncertain"})
+                elif browser_offer is not None:
+                    browser_offer["source"]+=" (headless browser render)"
+                    item=browser_offer
+                    health.append({"source":store+" browser render","status":"ok","found":1})
+                else:
                     health.append({"source":store+" browser render",
                                    "status":"no_verified_price",
                                    "detail":"Browser rendering did not reveal a verified primary-product price"})
+            if item is not None:
+                offers[item["id"]]=item
+            else:
                 detail={"source":store+" product","status":reason}
                 # Collect useful diagnostics for price failures, without
                 # allowing unrelated products to exhaust each store's quota.
