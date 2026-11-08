@@ -104,7 +104,7 @@ def _pccomponentes_price(doc, convert):
         container = doc.select_one("#pdp-price-current-container")
     if container is not None:
         raw = container.get_text(" ", strip=True).replace("\u00a0", " ")
-        amounts = re.findall(r"(?<!\d)(\d{1,5})\s*[,\.]\s*(\d{2})\s*(?:€|EUR)\b?", raw, re.I)
+        amounts = re.findall(r"(?<!\d)(\d{1,5})\s*[,\.]\s*(\d{2})\s*(?:€|EUR)", raw, re.I)
         # Euro sign isn't a word character, so also support it explicitly.
         if not amounts:
             amounts = re.findall(r"(?<!\d)(\d{1,5})\s*[,\.]\s*(\d{2})\s*€", raw)
