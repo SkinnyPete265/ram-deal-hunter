@@ -309,3 +309,40 @@ def test_fnac_marketplace_main_price_uses_verified_crucial_sku():
     o=product_info(html,"Fnac","https://www.fnac.pt/mp18882069/Modulo-de-memoria-Crucial-CT2K16G4DFRA32A")
     assert o is not None and o["price_eur"]==588.71 and o["configuration"]=="kit"
     assert "HTML fallback" in o["source"]
+
+
+def test_pccomponentes_react_buybox_integer_decimal_price():
+    html = """
+    <html><body><main>
+       <h1>Kingbank 32 GB DDR4 3200MHz (2x16GB) UDIMM CL16</h1>
+       <div data-e2e="pdp-price-current">
+         <span data-e2e="pdp-price-current-integer">189</span>
+         <span data-e2e="pdp-price-current-decimal">,95</span> €
+       </div>
+       <div class="product-card__price-container">
+          <span class="styledPrice-roCPNV priceBase-av5at_">9,99€</span>
+       </div>
+    </main></body></html>"""
+    offer = product_info(html,"PcComponentes","https://www.pccomponentes.pt/kingbank-2x16-ddr4")
+    assert offer is not None and offer["price_eur"] == 189.95
+    assert "PcComponentes primary buybox" in offer["source"]
+
+
+def test_pccomponentes_unrendered_buybox_never_uses_recommendation_price():
+    html = """
+    <html><body><main>
+      <h1>Kingbank DDR4 32GB (2x16GB) UDIMM 3200MHz</h1>
+      <div class="product-card__price-container"><span class="styledPrice-roCPNV">99,99€</span></div>
+      <div class="product-card__price-container"><span class="priceBase-av5at_">1,99€</span></div>
+    </main></body></html>"""
+    assert product_info(html,"PcComponentes","https://www.pccomponentes.pt/kingbank-2x16-ddr4") is None
+
+
+def test_pccomponentes_incomplete_price_fraction_is_not_guessed():
+    html = """
+    <html><body><main>
+      <h1>DDR4 32GB (2x16GB) UDIMM</h1>
+      <span data-e2e="pdp-price-current-integer">185</span>
+      <div class="product-card__price-container">9,99€</div>
+    </main></body></html>"""
+    assert product_info(html,"PcComponentes","https://www.pccomponentes.pt/ram-32gb-ddr4") is None
