@@ -62,7 +62,7 @@ def matches(name):
         # despite shops labelling it generically as a 16GB DIMM.
         re.search(r"\bpvs416g[a-z0-9]+k\b",raw)):
         return None
-    if re.search(r"(?:2x16(?:gb)?|16gbx2)(?!\d)",s):
+    if re.search(r"(?<!\d)(?:2x16(?:gb)?|16gbx2)(?!\d)",s):
         return "kit"
     # Retailer descriptions sometimes express the actual kit as
     # "dois módulos de 16 GB" instead of "2x16GB".
@@ -77,7 +77,7 @@ def matches(name):
         re.search(r"\b(?:cp|ct)2k16g4[a-z0-9]+\b",str(name).lower()) or
         re.search(r"\bcm[a-z]+32gx4m2[a-z0-9]+\b",str(name).lower())):
         return "kit"
-    if re.search(r"(?:1x16(?:gb)?|16gbx1)(?!\d)",s) and "32gb" not in s:
+    if re.search(r"(?<!\d)(?:1x16(?:gb)?|16gbx1)(?!\d)",s) and "32gb" not in s:
         return "single_pair"
     # A clearly named single 16GB desktop DIMM is also eligible, purchased twice.
     # Never infer this from a kit/pack description or from a laptop/server product.
