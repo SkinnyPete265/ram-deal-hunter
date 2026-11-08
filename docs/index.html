@@ -46,7 +46,7 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 <div class="tablewrap"><table><thead><tr><th>Model & specs</th><th>Store</th><th>Price for 32 GB</th><th>Stock</th><th>Checked</th><th></th></tr></thead><tbody id="rows"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody></table></div>
 <h2>Source status</h2><div id="health"></div>
 <footer>Some listings are independent retailer prices; "comparison" entries are the lowest advertised price across sellers and must be verified before purchase. Listed prices do not guarantee stock or delivery to Portugal. For two separate 16 GB modules, the displayed total is twice the unit price. Checkout, shipping and two-unit availability require verification. Unknown/stale items are labeled accordingly.</footer>
-</main><script>
+</main><script src="merge.js"></script><script>
 let data={offers:[],health:[],budget_eur:200},visible=[];
 const E=id=>document.getElementById(id);
 const euro=n=>Number.isFinite(n)?new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n):'—';
@@ -63,37 +63,61 @@ let s=E('sort').value;
 visible.sort((a,b)=>s==='recent'?String(b.observed_at).localeCompare(String(a.observed_at)):s==='store'?a.store.localeCompare(b.store)||a.price_eur-b.price_eur:a.price_eur-b.price_eur);
 E('count').textContent='('+visible.length+')';
 E('rows').innerHTML=visible.length?visible.map(o=>{
-let specs=['DDR4',o.configuration==='single_pair'?'2 identical individual modules':'2 × 16 GB kit',o.speed_mhz?o.speed_mhz+' MHz':null,o.cas_latency?'CL'+o.cas_latency:null,o.configuration==='single_pair'?'2 × '+euro(o.unit_price_eur):null,o.comparison_only?'LOWEST LISTED · unverified':null].filter(Boolean).join(' · ');
+let specs=['DDR4',o.configuration==='single_pair'?'2 identical individual modules':'2 × 16 GB kit',o.speed_mhz?o.speed_mhz+' MHz':null,o.cas_latency?'CL'+o.cas_latency:null,o.configuration==='single_pair'?'2 × '+euro(o.unit_price_eur):null,o.comparison_only?'LOWEST LISTED · unverified':null,o.scan_origin||null].filter(Boolean).join(' · ');
 let state=o.comparison_only?'Comparison price — seller unverified':o.stock==='in_stock'?'In stock':o.stock==='out_of_stock'?'Out of stock':'Stock unverified';
 let safe=/^https:\/\//.test(o.url)?o.url:'#';
 return '<tr><td><div class="name">'+esc(o.title)+'</div><div class="spec">'+esc(specs)+'</div></td><td>'+esc(o.store)+'</td><td class="price '+(o.price_eur<=budget&&o.stock!=='out_of_stock'?'good':'')+'">'+euro(o.price_eur)+'</td><td><span class="pill">'+state+'</span>'+(!o.current?' <span class="pill bad">Stale</span>':'')+'</td><td class="muted">'+date(o.observed_at)+'</td><td><a target="_blank" rel="noopener noreferrer" href="'+esc(safe)+'">View listing</a></td></tr>'
 }).join(''):'<tr><td colspan="6" class="empty">No matching offers. Check source status and retry later.</td></tr>';
 const grouped={};
 for(const h of (data.health||[])){
-  const store=String(h.source||'Unknown').replace(/ (category|product|browser fallback)$/,'');
-  const g=grouped[store]||(grouped[store]={store,blocked:false,errors:0,ok:0,products:0,fallback_attempted:0,fallback_recovered:0});
-  if(h.source.endsWith(' browser fallback')){
-    g.fallback_attempted=Number.parseInt(h.detail,10)||0;
-    g.fallback_recovered=Number(h.found)||0;
-    continue;
-  }
-  if(['blocked_403_or_429','automated_access_blocked'].includes(h.status))g.blocked=true;
-  if(h.status==='error')g.errors++;
-  if(h.status==='ok')g.ok++;
-  if(h.status==='no_verified_price')g.products++;
+ const store=String(h.source||'Unknown').replace(/ (category|product|browser fallback)$/,'');
+ const g=grouped[store]||(grouped[store]={
+   store,blockedHome:false,blockedCloud:false,okHome:0,okCloud:0,
+   errors:0,products:0,fallback_attempted:0,fallback_recovered:0
+ });
+ const home=h.scan_origin==='Home PC';
+ if(String(h.source).endsWith(' browser fallback')){
+   g.fallback_attempted+=Number.parseInt(h.detail,10)||0;
+   g.fallback_recovered+=Number(h.found)||0;
+   continue;
+ }
+ if(['blocked_403_or_429','automated_access_blocked'].includes(h.status)){
+   if(home)g.blockedHome=true;else g.blockedCloud=true;
+ }
+ if(h.status==='ok'){if(home)g.okHome++;else g.okCloud++}
+ if(h.status==='error')g.errors++;
+ if(h.status==='no_verified_price')g.products++;
 }
 E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b.store)).map(g=>{
  const found=curr.filter(o=>o.store===g.store).length;
- const state=g.blocked?'Blocked by retailer':g.fallback_recovered?'Recovered via browser-style request':g.ok||found?'Checked':'Unverified';
- const css=g.blocked?'blocked':g.ok||found?'active':'';
+ const homeOffers=curr.filter(o=>o.store===g.store&&o.scan_origin==='Home PC').length;
+ const workingHome=(g.okHome>0||homeOffers>0);
+ const blockedBoth=g.blockedHome&&g.blockedCloud&&!workingHome;
+ const state=workingHome?'Home PC checked'+(g.blockedCloud?' (cloud blocked)':''):
+   blockedBoth?'Blocked from both locations':
+   g.blockedHome?'Home PC blocked'+(g.okCloud?' (cloud checked)':''):
+   g.blockedCloud?'Cloud blocked'+(found?' (other data available)':''):
+   g.okCloud||found?'Cloud checked':'Unverified';
+ const css=blockedBoth||g.blockedHome||g.blockedCloud&&!workingHome?'blocked':workingHome||g.okCloud||found?'active':'';
  const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' browser retries worked':'';
  return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
- esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+(g.errors?' · '+g.errors+' errors':'')+(g.products?' · '+g.products+' without price data':''))+
+ esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+
+     (g.errors?' · '+g.errors+' errors':'')+(g.products?' · '+g.products+' without price data':''))+
  '</small></div>';
 }).join('')||'<p class="muted">No checks recorded yet.</p>';
 }
 async function load(){
-try{let r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);data=await r.json();E('updated').textContent=data.last_scan?'Last scan '+date(data.last_scan):'No live scan yet';
+try{
+let cache='?t='+Date.now();
+let [cloudResponse,homeResponse]=await Promise.all([
+  fetch('data.json'+cache,{cache:'no-store'}),
+  fetch('local-data.json'+cache,{cache:'no-store'}).catch(()=>null)
+]);
+if(!cloudResponse.ok)throw Error('HTTP '+cloudResponse.status);
+let [cloud,home]=await Promise.all([cloudResponse.json(),homeResponse&&homeResponse.ok?homeResponse.json():Promise.resolve(null)]);
+data=RAMHunterMerge.mergeSnapshots(cloud,home);
+let homeState=data.sources.home_last_scan?date(data.sources.home_last_scan):'not connected';
+E('updated').textContent=(data.last_scan?'Latest scan '+date(data.last_scan):'No live scan yet')+' · Home PC: '+homeState;
 let selected=E('store').value,stores=[...new Set((data.offers||[]).map(o=>o.store))].sort((a,b)=>a.localeCompare(b));
 E('store').innerHTML='<option value="">All stores</option>'+stores.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');E('store').value=stores.includes(selected)?selected:'';draw()}catch(err){E('updated').textContent='Could not load data: '+err.message}}
 E('refresh').onclick=load;
