@@ -23,4 +23,16 @@ assert(html.includes("timeZone:'Europe/Lisbon'"), 'Timestamps must use Portugal 
 assert(html.includes("Snapshot outdated"), 'Old data must not appear recently scanned');
 assert(html.includes("Indicative credit PVP"), "Indicative CHIP7 prices must be visibly labelled");
 assert(html.includes("transient fallback"), "Temporary Castro HTTP recovery must be grouped by store");
+const modes=['all','available','budget','unknown','out'];
+assert(html.includes('src="offer-filters.js"'), 'Dashboard loads pure quick-filter module');
+assert(html.includes('id="opportunity-detail"'), 'Closest currently available kit is displayed');
+assert(html.includes('id="opportunity-link"'), 'Closest kit has a direct retailer listing');
+assert(html.includes('RAMHunterFilters.closestAvailable(curr)'), 'Closest deal excludes unknown, catalogue and comparison prices');
+assert(html.includes('RAMHunterFilters.counts(curr,budget)'), 'Counts are based on current scans');
+assert(html.includes('RAMHunterFilters.matching(o,activeQuickFilter,budget)'), 'Quick filters affect the result rows');
+for(const mode of modes) {
+  assert(html.includes('data-offer-filter="'+mode+'"'), 'Missing quick filter: '+mode);
+  assert(html.includes('id="filter-'+mode+'-count"'), 'Missing current-count label: '+mode);
+}
+assert(html.includes('Number(best.price_eur)-budget'), 'Gap is measured against product-only budget');
 console.log('Dashboard inline JS syntax and status checks passed');
