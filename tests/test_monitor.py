@@ -148,3 +148,11 @@ def test_unregistered_desktop_ddr4_not_mistaken_for_rdimm():
     assert matches("Crucial DDR4 32GB 2x16GB Unregistered (unbuffered)") == "kit"
     assert matches("Corsair DDR4 32GB 2x16GB RDIMM Registered") is None
     assert matches("Kingston DDR4 32GB 2x16GB 260-pin SO-DIMM") is None
+
+
+def test_explicit_natural_language_module_counts():
+    assert matches("Kit desktop DDR4 de 32GB constituído por dois módulos de 16GB") == "kit"
+    assert matches("DDR4 32 GB RAM kit with two modules of 16 GB each") == "kit"
+    assert matches("DDR4 32GB composto por 2 módulos de 16 GB") == "kit"
+    assert matches("DDR4 16GB composto por dois módulos de 8GB") is None
+    assert matches("DDR5 32GB composto por dois módulos de 16GB") is None
