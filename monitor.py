@@ -12,7 +12,7 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
-from retailer_parser import extract_html_offer, category_card_offers
+from retailer_parser import extract_html_offer, category_card_offers, browser_stock_only
 from browser_render import render_dom
 try:
     from curl_cffi import requests as browser_requests
@@ -500,9 +500,22 @@ def run():
                         health.append({"source":store+" browser stock",
                                        "status":"ok","found":1})
                     else:
-                        health.append({"source":store+" browser stock",
-                                       "status":"unverified",
-                                       "detail":browser_stock_reason(item,browser_offer, bool(rendered))})
+                        # A matching main product may expose an explicit
+                        # availability signal even when the browser omits its
+                        # price. Use the stock-only probe, never browser price.
+                        rendered_stock, stock_reason = browser_stock_only(
+                            rendered, store, item["title"], stock)
+                        if rendered_stock in ("in_stock","out_of_stock"):
+                            item["stock"]=rendered_stock
+                            item["source"]+=" (main-product browser stock)"
+                            health.append({"source":store+" browser stock",
+                                           "status":"ok","found":1,
+                                           "detail":"stock_only_main_product"})
+                        else:
+                            health.append({"source":store+" browser stock",
+                                           "status":"unverified",
+                                           "detail":stock_reason if rendered else
+                                               browser_stock_reason(item,browser_offer,False)})
                 elif browser_offer is not None:
                     browser_offer["source"]+=" (headless browser render)"
                     item=browser_offer
