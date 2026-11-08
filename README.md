@@ -17,6 +17,12 @@ A separate ChatGPT hourly price-watch automation was previously created. It is d
 - €200 product-price ceiling; add shipping at checkout. No used or dubious offers.
 - Brand, MHz and CAS latency do not constrain eligibility.
 
+## Dashboard quick filters
+
+The dashboard offers quick one-click views for **All**, **In stock**, **≤€200**, **Stock unverified**, and **Out of stock**, alongside the existing search, store, date, and sort controls. The **≤€200** view intentionally includes unavailable and indicative/comparison prices: being cheap does not prove the item can be purchased. The **In stock** view is conservative and counts direct-retailer **2×16 GB kits** only, excluding comparison prices, catalogue-only cards, financing PVP and single 16 GB modules without verified quantities. Filter counts reflect current scan data. The **Show stale** option does not treat outdated listings as freshly available.
+
+A small panel above the table identifies the **cheapest verified retailer-listed in-stock kit**, with a link and the amount above/below the **€200 product-price-only budget**. **Shipping is intentionally not calculated or included**, because delivery fees and options vary at checkout. The buyer will assess shipping separately once an eligible kit appears.
+
 ## Always-on Windows home scanner
 
 Since residential connections may work where GitHub cloud runners receive HTTP 403, a **separate Windows Task Scheduler job** can scan the same public retailer pages from your home PC and upload results to `docs/local-data.json` every 8 hours. The hosted dashboard merges that home snapshot with the GitHub cloud snapshot (`docs/data.json`), preserving distinct timestamps, scan origins, and stale indicators. A snapshot remains current for up to **12 hours** to tolerate schedule delays; missed scans become stale. The cloud scanner runs three times per day at 02:17, 10:17 and 18:17 UTC. GitHub cron timing is best-effort.
