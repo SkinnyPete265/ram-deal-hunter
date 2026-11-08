@@ -202,3 +202,24 @@ def test_no_partial_match_on_larger_stick_counts():
     assert matches("DDR4 11x16GB DIMM 176GB") is None
     assert matches("DDR4 2x16GB DIMM 32GB") == "kit"
     assert matches("DDR4 1x16GB DIMM") == "single_pair"
+
+def test_atomic_snapshot_update(tmp_path, monkeypatch):
+    import monitor
+    file=tmp_path/"data.json"
+    file.write_text('{"offers":["old"]}',encoding="utf-8")
+    monitor.save_snapshot(file,{"offers":[{"price_eur":199.5}],"last_scan":"now"})
+    assert json.loads(file.read_text(encoding="utf-8"))["offers"][0]["price_eur"]==199.5
+    assert not (tmp_path/"data.json.tmp").exists()
+
+def test_failed_snapshot_swap_preserves_last_good_data(tmp_path, monkeypatch):
+    import monitor
+    file=tmp_path/"data.json"
+    file.write_text('{"offers":["old"]}',encoding="utf-8")
+    def fail(src,dst):
+        raise OSError("simulated disk error")
+    monkeypatch.setattr(monitor.os,"replace",fail)
+    import pytest
+    with pytest.raises(OSError):
+        monitor.save_snapshot(file,{"offers":["new"]})
+    assert json.loads(file.read_text(encoding="utf-8"))["offers"]==["old"]
+    assert not (tmp_path/"data.json.tmp").exists()
