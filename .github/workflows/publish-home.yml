@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'docs/local-data.json'
+      - 'docs/index.html'
+      - 'docs/merge.js'
   workflow_dispatch:
 
 permissions:
