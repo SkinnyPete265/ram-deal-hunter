@@ -60,7 +60,7 @@ def summarize(html,store,url,kind):
         cards=[]
         for item in doc.select("article")[:25]:
             title=item.get_text(" ",strip=True)[:110]
-            if store=="Chipman" and not re.search(r"32\s*GB|16\s*GB",title,re.I):
+            if store=="Chipman" and not re.search(r"32\s*GB|CP2K16|32GIS|32GVK",title,re.I):
                 continue
             prices=[]
             for q in item.select("[class*='price'],[class*='sale']"):
