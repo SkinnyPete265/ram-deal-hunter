@@ -39,7 +39,10 @@ def stamp():
 
 def matches(name):
     s = re.sub(r"\s+","",str(name).lower().replace("×","x").replace("*","x"))
-    if "ddr4" not in s or "ddr5" in s or any(t in s for t in ("sodimm","so-dimm","laptop","rdimm","lrdimm","eccreg","260pin","registeredmemory","servermemory")):
+    # An unambiguous Crucial CP2K16G4/CT2K16G4 DDR4 model can validate
+    # listings (e.g. Fnac marketplace) that omit "DDR4" from their headings.
+    trusted_ddr4_sku=bool(re.search(r"\b(?:cp|ct)2k16g4[a-z0-9]+\b",str(name).lower()))
+    if ("ddr4" not in s and not trusted_ddr4_sku) or "ddr5" in s or any(t in s for t in ("sodimm","so-dimm","laptop","rdimm","lrdimm","eccreg","260pin","registeredmemory","servermemory")):
         return None
     # Kingston KVRxxS... part numbers describe laptop SO-DIMMs even when
     # a seller's title incorrectly calls the module a generic DIMM.
