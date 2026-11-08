@@ -1,6 +1,6 @@
 # RAM Deal Hunter — Portugal
 
-A small self-hosted desktop-DDR4 price monitor for **32 GB in exactly two 16 GB sticks**, targeting **€200 or less**. Amazon.es is prioritized as an optional Keepa source, alongside Portuguese retailers.
+A small self-hosted desktop-DDR4 price monitor for **32 GB in exactly two 16 GB sticks**, targeting **€200 or less**. The automatic scanner targets Portuguese retailers without requiring any paid price-data API.
 
 ## Status
 
@@ -36,7 +36,7 @@ GitHub Actions uses `.github/workflows/scan.yml`, scheduled at minute 17 and 47 
 
 The scanner attempts a small watchlist and category-page discovery for PCDIGA, PcComponentes, Globaldata and CHIP7; ON4TECH is also on the watchlist. Retailers frequently change HTML, URLs and access policies, so entries may fail and should not be interpreted as a full-market comparison.
 
-Amazon.es requires a **paid Keepa API key** set as a repository Actions secret named `KEEPA_API_KEY`, or exported in your local environment. Without it, Amazon monitoring is **not configured**, and the dashboard will show this in source status. Keepa prices do not confirm eligibility to deliver to Portugal.
+**Amazon.es is deliberately excluded from unattended GitHub scans.** Reliable automated Amazon prices and delivery-to-Portugal checks are not provided by this free scanner, and no Keepa subscription is required. You can still search Amazon.es manually or use the separate ChatGPT hourly watch for best-effort public web listing research. These results should never be interpreted as confirmed checkout totals.
 
 Optional Telegram alerts require Actions secrets `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`, or local environment variables of those names. Alerts report deal candidates, not confirmed delivered prices.
 
@@ -45,7 +45,6 @@ Configure secrets through **Settings → Secrets and variables → Actions → N
 ## Files
 
 - `monitor.py`: retailer scanning, safe product extraction, alert deduplication, JSON snapshot
-- `amazon.py`: optional Amazon.es Keepa source
 - `app.py`: local-only dashboard server and scan control
 - `docs/index.html`: responsive dashboard (search, filters, CSV export)
 - `docs/data.json`: last scan and historical offers
@@ -55,6 +54,6 @@ Configure secrets through **Settings → Secrets and variables → Actions → N
 
 ## Accuracy and limitations
 
-The parser only accepts explicit 2×16 GB or 1×16 GB DDR4 configurations and price data from Product JSON-LD (or Keepa); it avoids guesswork. If a store blocks requests or omits JSON-LD data, the corresponding source status will show a failure or no verified price rather than a fabricated offer. For two separate singles, a retailer's in-stock status does not establish that **two** units can be purchased. Prices and delivery costs must always be confirmed at checkout.
+The parser only accepts explicit 2×16 GB or 1×16 GB DDR4 configurations and price data from retailer Product JSON-LD; it avoids guesswork. If a store blocks requests or omits JSON-LD data, the corresponding source status will show a failure or no verified price rather than a fabricated offer. For two separate singles, a retailer's in-stock status does not establish that **two** units can be purchased. Prices and delivery costs must always be confirmed at checkout.
 
 The scanner currently does **not** verify shipping fees or actual checkout totals to Portugal, so a €199 listing could exceed your total budget after shipping. Scanning every 30 minutes is best-effort rather than a real-time feed.
