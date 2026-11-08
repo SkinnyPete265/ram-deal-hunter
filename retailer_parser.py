@@ -302,6 +302,36 @@ def _primary_stock(doc, classify):
     return "unknown"
 
 
+def _pccomponentes_stock(doc):
+    """Identify explicit *unavailable* main-item wording on PcComponentes.
+
+    A visible price without a purchase option is not evidence of stock.
+    Only examine the portion immediately after the primary h1, rather than
+    unrelated product cards appearing later on the page.
+    """
+    main=doc.select_one("main") or doc.body
+    if main is None:
+        return "unknown"
+    heading=main.select_one("h1")
+    if heading is None:
+        return "unknown"
+    full=main.get_text(" ",strip=True)
+    label=heading.get_text(" ",strip=True)
+    position=full.find(label)
+    if position<0:
+        return "unknown"
+    primary=full[position+len(label):position+len(label)+2500]
+    if re.search(
+        r"disponibilidade\s+do\s+produto\s*"
+        r"(?:sem\s+data\s+exacta\s+de\s+chegada|sem\s+data\s+exata\s+de\s+chegada)",
+        primary, re.I
+    ):
+        return "out_of_stock"
+    if re.search(r"avisem[- ]me\s+quando\s+estiver\s+dispon[ií]vel",primary,re.I):
+        return "out_of_stock"
+    return "unknown"
+
+
 def extract_html_offer(html, store, url, matches, price, stock, stamp):
     """Return (offer, reason). Never guess a price from a recommendation."""
     doc = BeautifulSoup(html, "html.parser")
@@ -322,6 +352,11 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
     if currency and currency.get("content") and currency.get("content").strip().upper() != "EUR":
         return None, "non_eur_price"
     status = _primary_stock(doc, stock)
+    if store=="PcComponentes":
+        # Retain unknown unless the main product explicitly says unavailable.
+        primary_status=_pccomponentes_stock(doc)
+        if primary_status=="out_of_stock":
+            status="out_of_stock"
     # ON4TECH puts its stock indicator beside the actual primary price.
     # Do not infer "in stock" from recommended product cards.
     if store=="ON4TECH":
