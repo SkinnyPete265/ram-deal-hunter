@@ -12,6 +12,7 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
+from retailer_parser import extract_html_offer
 try:
     from curl_cffi import requests as browser_requests
 except ImportError:
@@ -119,7 +120,9 @@ def product_info(html,store,url):
                 mhz=re.search(r"\b(2133|2400|2666|2933|3000|3200|3466|3600|3733|4000|4266)\b",name)
                 cl=re.search(r"\bCL\s*(\d\d)\b",name,re.I)
                 return dict(id=identity,store=store,url=url,title=name,configuration=kind,units_to_buy=2 if kind=="single_pair" else 1,unit_price_eur=unit,price_eur=amount,stock=availability,shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,cas_latency=int(cl[1]) if cl else None,source="Retailer product JSON-LD",observed_at=stamp(),current=True)
-    return None
+    # Retailers such as Chipman and Castro Electrónica expose prices in
+    # product-level HTML widgets even when their JSON-LD is absent/incomplete.
+    return extract_html_offer(html, store, url, matches, price, stock, stamp)[0]
 
 def download(url):
     """Request a public product page; retry one blocked request with a browser-like TLS client.
@@ -255,9 +258,13 @@ def run():
         if store in blocked_stores:
             continue
         try:
-            item=product_info(download(url),store,url)
-            if item: offers[item["id"]]=item
-            else: health.append({"source":store+" product","status":"no_verified_price"})
+            html=download(url)
+            item=product_info(html,store,url)
+            if item:
+                offers[item["id"]]=item
+            else:
+                _,reason=extract_html_offer(html,store,url,matches,price,stock,stamp)
+                health.append({"source":store+" product","status":reason})
         except (requests.RequestException,ValueError) as e:
             is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
             if is_blocked: blocked_stores.add(store)
