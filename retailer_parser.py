@@ -129,56 +129,97 @@ def _chipman_tax_price(doc, convert):
 
 
 def category_card_offers(html, store, base, matches, price, stock, stamp, allowed):
-    """Extract explicitly matching RAM cards only; mark stock unverified.
+    """Read retailer-owned catalogue prices, never shipping charges or recommendations.
 
-    A catalogue card is usable product price evidence but does not prove
-    stock or checkout delivery, even when the card has an add-to-cart control.
+    Catalogue price alone never establishes stock or delivery. If a later
+    product page yields structured data it replaces this provisional observation.
     """
     doc=BeautifulSoup(html,"html.parser")
     found={}
-    selectors=("article.product-miniature", ".product-miniature", ".product-card",
-               ".product-item", ".js-product-miniature", "li.ajax_block_product")
-    for card in doc.select(", ".join(selectors)):
-        anchor=card.select_one("h2.product-title a[href], h3.product-title a[href], .product-title a[href], a.product-name[href], a.product-thumbnail[href]")
-        if anchor is None:
-            continue
-        url=urljoin(base,anchor.get("href","")).split("#")[0].split("?")[0]
+    # Restrict format inference to an explicitly DDR4-only retailer category.
+    ddr4_category=bool(re.search(r"(?:ddr4|memorias-ram-ddr4)",base,re.I))
+
+    def add(anchor, price_node, card):
+        if anchor is None or price_node is None:
+            return
+        href=anchor.get("href","")
+        url=urljoin(base,href).split("#")[0].split("?")[0]
         if not allowed(store,url) or url.rstrip("/")==base.rstrip("/"):
-            continue
+            return
         name=anchor.get_text(" ",strip=True)
         if not name:
-            heading=card.select_one(".product-title")
+            heading=card.select_one(".product-title, h2, h3")
             name=heading.get_text(" ",strip=True) if heading else ""
-        description=card.select_one(".product-description, .product-desc")
+        if not name or len(name)>230:
+            return
+        description=card.select_one(".product-description,.product-desc")
         details=name+(" "+description.get_text(" ",strip=True)[:350] if description else "")
+        if ddr4_category and "ddr4" not in details.lower():
+            details+=" DDR4"
         kind=matches(details)
         if kind is None:
-            continue
-        node=card.select_one(".product-price-and-shipping .price:not(.regular-price), .current-price .price, .price-final_price .price, .product-price, .price:not(.regular-price)")
-        if node is None:
-            continue
+            return
         unit=None
-        for value in (node.get("content"),node.get("data-price-amount"),node.get_text(" ",strip=True)[:120]):
+        for value in (price_node.get("content"),price_node.get("data-price-amount"),
+                      price_node.get_text(" ",strip=True)[:110]):
             unit=_amount(value,price)
             if unit is not None:
                 break
         if unit is None:
-            continue
-        availability="unknown"
-        indicator=card.select_one(".product-availability, .out-of-stock, .product-flags .out_of_stock")
+            return
+        status="unknown"
+        indicator=card.select_one(".product-availability,.out-of-stock,.product-flags .out_of_stock")
         if indicator and stock(indicator.get_text(" ",strip=True))=="out_of_stock":
-            availability="out_of_stock"
+            status="out_of_stock"
         total=round(unit*(2 if kind=="single_pair" else 1),2)
         ident=hashlib.sha256((store+":"+url).encode()).hexdigest()[:16]
         mhz=re.search(r"\b(2133|2400|2666|2933|3000|3200|3466|3600|3733|4000|4266)\b",name)
         cl=re.search(r"\bCL\s*(\d\d)\b",name,re.I)
         found[ident]=dict(id=ident,store=store,url=url,title=name,configuration=kind,
             units_to_buy=2 if kind=="single_pair" else 1,
-            unit_price_eur=unit,price_eur=total,stock=availability,
+            unit_price_eur=unit,price_eur=total,stock=status,
             shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,
             cas_latency=int(cl[1]) if cl else None,
             source="Retailer catalogue price (verify product page)",observed_at=stamp(),
             current=True,catalogue_only=True)
+
+    generic=("article.product-miniature",".product-miniature",".product-card",
+             ".product-item",".js-product-miniature","li.ajax_block_product")
+    for card in doc.select(", ".join(generic)):
+        anchor=card.select_one("h2.product-title a[href], h3.product-title a[href], .product-title a[href], a.product-name[href], a.product-thumbnail[href]")
+        node=card.select_one(".product-price-and-shipping .price:not(.regular-price),.current-price .price,.price-final_price .price,.product-price,.price:not(.regular-price)")
+        add(anchor,node,card)
+
+    if store=="Chipman":
+        # Current custom Tailwind storefront: <article class="group card-hover">
+        # contains an image link, a second named link, a struck-out price and
+        # a visible sale-price span with text-sale-600.
+        for card in doc.select("article.card-hover"):
+            anchor=next((a for a in card.select("a[href]") if
+                         "/memorias-ram-ddr4/" in a.get("href","") and
+                         len(a.get_text(" ",strip=True))>18),None)
+            node=card.select_one("span[class*='text-sale-'][class*='font-black']")
+            if node is None:
+                node=card.select_one("span[class*='text-sale-']")
+            add(anchor,node,card)
+
+    if store=="Castro Electrónica":
+        # The retailer's online price uses span.price-web; a different
+        # nearby "Loja" amount refers to the in-store price.
+        for node in doc.select("span.price-web"):
+            parent=node
+            for _ in range(9):
+                parent=parent.parent
+                if parent is None:
+                    break
+                links=[a for a in parent.select("a[href]")
+                       if "/pt/product/" in a.get("href","")]
+                links=[a for a in links if len(a.get_text(" ",strip=True))>16]
+                if not links:
+                    continue
+                anchor=max(links,key=lambda a:len(a.get_text(" ",strip=True)))
+                add(anchor,node,parent)
+                break
     return list(found.values())
 
 
