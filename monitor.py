@@ -12,7 +12,7 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 from bs4 import BeautifulSoup
-from retailer_parser import extract_html_offer
+from retailer_parser import extract_html_offer, category_card_offers
 try:
     from curl_cffi import requests as browser_requests
 except ImportError:
@@ -233,13 +233,19 @@ def run():
         for row in csv.DictReader(f):
             if allowed(row["store"],row["url"]): targets[(row["store"],row["url"])]=True
     health=[]
+    catalogue_offers={}
     FETCH_META.clear()
     blocked_stores=set()
     for store,url in cfg["retailer_pages"]:
         try:
-            discovered=links(download(url),url,store)
+            html=download(url)
+            discovered=links(html,url,store)
             for u in discovered: targets[(store,u)]=True
-            health.append({"source":store+" category","status":"ok","found":len(discovered)})
+            cards=category_card_offers(html,store,url,matches,price,stock,stamp,allowed)
+            for item in cards:
+                catalogue_offers[item["id"]]=item
+                targets[(store,item["url"])]=True
+            health.append({"source":store+" category","status":"ok","found":len(discovered),"priced_cards":len(cards)})
         except (requests.RequestException,ValueError) as e:
             is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
             if is_blocked: blocked_stores.add(store)
@@ -253,7 +259,7 @@ def run():
     while any(grouped.values()) and len(queue)<120:
         for store,urls in grouped.items():
             if urls and len(queue)<120: queue.append((store,urls.pop(0)))
-    offers={}
+    offers=dict(catalogue_offers)
     for store,url in queue:
         if store in blocked_stores:
             continue
