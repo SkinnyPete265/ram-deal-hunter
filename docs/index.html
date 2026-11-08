@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAM Deal Hunter · Portugal</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1017;--panel:#161d28;--muted:#a4adbd;--line:#293443;--accent:#65e7b0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#ecf3fc;font:15px system-ui,Segoe UI,sans-serif}
+main{max-width:1280px;margin:0 auto;padding:30px 20px}header{display:flex;gap:24px;align-items:start;justify-content:space-between}
+h1{margin:3px 0;font-size:clamp(2rem,5vw,3.7rem);letter-spacing:-.05em}h1 span{color:var(--accent)}
+h2{margin:25px 0 12px;font-size:1.1rem}.muted,small{color:var(--muted)}.brand{font-size:.82rem;letter-spacing:.12em;font-weight:800;color:var(--accent)}
+p{line-height:1.5}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px 0}
+.card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:18px}
+.card small{display:block;margin-bottom:9px}.card strong{display:block;font-size:1.8rem}
+.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:24px 0}
+input,select,button{background:var(--panel);color:#edf4fc;border:1px solid #374455;border-radius:10px;padding:11px;font:inherit}
+button{cursor:pointer}button:hover{border-color:var(--accent)}button:disabled{opacity:.5}
+input{flex:1;min-width:160px}.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:15px}
+table{width:100%;border-collapse:collapse;min-width:900px}th{text-align:left;color:var(--muted);font-size:.78rem;font-weight:600;background:#1b2430}
+th,td{padding:15px 13px;border-bottom:1px solid var(--line);vertical-align:middle}
+td a{color:var(--accent);text-decoration:none;white-space:nowrap}
+.price{font-size:1.05rem;font-weight:800;white-space:nowrap}.good{color:var(--accent)}.bad{color:#fb9494}
+.pill{display:inline-block;border-radius:99px;background:#303c4a;padding:5px 9px;font-size:.75rem}
+.name{font-weight:700}.spec{font-size:.8rem;color:var(--muted);margin-top:5px}
+#health{font-size:.82rem;line-height:2;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:45px}
+footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
+@media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}header{display:block}}
+</style></head><body><main>
+<div class="brand">RAM HUNTER / PORTUGAL</div><header><div><h1>Less money.<br><span>More memory.</span></h1>
+<p class="muted">Desktop DDR4 · exactly 2 × 16 GB · Amazon.es prioritized · €200 maximum</p></div>
+<p class="muted" id="updated">No live scan yet</p></header>
+<section class="summary"><div class="card"><small>Budget</small><strong>€200</strong></div>
+<div class="card"><small>Current candidates</small><strong id="deals">0</strong></div>
+<div class="card"><small>Lowest available</small><strong id="lowest">—</strong></div>
+<div class="card"><small>Tracked offers</small><strong id="tracked">0</strong></div></section>
+<div class="controls"><input id="search" placeholder="Search RAM models or specs">
+<select id="store"><option value="">All stores</option></select>
+<select id="sort"><option value="price">Lowest price</option><option value="recent">Newest checked</option><option value="store">Amazon.es first</option></select>
+<label><input id="stale" type="checkbox"> Show stale</label>
+<button id="refresh">Refresh</button><button id="export">Export CSV</button><button id="scan" hidden>Scan now</button>
+<span class="muted" id="scan-status"></span></div>
+<h2>Tracked RAM offers <span class="muted" id="count"></span></h2>
+<div class="tablewrap"><table><thead><tr><th>Model & specs</th><th>Store</th><th>Price for 32 GB</th><th>Stock</th><th>Checked</th><th></th></tr></thead><tbody id="rows"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody></table></div>
+<h2>Source status</h2><div id="health"></div>
+<footer>Listed prices do not guarantee stock or delivery to Portugal. For two separate 16 GB modules, the displayed total is twice the unit price. Checkout, shipping and two-unit availability require verification. Unknown/stale items are labeled accordingly.</footer>
+</main><script>
+let data={offers:[],health:[],budget_eur:200},visible=[];
+const E=id=>document.getElementById(id);
+const euro=n=>Number.isFinite(n)?new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n):'—';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const date=s=>s?new Date(s).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon'}):'—';
+function draw(){
+let offers=data.offers||[],curr=offers.filter(o=>o.current),budget=data.budget_eur||200;
+E('tracked').textContent=curr.length;
+E('deals').textContent=curr.filter(o=>o.price_eur<=budget&&o.stock!=='out_of_stock').length;
+let available=curr.filter(o=>o.stock==='in_stock');E('lowest').textContent=available.length?euro(Math.min(...available.map(o=>o.price_eur))):'—';
+let q=E('search').value.toLowerCase(),st=E('store').value;
+visible=offers.filter(o=>(E('stale').checked||o.current)&&(!st||o.store===st)&&[o.title,o.store,o.speed_mhz,o.cas_latency].join(' ').toLowerCase().includes(q));
+let s=E('sort').value;
+visible.sort((a,b)=>s==='recent'?String(b.observed_at).localeCompare(String(a.observed_at)):s==='store'?(a.store==='Amazon.es'?-1:0)-(b.store==='Amazon.es'?-1:0)||a.price_eur-b.price_eur:a.price_eur-b.price_eur);
+E('count').textContent='('+visible.length+')';
+E('rows').innerHTML=visible.length?visible.map(o=>{
+let specs=['DDR4',o.configuration==='single_pair'?'2 identical individual modules':'2 × 16 GB kit',o.speed_mhz?o.speed_mhz+' MHz':null,o.cas_latency?'CL'+o.cas_latency:null,o.configuration==='single_pair'?'2 × '+euro(o.unit_price_eur):null].filter(Boolean).join(' · ');
+let state=o.stock==='in_stock'?'In stock':o.stock==='out_of_stock'?'Out of stock':'Stock unverified';
+let safe=/^https:\/\//.test(o.url)?o.url:'#';
+return '<tr><td><div class="name">'+esc(o.title)+'</div><div class="spec">'+esc(specs)+'</div></td><td>'+esc(o.store)+'</td><td class="price '+(o.price_eur<=budget&&o.stock!=='out_of_stock'?'good':'')+'">'+euro(o.price_eur)+'</td><td><span class="pill">'+state+'</span>'+(!o.current?' <span class="pill bad">Stale</span>':'')+'</td><td class="muted">'+date(o.observed_at)+'</td><td><a target="_blank" rel="noopener noreferrer" href="'+esc(safe)+'">View listing</a></td></tr>'
+}).join(''):'<tr><td colspan="6" class="empty">No matching offers. Check source status and retry later.</td></tr>';
+E('health').textContent=(data.health||[]).map(h=>h.source+': '+h.status).join(' · ')||'No checks recorded.';
+}
+async function load(){
+try{let r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);data=await r.json();E('updated').textContent=data.last_scan?'Last scan '+date(data.last_scan):'No live scan yet';
+let selected=E('store').value,stores=[...new Set((data.offers||[]).map(o=>o.store))].sort((a,b)=>a==='Amazon.es'?-1:b==='Amazon.es'?1:a.localeCompare(b));
+E('store').innerHTML='<option value="">All stores</option>'+stores.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');E('store').value=stores.includes(selected)?selected:'';draw()}catch(err){E('updated').textContent='Could not load data: '+err.message}}
+E('refresh').onclick=load;
+['search','sort','store','stale'].forEach(id=>E(id).addEventListener(id==='search'?'input':'change',draw));
+E('export').onclick=()=>{let rows=[['Store','RAM','Price EUR','Stock','Updated','Link'],...visible.map(o=>[o.store,o.title,o.price_eur,o.stock,o.observed_at,o.url])];let csv=rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(',')).join('\r\n');let a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv'}));a.download='ram-offers.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+async function status(){try{let r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)return;let s=await r.json();E('scan').hidden=false;E('scan').disabled=!!s.running;E('scan').textContent=s.running?'Scanning…':'Scan now';E('scan-status').textContent=s.last_error?'Scan error: '+s.last_error:s.running?'Checking stores…':'';if(s.completed_at&&s.completed_at!==window._done){window._done=s.completed_at;load()}}catch(_){}}
+E('scan').onclick=async()=>{await fetch('/api/scan',{method:'POST'});status()};
+if(['localhost','127.0.0.1'].includes(location.hostname)){status();setInterval(status,5000)}
+load();setInterval(load,120000);
+</script></body></html>
