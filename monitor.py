@@ -525,7 +525,7 @@ def run():
                     item=browser_offer
                     health.append({"source":store+" browser render","status":"ok","found":1})
                 else:
-                    if rendered and re.search(r"<title>\\s*(?:just a moment|attention required|access denied)",rendered,re.I):
+                    if rendered and re.search(r"<title>\s*(?:just a moment|attention required|access denied)",rendered,re.I):
                         browser_challenged.add(store)
                     health.append({"source":store+" browser render",
                                    "status":"no_verified_price",
