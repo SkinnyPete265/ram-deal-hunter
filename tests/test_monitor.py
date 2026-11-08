@@ -258,6 +258,7 @@ def test_alerts_require_direct_in_stock_2x16gb_kit():
     assert not eligible_for_alert({**base,"stock":"out_of_stock"},200)
     assert not eligible_for_alert({**base,"comparison_only":True},200)
     assert not eligible_for_alert({**base,"catalogue_only":True},200)
+    assert not eligible_for_alert({**base,"indicative_only":True},200)
     assert not eligible_for_alert({**base,"configuration":"single_pair","units_to_buy":2},200)
     assert not eligible_for_alert({**base,"units_to_buy":2},200)
 
