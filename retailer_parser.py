@@ -347,8 +347,18 @@ def _pccomponentes_stock(doc):
     heading=main.select_one("h1")
     if heading is None:
         return "unknown"
-    full=main.get_text(" ",strip=True)
-    label=heading.get_text(" ",strip=True)
+    # Exclude recommendation blocks before searching nearby availability
+    # wording, even when those blocks are immediately below the main h1.
+    clean=BeautifulSoup(str(main),"html.parser")
+    for block in clean.select("[class], [id]"):
+        marker=" ".join(block.get("class",[]))+" "+str(block.get("id",""))
+        if re.search(r"related|recommend|suggest|carousel|similar",marker,re.I):
+            block.decompose()
+    clean_heading=clean.select_one("h1")
+    if clean_heading is None:
+        return "unknown"
+    full=clean.get_text(" ",strip=True)
+    label=clean_heading.get_text(" ",strip=True)
     position=full.find(label)
     if position<0:
         return "unknown"
