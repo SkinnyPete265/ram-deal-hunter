@@ -373,6 +373,31 @@ def notify(o):
         return r.ok and r.json().get("ok",False)
     except (requests.RequestException,ValueError): return False
 
+def compatible_browser_stock(original, rendered):
+    """Browser results may supplement stock, never replace a verified price.
+
+    Only accept a freshly rendered reading for a kit with the same listing
+    price and model identity. A different model or price might be a redirected
+    page, a recommendation, or a changing purchase option.
+    """
+    if not original or not rendered:
+        return False
+    if (original.get("configuration")!="kit" or
+            rendered.get("configuration")!="kit" or
+            original.get("store")!=rendered.get("store") or
+            rendered.get("stock") not in ("in_stock","out_of_stock")):
+        return False
+    if abs(original.get("price_eur",0)-rendered.get("price_eur",0))>0.011:
+        return False
+    def words(value):
+        return set(re.findall(r"[a-z0-9]{3,}",str(value).casefold()))
+    primary=words(original.get("title",""))
+    candidate=words(rendered.get("title",""))
+    return bool(primary and candidate and
+                len(primary & candidate)>=3 and
+                len(primary & candidate)/len(primary | candidate)>=0.5)
+
+
 def save_snapshot(path, output):
     """Replace the published JSON only after a complete file is written."""
     path=Path(path)
@@ -453,10 +478,7 @@ def run():
                     # The price and identity came from the original product
                     # page. Only enrich availability if a rendered page proves
                     # the same RAM configuration and gives an explicit result.
-                    if (browser_offer and
-                            browser_offer.get("configuration")==item.get("configuration") and
-                            abs(browser_offer.get("price_eur",0)-item.get("price_eur",0))<0.011 and
-                            browser_offer.get("stock") in ("in_stock","out_of_stock")):
+                    if compatible_browser_stock(item,browser_offer):
                         item["stock"]=browser_offer["stock"]
                         item["source"]+=" (stock checked in headless browser)"
                         health.append({"source":store+" browser stock",
