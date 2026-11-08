@@ -381,3 +381,15 @@ def test_castro_transient_fallback_does_not_make_502_a_valid_page(monkeypatch):
         monitor.download(url)
     assert monitor.FETCH_META["www.castroelectronica.pt"]["transient_attempted"]==1
     assert monitor.FETCH_META["www.castroelectronica.pt"]["transient_recovered"]==0
+
+def test_scan_trigger_records_only_known_non_identifying_values(monkeypatch):
+    from monitor import scan_trigger
+    for supplied,expected in (
+        ("manual","manual"),("scheduled","scheduled"),("push","push"),
+        ("MANUAL","manual"),(" unknown ","unknown"),("","unknown"),
+        ("pedro@pc.example","unknown")
+    ):
+        monkeypatch.setenv("RAM_DEAL_SCAN_TRIGGER",supplied)
+        assert scan_trigger()==expected
+    monkeypatch.delenv("RAM_DEAL_SCAN_TRIGGER")
+    assert scan_trigger()=="unknown"
