@@ -48,9 +48,9 @@ def matches(name):
         return None
     if any(re.search(p,s) for p in (r"1x32(?:gb)?",r"4x8(?:gb)?",r"2x8(?:gb)?",r"4x4(?:gb)?",r"2x32(?:gb)?",r"4x16(?:gb)?",r"8x4(?:gb)?")):
         return None
-    if re.search(r"(?:2x16(?:gb)?|16gbx2)(?![a-z0-9])",s):
+    if re.search(r"(?:2x16(?:gb)?|16gbx2)(?!\d)",s):
         return "kit"
-    if re.search(r"(?:1x16(?:gb)?|16gbx1)(?![a-z0-9])",s) and "32gb" not in s:
+    if re.search(r"(?:1x16(?:gb)?|16gbx1)(?!\d)",s) and "32gb" not in s:
         return "single_pair"
     # A clearly named single 16GB desktop DIMM is also eligible, purchased twice.
     # Never infer this from a kit/pack description or from a laptop/server product.
