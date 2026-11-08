@@ -364,6 +364,42 @@ def _pccomponentes_stock(doc):
     return "unknown"
 
 
+def _castro_online_stock(doc):
+    """Read only the explicit ONLINE stock field for the main Castro product.
+
+    Castro lists online/Mozelos/Porto separately. Do not interpret local shop
+    availability or a general "Comprar" button as online stock. The page also
+    contains unrelated recommendation cards after the main product.
+    """
+    main = doc.select_one("main") or doc.body
+    if main is None:
+        return "unknown"
+    heading = main.select_one("h1")
+    if heading is None:
+        return "unknown"
+    full = main.get_text(" ", strip=True)
+    title = heading.get_text(" ", strip=True)
+    idx = full.find(title)
+    if idx < 0:
+        return "unknown"
+    primary = full[idx + len(title):idx + len(title) + 3200]
+    # This is the site's dedicated main-product availability section.
+    match = re.search(
+        r"Disponibilidade\s+Online\s*:?\s*"
+        r"(Indispon[ií]vel|Esgotado|Sem\s+stock|Dispon[ií]vel|"
+        r"Consulte[- ]nos|Por\s+encomenda)\b",
+        primary, re.I
+    )
+    if not match:
+        return "unknown"
+    value = match.group(1).lower()
+    if re.match(r"indispon|esgotado|sem\s+stock", value):
+        return "out_of_stock"
+    if re.match(r"dispon", value):
+        return "in_stock"
+    return "unknown"
+
+
 def extract_html_offer(html, store, url, matches, price, stock, stamp):
     """Return (offer, reason). Never guess a price from a recommendation."""
     doc = BeautifulSoup(html, "html.parser")
@@ -399,6 +435,11 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
     if currency and currency.get("content") and currency.get("content").strip().upper() != "EUR":
         return None, "non_eur_price"
     status = _primary_stock(doc, stock)
+    if store=="Castro Electrónica":
+        # The online value is separate from Mozelos / Porto store inventory.
+        online_status = _castro_online_stock(doc)
+        if online_status != "unknown":
+            status = online_status
     if store=="PcComponentes":
         # Retain unknown unless the main product explicitly says unavailable.
         primary_status=_pccomponentes_stock(doc)
