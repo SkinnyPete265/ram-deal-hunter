@@ -72,6 +72,13 @@ try {
         }
     }
 
+    # The scheduled task passes -Unattended; RUN_LOCAL_SCAN.bat does not.
+    # This metadata is public but contains no Windows usernames or machine IDs.
+    if ($Unattended) {
+        $env:RAM_DEAL_SCAN_TRIGGER = "scheduled"
+    } else {
+        $env:RAM_DEAL_SCAN_TRIGGER = "manual"
+    }
     $env:RAM_DEAL_DATA_FILE = Join-Path $root "docs\local-data.json"
     $env:PYTHONDONTWRITEBYTECODE = "1"
 
