@@ -129,6 +129,14 @@ def product_info(html,store,url):
             if isinstance(properties,dict): properties=[properties]
             extra=" ".join(str(p.get("name",""))+" "+str(p.get("value","")) for p in properties if isinstance(p,dict))
             kind=matches(name) or matches(name+" "+extra)
+            # Some sellers omit the module count from the visible title, while
+            # their exact product URL contains an unambiguous manufacturer SKU.
+            # Use that corroboration only for a title explicitly saying
+            # "DDR4 32GB"; never trust arbitrary URL words like "2x16".
+            if (not kind and "ddr4" in name.lower() and
+                    re.search(r"\b32\s*gb\b",name,re.I) and
+                    re.search(r"(?:cm[a-z]+32gx4m2[a-z0-9]+|kf4\d{2}[a-z0-9]+k2[/\-]32|f4-[a-z0-9]+d-32[a-z0-9]+)",url,re.I)):
+                kind=matches(name+" "+url)
             if not kind: continue
             offers=item.get("offers") or []
             if isinstance(offers,dict): offers=[offers]
