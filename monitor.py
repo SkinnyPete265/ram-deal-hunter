@@ -163,6 +163,27 @@ def product_info(html,store,url):
     # product-level HTML widgets even when their JSON-LD is absent/incomplete.
     return extract_html_offer(html, store, url, matches, price, stock, stamp)[0]
 
+def _request_with_transient_retry(url):
+    """One gentle retry for intermittent 502/503/504 or request timeouts.
+
+    Permanent 403/404/410 failures are not retried here. HTTP fingerprint
+    fallback for access-denied responses remains a separate operation.
+    """
+    for attempt in range(2):
+        try:
+            response=requests.get(url,headers=AGENT,timeout=18)
+        except requests.Timeout:
+            if attempt:
+                raise
+            time.sleep(0.4)
+            continue
+        if response.status_code in (502,503,504) and attempt==0:
+            time.sleep(0.4)
+            continue
+        return response
+    raise RuntimeError("HTTP retry exhausted")
+
+
 def download(url):
     """Request a public product page; retry one blocked request with a browser-like TLS client.
 
@@ -171,7 +192,7 @@ def download(url):
     """
     host=urlparse(url).hostname or ""
     record=FETCH_META.setdefault(host,{"attempted":0,"recovered":0,"still_blocked":0})
-    response=requests.get(url,headers=AGENT,timeout=18)
+    response=_request_with_transient_retry(url)
     if response.status_code in (403,429):
         record["attempted"]+=1
         browser=None
