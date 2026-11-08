@@ -1,5 +1,11 @@
 name: Scan RAM prices
 on:
+  push:
+    paths:
+      - 'monitor.py'
+      - 'config.json'
+      - 'watchlist.csv'
+      - '.github/workflows/scan.yml'
   workflow_dispatch:
   schedule:
     - cron: '17,47 * * * *'
