@@ -1,5 +1,6 @@
 """Fixtures model real retailer patterns: PrestaShop primary prices and price tags."""
-from monitor import product_info
+from monitor import product_info, matches, price, stock, stamp, allowed
+from retailer_parser import category_card_offers
 
 
 def test_chipman_current_price_and_delivery_stock():
@@ -101,3 +102,90 @@ def test_preferred_current_price_over_strikethrough_old_price():
     """
     o=product_info(html,"Chipman","https://chipman.pt/memorias-ram/kingston")
     assert o and o["price_eur"]==194.66
+
+
+def test_chipman_price_with_vat_label_without_standard_css():
+    html = """
+    <html><head><meta name="description" content="Desktop DDR4 32GB (2x16GB)"></head>
+    <body><main id="main">
+      <h1>G.Skill DDR4 32GB (2x16GB) Ripjaws V</h1>
+      <div class="special-offer">
+       <span>239,90 €</span> <span>Com IVA</span>
+      </div>
+      <div class="recommended"><h2>Memory 8GB DDR4</h2><span>19,00 €</span></div>
+    </main></body></html>
+    """
+    o=product_info(html,"Chipman","https://chipman.pt/memorias-ram/gskill-ripjaws")
+    assert o and o["price_eur"]==239.9
+    assert o["source"].startswith("Chipman primary VAT-inclusive price")
+
+
+def test_chipman_catalogue_card_price_and_safe_stock():
+    html = """
+    <section>
+      <article class="product-miniature">
+        <h2 class="product-title">
+          <a href="/memorias-ram/gskill-2x16">Memória RAM G.Skill Aegis DDR4 32GB (2x16GB) 3200MHz CL16</a>
+        </h2>
+        <div class="product-price-and-shipping">
+          <span class="regular-price">299,90 €</span>
+          <span class="price">264,90 €</span>
+        </div>
+        <button>Adicionar ao carrinho</button>
+      </article>
+      <article class="product-miniature">
+        <h2 class="product-title"><a href="/memorias-ram/laptop">
+          Memória RAM DDR4 32GB 2x16GB SO-DIMM
+        </a></h2>
+        <span class="price">29,90 €</span>
+      </article>
+      <article class="product-miniature">
+        <h2 class="product-title"><a href="/memorias-ram/ddr5">
+          Memória RAM DDR5 32GB 2x16GB UDIMM
+        </a></h2>
+        <span class="price">89,90 €</span>
+      </article>
+    </section>
+    """
+    base="https://chipman.pt/categorias/memorias-ram-ddr4"
+    offers=category_card_offers(html,"Chipman",base,matches,price,stock,stamp,allowed)
+    assert len(offers)==1
+    o=offers[0]
+    assert o["price_eur"]==264.9
+    assert o["stock"]=="unknown"
+    assert o["catalogue_only"] is True
+    assert o["url"]=="https://chipman.pt/memorias-ram/gskill-2x16"
+
+
+def test_catalogue_card_single_pair_price_doubled():
+    html = """
+    <article class="product-miniature">
+      <h2 class="product-title"><a href="/memorias-ram/apacer16">
+        Memória RAM Apacer DDR4 16GB DIMM 3200MHz
+      </a></h2>
+      <div class="product-price-and-shipping"><span class="price">79,90 €</span></div>
+    </article>
+    """
+    base="https://chipman.pt/categorias/memorias-ram-ddr4"
+    offers=category_card_offers(html,"Chipman",base,matches,price,stock,stamp,allowed)
+    assert len(offers)==1 and offers[0]["price_eur"]==159.8
+    assert offers[0]["units_to_buy"]==2
+    assert offers[0]["stock"]=="unknown"
+
+
+def test_catalogue_card_ignores_untrusted_host_and_missing_price():
+    html = """
+    <article class="product-miniature">
+      <h2 class="product-title"><a href="https://fakechipman.test/ram">
+        RAM DDR4 32GB 2x16GB
+      </a></h2>
+      <span class="price">39,90 €</span>
+    </article>
+    <article class="product-miniature">
+      <h2 class="product-title"><a href="/memorias-ram/unpriced">
+        RAM DDR4 32GB 2x16GB
+      </a></h2>
+      <div class="delivery">Entregue em 3 dias</div>
+    </article>
+    """
+    assert category_card_offers(html,"Chipman","https://chipman.pt/categorias/memorias-ram-ddr4",matches,price,stock,stamp,allowed)==[]
