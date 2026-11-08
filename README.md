@@ -1,10 +1,10 @@
 # RAM Deal Hunter — Portugal
 
-A small self-hosted desktop-DDR4 price monitor for **32 GB in exactly two 16 GB sticks**, targeting **€200 or less**. The automatic scanner targets Portuguese retailers without requiring any paid price-data API.
+A small self-hosted desktop-DDR4 price monitor for **32 GB in exactly two 16 GB sticks**, targeting **€200 or less**. The scanners monitor Portugal-friendly retailers without requiring any paid price-data API.
 
 ## Status
 
-The repository contains working application source, GitHub Actions schedules, live retailer scan data, and a successfully deployed GitHub Pages dashboard. A separate Windows home scanner is available but has not been installed or tested on the user's PC. Telegram delivery is not verified. Stock and shipping to Portugal are not guaranteed from retailer metadata. Every deal is a **candidate** until checkout verifies the exact configuration, availability and shipping.
+The repository contains working application source, GitHub Actions schedules, live retailer scan data, and a successfully deployed GitHub Pages dashboard. A separate Windows home scanner was installed and has successfully uploaded recurring scans from the user's PC. Telegram delivery is not verified. Stock and shipping to Portugal are not guaranteed from retailer metadata. Every deal is a **candidate** until checkout verifies the exact configuration, availability and shipping.
 
 The repository is **public** and includes a scheduled GitHub Pages deployment job. To activate the public dashboard, open **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**, and save. Then run **Actions → Scan RAM prices → Run workflow** to start a scan and deploy the site, or let the scheduled workflow run. After the first successful deployment, use **https://skinnypete265.github.io/ram-deal-hunter/**. The dashboard reads the latest deployed `docs/data.json`; it cannot trigger manual scans from GitHub Pages. The site is read-only and data is public, so never place API keys or Telegram tokens inside `docs/`.
 
@@ -19,14 +19,16 @@ A separate ChatGPT hourly price-watch automation was previously created. It is d
 
 ## Always-on Windows home scanner
 
-Since residential connections may work where GitHub cloud runners receive HTTP 403, a **separate Windows Task Scheduler job** can scan the same public retailer pages from your home PC and upload results to `docs/local-data.json` every 30 minutes. The hosted dashboard merges that home snapshot with the GitHub cloud snapshot (`docs/data.json`), preserving distinct timestamps, scan origins, and stale indicators. This does not guarantee previously blocked stores will work from home.
+Since residential connections may work where GitHub cloud runners receive HTTP 403, a **separate Windows Task Scheduler job** can scan the same public retailer pages from your home PC and upload results to `docs/local-data.json` every 8 hours. The hosted dashboard merges that home snapshot with the GitHub cloud snapshot (`docs/data.json`), preserving distinct timestamps, scan origins, and stale indicators. A snapshot remains current for up to **12 hours** to tolerate schedule delays; missed scans become stale. The cloud scanner runs three times per day at 02:17, 10:17 and 18:17 UTC. GitHub cron timing is best-effort.
+
+**Upgrading an existing 30-minute Windows installation:** The installed task updates itself to an eight-hour interval when `Run-LocalScan.ps1` pulls the new `Update-LocalSchedule.ps1` helper. Because an already-running PowerShell process uses the old script version, the change may require up to **two more half-hour task executions** to take effect. Check Task Scheduler → **RAM Deal Hunter - Home Scanner** → Triggers; it should eventually show an eight-hour repetition. The installer now creates eight-hour tasks directly. This does not guarantee previously blocked stores will work from home.
 
 **One-time setup on your Windows computer:**
 
 1. Install **Python 3.11+** and **Git for Windows** (with Git Credential Manager). The `py -3` and `git` commands must work in PowerShell.
 2. **Clone** [SkinnyPete265/ram-deal-hunter](https://github.com/SkinnyPete265/ram-deal-hunter) using GitHub Desktop (`Code → Open with GitHub Desktop`) or `git clone https://github.com/SkinnyPete265/ram-deal-hunter.git`. A downloaded ZIP is not enough because the scanner uploads through Git.
 3. In the cloned folder, double-click **`INSTALL_BACKGROUND_SCANNER.bat`**. The installer installs Python packages, performs a real scan and attempts a Git push. **Sign into GitHub when Git Credential Manager prompts you.** A failed first push prevents the background task from being registered.
-4. If the initial upload succeeds, Windows Task Scheduler registers **RAM Deal Hunter - Home Scanner**, running every **30 minutes**. It works while the PC is locked, but the Windows user must remain **signed in**, the PC must be awake, and its network must be online.
+4. If the initial upload succeeds, Windows Task Scheduler registers **RAM Deal Hunter - Home Scanner**, running every **8 hours**. It works while the PC is locked, but the Windows user must remain **signed in**, the PC must be awake, and its network must be online.
 5. Visit [the public dashboard](https://skinnypete265.github.io/ram-deal-hunter/) after the **Publish Home PC RAM dashboard** GitHub Actions workflow deploys the first upload. The page shows **Home PC** as a scan source.
 
 **Tools:** Double-click `RUN_LOCAL_SCAN.bat` for an interactive scan, or `UNINSTALL_BACKGROUND_SCANNER.bat` to remove the scheduled task. Inspect `logs/local-scanner.log` for errors (local-only; ignored by Git). If Git credentials are revoked, sign in again through an interactive manual scan. **Don't run `START_WINDOWS.bat` alongside the scheduled scanner** unless you know how to manage its separate local data and Git checkout changes.
@@ -35,7 +37,7 @@ Since residential connections may work where GitHub cloud runners receive HTTP 4
 
 ## Run locally (Windows)
 
-Install Python 3.11+ and double-click `START_WINDOWS.bat`. The application will install dependencies and start a local dashboard at **http://127.0.0.1:8765**. It attempts a scan at startup and every 30 minutes while running. Use **Scan now** for a manual check.
+Install Python 3.11+ and double-click `START_WINDOWS.bat`. The application will install dependencies and start a local dashboard at **http://127.0.0.1:8765**. It attempts a scan at startup and every 8 hours while running. Use **Scan now** for a manual check.
 
 For command-line use:
 
@@ -46,7 +48,7 @@ python monitor.py
 python app.py
 ```
 
-GitHub Actions uses `.github/workflows/scan.yml`, scheduled at minute 17 and 47 each hour (and on changes to retailer configuration, watchlists, or the scan workflow). GitHub may delay or skip runs, especially on inactive repositories. Use **Actions → Scan RAM prices → Run workflow** to request a scan. See the **Test** workflow for automated parser tests.
+GitHub Actions uses `.github/workflows/scan.yml`, scheduled at 02:17, 10:17 and 18:17 UTC (and on changes to retailer configuration, watchlists, or the scan workflow). GitHub may delay or skip runs, especially on inactive repositories. Use **Actions → Scan RAM prices → Run workflow** to request a scan. See the **Test** workflow for automated parser tests.
 
 ## Retailers and API setup
 
@@ -78,4 +80,4 @@ Configure secrets through **Settings → Secrets and variables → Actions → N
 
 The scanner accepts explicitly specified 2×16 GB kits or eligible 1×16 GB modules (priced as two identical units) and certain **unambiguous manufacturer part numbers** proving those configurations. Prices must originate from the primary product data, current sale-price widget, or a single corresponding catalogue card—never recommended products, crossed-out list prices, shipping fees, or other product offers. If data remains inaccessible, it reports the reason, rather than inventing a price. On up to two failed product pages per retailer, limited **public, sanitized price-element diagnostics** are included in each snapshot to help improve adapters without saving full HTML, forms or credentials. For two separate singles, a retailer's in-stock status does not establish that **two** units can be purchased. Prices and delivery costs must always be confirmed at checkout.
 
-The scanner currently does **not** verify shipping fees or actual checkout totals to Portugal, so a €199 listing could exceed your total budget after shipping. Scanning every 30 minutes is best-effort rather than a real-time feed.
+The scanner currently does **not** verify shipping fees or actual checkout totals to Portugal, so a €199 listing could exceed your total budget after shipping. Scanning every 8 hours is best-effort rather than a real-time feed.
