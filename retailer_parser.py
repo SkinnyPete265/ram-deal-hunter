@@ -385,6 +385,15 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
         if unit is not None:
             source="Chipman primary VAT-inclusive price"
     if unit is None:
+        if store=="CHIP7":
+            heading=doc.select_one("h1")
+            main=doc.select_one("main") or doc.body
+            if heading is not None and main is not None:
+                contents=main.get_text(" ",strip=True)
+                pos=contents.find(heading.get_text(" ",strip=True))
+                if pos>=0 and re.search(r"Contacte\s+a\s+loja\s+CHIP7",
+                        contents[pos:pos+2100],re.I):
+                    return None, "contact_store_for_price"
         return None, "price_not_found"
     currency = doc.select_one("meta[property='product:price:currency'], meta[itemprop='priceCurrency']")
     if currency and currency.get("content") and currency.get("content").strip().upper() != "EUR":
