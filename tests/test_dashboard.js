@@ -14,6 +14,13 @@ assert(html.includes('g.render_recovered'), 'Source health must count browser re
 assert(html.includes("o.stock==='in_stock'&&!o.comparison_only&&!o.catalogue_only"),
   'Deal count should exclude speculative comparison and catalogue prices');
 assert(html.includes("GitHub Actions → Run workflow"), 'Manual scan guidance stays visible');
+for (const id of ["scan-home-time", "scan-cloud-time", "scan-home-kind", "scan-cloud-kind"]) {
+  assert(html.includes('id="'+id+'"'), 'Missing scan timestamp UI: '+id);
+}
+assert(html.includes("drawScanInfo()"), 'Dashboard must show provenance after loading both snapshots');
+assert(html.includes("scanKind(sources.latest_scan_trigger"), 'Latest scan must identify manual/scheduled origin');
+assert(html.includes("timeZone:'Europe/Lisbon'"), 'Timestamps must use Portugal local time');
+assert(html.includes("Snapshot outdated"), 'Old data must not appear recently scanned');
 assert(html.includes("Indicative credit PVP"), "Indicative CHIP7 prices must be visibly labelled");
 assert(html.includes("transient fallback"), "Temporary Castro HTTP recovery must be grouped by store");
 console.log('Dashboard inline JS syntax and status checks passed');
