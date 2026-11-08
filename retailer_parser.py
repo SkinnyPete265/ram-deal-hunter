@@ -21,10 +21,31 @@ PRIMARY_PRICE_SELECTORS = (
     ".product-info-main .price-final_price .price",
     "#product-price .price",
     "#product-price",
-    "main .product-price .price",
-    "main .product-price",
     "main [itemprop='price'][content]",
 )
+# Verified by inspecting real public product-page markup.
+# Do not use unscoped .price or .product-price: related products also use them.
+STORE_PRICE_SELECTORS = {
+    "Chipman": (
+        "main [class*='text-3xl'][class*='text-sale-']",
+        "main [class*='text-xl'][class*='text-sale-']",
+        "main [class*='text-3xl'][class*='font-extrabold']",
+    ),
+    "Castro Electrónica": (
+        "span.product-opportunity-new-price",
+        ".product-opportunity-new-price",
+    ),
+    "ON4TECH": (
+        "span.product-detalhe-price",
+        ".product-detalhe-price",
+    ),
+    "Globaldata": ("span.sales.js-sales", "span.sales .value"),
+    "Fnac": (".f-faPriceBox__price.userPrice", ".f-faPriceBox__price"),
+    "KIBO": (".kibo-pdp-price__amount",),
+    "El Shop": (".product__prices-inline .product__price", ".product__prices-inline"),
+    "PCBox": (".space-y-6 .text-xl.font-bold",),
+}
+
 PRICE_META_SELECTORS = (
     "meta[property='product:price:amount']",
     "meta[property='og:price:amount']",
@@ -63,13 +84,13 @@ def _name_and_metadata(doc):
     return title, (title + " " + description).strip()
 
 
-def _primary_price(doc, convert):
+def _primary_price(doc, convert, store=None):
     for selector in PRICE_META_SELECTORS:
         for node in doc.select(selector):
             number = _amount(node.get("content"), convert)
             if number is not None:
                 return number, "Product price metadata"
-    for selector in PRIMARY_PRICE_SELECTORS:
+    for selector in STORE_PRICE_SELECTORS.get(store,()) + PRIMARY_PRICE_SELECTORS:
         for node in doc.select(selector):
             for key in ("content", "data-price-amount", "data-price", "value"):
                 number = _amount(node.get(key), convert)
@@ -185,7 +206,7 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
     kind = matches(details)
     if kind is None:
         return None, "configuration_unverified"
-    unit, source = _primary_price(doc, price)
+    unit, source = _primary_price(doc, price, store)
     if unit is None and store=="Chipman":
         unit=_chipman_tax_price(doc,price)
         if unit is not None:
@@ -196,6 +217,13 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
     if currency and currency.get("content") and currency.get("content").strip().upper() != "EUR":
         return None, "non_eur_price"
     status = _primary_stock(doc, stock)
+    # ON4TECH puts its stock indicator beside the actual primary price.
+    # Do not infer "in stock" from recommended product cards.
+    if store=="ON4TECH":
+        main=doc.select_one("main, #product, .product-detalhe") or doc.body
+        primary_text=main.get_text(" ",strip=True)[:2500] if main else ""
+        if re.search(r"Produto\s+Esgotado",primary_text,re.I):
+            status="out_of_stock"
     if kind == "single_pair" and status == "in_stock":
         status = "unknown"  # Stock of one does not prove stock of two.
     total = round(unit * (2 if kind == "single_pair" else 1), 2)
