@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-11-08T01:05:43+00:00",
+  "last_scan": "2026-11-08T01:12:24+00:00",
   "budget_eur": 200,
   "offers": [
     {
@@ -16,12 +16,42 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:14+00:00",
+      "observed_at": "2026-11-08T01:10:37+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T00:41:18+00:00",
           "price_eur": 91.02,
+          "stock": "out_of_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "544408caff3632f4",
+      "store": "ON4TECH",
+      "url": "https://www.on4tech.pt/p3-p-487168-memoria-corsair-vengeance-ddr4-32gb-2x16gb-pc3600-rgb-pro-preta-pt",
+      "title": "on4tech",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 196.0,
+      "price_eur": 196.0,
+      "stock": "out_of_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": null,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-08T01:10:34+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T00:23:06+00:00",
+          "price_eur": 183,
+          "stock": "out_of_stock"
+        },
+        {
+          "at": "2026-11-08T01:10:34+00:00",
+          "price_eur": 196.0,
           "stock": "out_of_stock"
         }
       ],
@@ -41,7 +71,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -67,7 +97,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:40+00:00",
+      "observed_at": "2026-11-08T01:11:02+00:00",
       "current": true,
       "history": [
         {
@@ -92,7 +122,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:26+00:00",
+      "observed_at": "2026-11-08T01:12:01+00:00",
       "current": true,
       "history": [
         {
@@ -117,7 +147,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -143,7 +173,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -169,7 +199,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -195,7 +225,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -221,7 +251,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:23+00:00",
+      "observed_at": "2026-11-08T01:11:57+00:00",
       "current": true,
       "history": [
         {
@@ -246,7 +276,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -272,7 +302,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -298,7 +328,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:20+00:00",
+      "observed_at": "2026-11-08T01:10:43+00:00",
       "current": true,
       "history": [
         {
@@ -323,7 +353,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:20+00:00",
+      "observed_at": "2026-11-08T01:11:53+00:00",
       "current": true,
       "history": [
         {
@@ -348,7 +378,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:34+00:00",
+      "observed_at": "2026-11-08T01:12:10+00:00",
       "current": true,
       "history": [
         {
@@ -373,7 +403,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:08+00:00",
+      "observed_at": "2026-11-08T01:10:32+00:00",
       "current": true,
       "history": [
         {
@@ -398,7 +428,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:35+00:00",
+      "observed_at": "2026-11-08T01:10:57+00:00",
       "current": true,
       "history": [
         {
@@ -423,7 +453,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -449,7 +479,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -475,7 +505,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -501,7 +531,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -527,7 +557,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -553,7 +583,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:38+00:00",
+      "observed_at": "2026-11-08T01:12:16+00:00",
       "current": true,
       "history": [
         {
@@ -578,7 +608,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -604,7 +634,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:17+00:00",
+      "observed_at": "2026-11-08T01:11:49+00:00",
       "current": true,
       "history": [
         {
@@ -629,7 +659,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:14+00:00",
+      "observed_at": "2026-11-08T01:11:46+00:00",
       "current": true,
       "history": [
         {
@@ -654,7 +684,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -680,7 +710,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:28+00:00",
+      "observed_at": "2026-11-08T01:10:51+00:00",
       "current": true,
       "history": [
         {
@@ -705,7 +735,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -731,7 +761,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:05:11+00:00",
+      "observed_at": "2026-11-08T01:11:42+00:00",
       "current": true,
       "history": [
         {
@@ -756,7 +786,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -782,7 +812,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:12+00:00",
+      "observed_at": "2026-11-08T01:10:36+00:00",
       "current": true,
       "history": [
         {
@@ -807,7 +837,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:32+00:00",
+      "observed_at": "2026-11-08T01:10:55+00:00",
       "current": true,
       "history": [
         {
@@ -832,7 +862,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T01:05:43+00:00",
+      "observed_at": "2026-11-08T01:12:23+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -858,38 +888,13 @@
       "speed_mhz": 3200,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T01:04:21+00:00",
+      "observed_at": "2026-11-08T01:10:44+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T00:41:24+00:00",
           "price_eur": 465.2,
           "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "544408caff3632f4",
-      "store": "ON4TECH",
-      "url": "https://www.on4tech.pt/p3-p-487168-memoria-corsair-vengeance-ddr4-32gb-2x16gb-pc3600-rgb-pro-preta-pt",
-      "title": "Memória Corsair Vengeance DDR4 32GB 2x16GB PC3600 RGB PRO - Preta",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 183,
-      "price_eur": 183,
-      "stock": "out_of_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": null,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T00:23:06+00:00",
-      "current": false,
-      "history": [
-        {
-          "at": "2026-11-08T00:23:06+00:00",
-          "price_eur": 183,
-          "stock": "out_of_stock"
         }
       ],
       "alerted_price_eur": null
@@ -1052,12 +1057,8 @@
       "found": 5
     },
     {
-      "source": "ON4TECH product",
-      "status": "no_verified_price"
-    },
-    {
       "source": "Novo Atalho product",
-      "status": "no_verified_price"
+      "status": "no_primary_product"
     },
     {
       "source": "Switch Technology product",
@@ -1066,259 +1067,259 @@
     },
     {
       "source": "Fnac product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "El Shop product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "PCBox product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "El Shop product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "El Shop product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "PCBox product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "PCBox product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Chipman product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "Globaldata product",
-      "status": "no_verified_price"
+      "status": "configuration_unverified"
     },
     {
       "source": "Castro Electrónica product",
-      "status": "no_verified_price"
+      "status": "price_not_found"
     },
     {
       "source": "KuantoKusta comparison",
