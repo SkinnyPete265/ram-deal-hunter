@@ -8,7 +8,7 @@ The repository contains working application source, GitHub Actions schedules, li
 
 The repository is **public** and includes a scheduled GitHub Pages deployment job. To activate the public dashboard, open **Settings → Pages → Build and deployment**, set **Source** to **GitHub Actions**, and save. Then run **Actions → Scan RAM prices → Run workflow** to start a scan and deploy the site, or let the scheduled workflow run. After the first successful deployment, use **https://skinnypete265.github.io/ram-deal-hunter/**. The dashboard reads the latest deployed `docs/data.json`; it cannot trigger manual scans from GitHub Pages. The site is read-only and data is public, so never place API keys or Telegram tokens inside `docs/`.
 
-A separate ChatGPT hourly price-watch automation was previously created. It is distinct from this project.
+A separate ChatGPT hourly price-watch automation was previously created. It is distinct from this project and is **not changed by the eight-hour GitHub/Windows schedule**.
 
 ## Buying criteria
 
@@ -53,6 +53,8 @@ GitHub Actions uses `.github/workflows/scan.yml`, scheduled at 02:17, 10:17 and 
 ## Retailers and API setup
 
 The scanner uses a small seeded watchlist plus category-page discovery across **PCDIGA, PcComponentes, Globaldata, CHIP7, Novo Atalho, Castro Electrónica, Chipman, You Get, KIBO, El Shop (Spain), and PCBox**. Additional direct-product watchlist URLs cover **ON4TECH, Switch Technology, and Fnac.pt**. The Spain-based El Shop explicitly lists Portugal as a supported destination; other included retailers have Portuguese storefronts and/or published Portugal delivery options. Marketplace shipping depends on the individual seller.
+
+**Windows-only JavaScript fallback (optional):** Some PcComponentes and CHIP7 product pages do not expose their main buybox price in raw HTML. For up to six failed PcComponentes products and three CHIP7 products per home scan, the scanner may use the installed Chrome or Edge executable in isolated headless mode to read the JavaScript-rendered DOM. No browser extension, paid proxy, extra Python package or account is needed. Only the verified primary-product price is eligible; the parser never substitutes a related-item price. This feature may still fail because a retailer blocks automation or does not show a valid buybox. It is not used on GitHub's Linux runners.
 
 **Known coverage gaps:** PCDIGA, PcComponentes and CHIP7 returned HTTP 403 from GitHub-hosted scans on 8 November 2026. The monitor now retries a 403/429 **once** using the free open-source `curl_cffi` client with a Chrome-like TLS/HTTP2 fingerprint. It records recovery counts and blocked status, then skips further attempts to a persistently blocked store *during the same run*. This cannot solve CAPTCHA or JavaScript verification challenges, and GitHub's hosting IP may still be denied. No paid proxies, CAPTCHA-solving services or retailer accounts are required. Do not infer that a retailer is successfully covered until its latest scan reports prices. Other sources may omit structured product data or block requests too. The tracker does not claim total market coverage.
 
