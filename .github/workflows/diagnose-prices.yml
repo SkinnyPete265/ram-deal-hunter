@@ -1,0 +1,21 @@
+name: Price extraction diagnostics
+on:
+  push:
+    paths:
+      - 'scripts/diagnose_prices.py'
+      - '.github/workflows/diagnose-prices.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - name: Inspect sample retailer pages and extraction reasons
+        run: python scripts/diagnose_prices.py
