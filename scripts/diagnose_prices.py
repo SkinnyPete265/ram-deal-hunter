@@ -15,8 +15,9 @@ from monitor import ROOT, allowed, download, links, product_info
 from retailer_parser import extract_html_offer, _name_and_metadata
 from monitor import matches, price, stock, stamp
 
-GROUPS = {"Chipman","Castro Electrónica","Novo Atalho","El Shop","PCBox","KIBO","Globaldata",
-          "ON4TECH","Fnac","PCDIGA","PcComponentes","CHIP7","You Get","Switch Technology"}
+# Focused diagnostic for the two remaining problematic retailer sources.
+# This is not the regular 8-hour scan; only the diagnostic workflow uses it.
+GROUPS = {"Castro Electrónica","CHIP7"}
 PRICES = re.compile(r"\d{1,5}[.,]\d{2}\s*(?:€|EUR)|(?:€|EUR)\s*\d{1,5}",re.I)
 
 def summarize(html,store,url,kind):
@@ -111,6 +112,7 @@ def summarize(html,store,url,kind):
         print(json.dumps({"store":store,"kind":"card_diagnostics","cards":cards},ensure_ascii=False))
     print(json.dumps({
         "store":store,"kind":kind,"url":url[:190],
+        "indicative_only":bool(product and product.get("indicative_only")),
         "h1":name[:220],"matches":matches(details),"metadata_excerpt":details[:350],
         "extraction":reason,"found":bool(product),"price":product.get("price_eur") if product else None,
         "meta":metas,"price_nodes":priced_nodes,"price_snippets":snippets,
@@ -138,7 +140,7 @@ def main():
         except Exception as e:
             print(json.dumps({"store":store,"kind":"category","error":str(e)[:170]}))
     for store,urls in seen.items():
-        max_samples=3 if store in ("Chipman","Castro Electrónica") else 1
+        max_samples=3
         for url in urls[:max_samples]:
             try: summarize(download(url),store,url,"product")
             except Exception as e:
