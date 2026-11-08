@@ -16,15 +16,24 @@
     const bestById = new Map();
     const health = [];
     const timestamps = {};
+    const scanTriggers = {};
+    const freshness = {};
 
     for (const source of sourceList) {
       const snap = source.snapshot;
       timestamps[source.label] = snap && snap.last_scan || null;
-      if (!snap) continue;
+      // Older snapshots predate scan_trigger; never guess they were scheduled.
+      scanTriggers[source.label] = snap && ["manual", "scheduled", "push"].includes(snap.scan_trigger)
+        ? snap.scan_trigger : "unknown";
+      if (!snap) {
+        freshness[source.label] = false;
+        continue;
+      }
       const scannedAt = millis(snap.last_scan);
       const isFresh = scannedAt > 0 &&
           currentTime >= scannedAt - 2 * 60 * 1000 &&
           currentTime - scannedAt <= MAX_AGE_MS;
+      freshness[source.label] = isFresh;
 
       if (isFresh) {
         for (const check of (snap.health || [])) {
@@ -51,6 +60,9 @@
       .sort((a, b) => Number(b.current) - Number(a.current) || a.price_eur - b.price_eur);
     const times = Object.values(timestamps).map(millis);
     const last = Math.max(0, ...times);
+    const latestSource = last
+      ? (millis(timestamps["Home PC"]) >= millis(timestamps["GitHub cloud"]) ? "Home PC" : "GitHub cloud")
+      : null;
     return {
       budget_eur: Number(cloud && cloud.budget_eur) || Number(home && home.budget_eur) || 200,
       last_scan: last ? new Date(last).toISOString() : null,
@@ -58,7 +70,14 @@
       health: health,
       sources: {
         cloud_last_scan: timestamps["GitHub cloud"],
-        home_last_scan: timestamps["Home PC"]
+        home_last_scan: timestamps["Home PC"],
+        cloud_scan_trigger: scanTriggers["GitHub cloud"],
+        home_scan_trigger: scanTriggers["Home PC"],
+        cloud_is_fresh: freshness["GitHub cloud"],
+        home_is_fresh: freshness["Home PC"],
+        latest_scan_origin: latestSource,
+        latest_scan_trigger: latestSource ? scanTriggers[latestSource] : "unknown",
+        latest_is_fresh: latestSource ? freshness[latestSource] : false
       }
     };
   }
