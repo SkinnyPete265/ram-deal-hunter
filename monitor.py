@@ -277,6 +277,18 @@ def notify(o):
         return r.ok and r.json().get("ok",False)
     except (requests.RequestException,ValueError): return False
 
+def save_snapshot(path, output):
+    """Replace the published JSON only after a complete file is written."""
+    path=Path(path)
+    path.parent.mkdir(parents=True,exist_ok=True)
+    temporary=path.with_name(path.name+".tmp")
+    try:
+        temporary.write_text(json.dumps(output,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+        os.replace(temporary,path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
 def run():
     cfg=json.loads((ROOT/"config.json").read_text(encoding="utf-8"))
     previous=json.loads(DATA.read_text(encoding="utf-8")) if DATA.exists() else {"offers":[]}
@@ -374,7 +386,7 @@ def run():
     for ident,item in earlier.items():
         if ident not in offers: offers[ident]={**item,"current":False}
     output={"last_scan":stamp(),"budget_eur":cfg["budget_eur"],"offers":sorted(offers.values(),key=lambda x:(not x["current"],x["price_eur"])),"health":health,"note":"Prices observed on retailer pages. Stock and shipping to Portugal must be confirmed at checkout."}
-    DATA.write_text(json.dumps(output,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    save_snapshot(DATA,output)
     print("Scan complete:",len(offers),"tracked offers;",len(health),"source checks")
 
 if __name__=="__main__": run()
