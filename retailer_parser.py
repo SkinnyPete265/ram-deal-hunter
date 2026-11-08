@@ -351,6 +351,8 @@ def _pccomponentes_stock(doc):
     # wording, even when those blocks are immediately below the main h1.
     clean=BeautifulSoup(str(main),"html.parser")
     for block in clean.select("[class], [id]"):
+        if getattr(block, "decomposed", False):
+            continue
         marker=" ".join(block.get("class",[]))+" "+str(block.get("id",""))
         if re.search(r"related|recommend|suggest|carousel|similar",marker,re.I):
             block.decompose()
