@@ -1,0 +1,26 @@
+{
+  "budget_eur": 200,
+  "memory_type": "DDR4",
+  "capacity_gb": 32,
+  "stick_count": 2,
+  "stick_size_gb": 16,
+  "form_factor": "UDIMM",
+  "retailer_pages": [
+    [
+      "PCDIGA",
+      "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4"
+    ],
+    [
+      "PcComponentes",
+      "https://www.pccomponentes.pt/categorias/memorias-ram/ddr4"
+    ],
+    [
+      "Globaldata",
+      "https://www.globaldata.pt/componentes/memorias-ram/memorias-ddr4"
+    ],
+    [
+      "CHIP7",
+      "https://chip7.pt/componentes-hardware/memoria-ram/memoria-ram-ddr4"
+    ]
+  ]
+}
