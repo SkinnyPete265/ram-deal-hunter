@@ -1,5 +1,5 @@
 import json
-from monitor import matches, price, stock, product_info, allowed, links
+from monitor import matches, price, stock, product_info, allowed, links, comparison_offers
 
 def test_desktop_configuration():
     assert matches("Corsair 32GB DDR4 3200MHz (2x16GB)")=="kit"
@@ -111,3 +111,28 @@ def test_browser_fallback_keeps_blocked_failure(monkeypatch):
     with pytest.raises(HTTPError):
         monitor.download("https://chip7.pt/test")
     assert monitor.FETCH_META["chip7.pt"]["still_blocked"]==1
+
+def test_comparison_offers_are_unverified():
+    html = """
+    <a href="/p/78706/corsair-ddr4">
+      Memória RAM Corsair 32GB Vengeance LPX (2x 16GB) DDR4 CL16 3200Mhz Black desde 189,50€ em 12 lojas
+    </a>
+    <a href="/p/78707/sodimm">
+      Memória RAM Crucial 32GB SO-DIMM DDR4 3200Mhz (2x16GB) desde 150,00€
+    </a>
+    <a href="https://evil.example/p/12/fake">
+      Memória RAM Corsair DDR4 (2x16GB) desde 10,00€
+    </a>
+    <a href="/p/78708/one-by-32">
+      Memória RAM DDR4 (1x32GB) desde 89,00€
+    </a>
+    """
+    found=comparison_offers(html,"https://www.kuantokusta.pt/c/11/memoria-ram/f/347-8352/32-gb-ddr4")
+    assert len(found)==1
+    o=found[0]
+    assert o["price_eur"]==189.5
+    assert o["comparison_only"] is True
+    assert o["stock"]=="unknown"
+    assert o["shipping_to_pt"]=="unverified"
+    assert o["configuration"]=="kit"
+    assert o["url"].startswith("https://www.kuantokusta.pt/p/78706/")
