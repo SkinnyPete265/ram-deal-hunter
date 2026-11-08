@@ -22,6 +22,7 @@ HOSTS = {
     "Novo Atalho": "novoatalho.pt", "Castro Electrónica": "castroelectronica.pt",
     "Chipman": "chipman.pt", "Switch Technology": "switchtechnology.pt",
     "You Get": "youget.pt", "KIBO": "kibo.pt", "El Shop": "elshop.es",
+    "PCBox": "pcbox.pt", "Fnac": "fnac.pt",
 }
 NEG = ("outofstock","soldout","esgotado","sem stock","agotado","indisponivel","indisponível")
 POS = ("instock","in stock","em stock","disponivel","disponível","en stock")
@@ -83,9 +84,12 @@ def product_info(html,store,url):
             queue.extend(item.get("@graph",[]) if isinstance(item.get("@graph"),list) else [])
             kinds=item.get("@type",[])
             if isinstance(kinds,str): kinds=[kinds]
-            if "Product" not in kinds: continue
+            if not any(str(k).rstrip("/").split("/")[-1]=="Product" for k in kinds): continue
             name=str(item.get("name") or "")
-            kind=matches(name)
+            properties=item.get("additionalProperty") or []
+            if isinstance(properties,dict): properties=[properties]
+            extra=" ".join(str(p.get("name",""))+" "+str(p.get("value","")) for p in properties if isinstance(p,dict))
+            kind=matches(name) or matches(name+" "+extra)
             if not kind: continue
             offers=item.get("offers") or []
             if isinstance(offers,dict): offers=[offers]
@@ -94,6 +98,10 @@ def product_info(html,store,url):
                 unit=price(o.get("price") or o.get("lowPrice"))
                 if unit is None: continue
                 availability=stock(o.get("availability"))
+                # Prefer an explicit primary-product out-of-stock statement on PCBox pages
+                # to potentially stale structured availability.
+                if store=="PCBox" and re.search(r"produto n[aã]o dispon[ií]vel no momento",html,re.I):
+                    availability="out_of_stock"
                 if kind=="single_pair" and availability=="in_stock": availability="unknown"
                 amount=round(unit*(2 if kind=="single_pair" else 1),2)
                 identity=hashlib.sha256((store+":"+url.split("?")[0]).encode()).hexdigest()[:16]
