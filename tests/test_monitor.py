@@ -187,3 +187,11 @@ def test_price_diagnostics_do_not_capture_form_values():
     assert "PRIVATE" not in str(diagnostic)
     assert diagnostic["heading"]=="DDR4 RAM kit"
     assert diagnostic["price_nodes"][0][3]=="199,90 €"
+
+
+def test_disguised_dual_eight_gigabyte_kits_not_treated_as_singles():
+    assert matches("Memória RAM G.SKILL Aegis F4-3200C16D-16GIS (3200MHz - 16GB - DIMM) DDR4") is None
+    assert matches("Kingston Fury RGB KF432C16BB2AK2/16 DDR4 16GB DIMM") is None
+    assert matches("Corsair Dominator CMT16GX4M2Z3200C16 DDR4 16GB DIMM") is None
+    assert matches("Crucial CT2K8G4DFRA32A DDR4 16GB DIMM") is None
+    assert matches("Kingston Fury RGB KF432C16BB2A/16 DDR4 16GB DIMM")=="single_pair"
