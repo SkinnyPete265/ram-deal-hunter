@@ -1,7 +1,8 @@
 /* Merge independent GitHub-cloud and Windows-home scans without overwriting either. */
 (function (scope) {
   "use strict";
-  const MAX_AGE_MS = 6 * 60 * 60 * 1000;
+  // 8-hour scan cadence: allow a delayed run but retire missed updates at 12h.
+  const MAX_AGE_MS = 12 * 60 * 60 * 1000;
   function millis(value) {
     const t = Date.parse(value || "");
     return Number.isFinite(t) ? t : 0;
