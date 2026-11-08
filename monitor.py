@@ -53,6 +53,10 @@ def matches(name):
     # E.g. Kingston KVR32S22D8/16 is officially a 260-pin SO-DIMM.
     if re.search(r"kvr\d{2}s\d{2}[a-z0-9]+[/_]\d{1,3}(?!\d)",str(name).lower()):
         return None
+    # Crucial CT...G4S... models are laptop SO-DIMMs, not desktop UDIMMs.
+    # Example CT16G4SFRA32AT is sold under generic 1x16GB DDR4 headings.
+    if re.search(r"\bct\d+g4s[a-z0-9]+\b",str(name).lower()):
+        return None
     if any(re.search(p,s) for p in (r"1x32(?:gb)?",r"4x8(?:gb)?",r"2x8(?:gb)?",r"4x4(?:gb)?",r"2x32(?:gb)?",r"4x16(?:gb)?",r"8x4(?:gb)?")):
         return None
     raw=str(name).lower()
