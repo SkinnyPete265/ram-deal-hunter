@@ -44,6 +44,13 @@ STORE_PRICE_SELECTORS = {
     "KIBO": (".kibo-pdp-price__amount",),
     "El Shop": (".product__prices-inline .product__price", ".product__prices-inline"),
     "PCBox": (".space-y-6 .text-xl.font-bold",),
+    # PcComponentes renders a React purchase box. These attributes are
+    # main-product selectors, unlike its unrelated product-card__price lists.
+    "PcComponentes": (
+        "[data-e2e='pdp-price-current']",
+        "[data-e2e='pdp-price-current-amount']",
+        "[data-e2e='pdp-price']",
+    ),
 }
 
 PRICE_META_SELECTORS = (
@@ -84,12 +91,37 @@ def _name_and_metadata(doc):
     return title, (title + " " + description).strip()
 
 
+def _pccomponentes_price(doc, convert):
+    """Read the main PcComponentes purchase box, not recommended products.
+
+    Different versions render a complete amount or separate integer/cents
+    elements. An unrendered page must return None, never a related-card price.
+    """
+    integer=doc.select_one("[data-e2e='pdp-price-current-integer']")
+    if integer is None:
+        return None
+    whole=re.sub(r"[^0-9]", "", integer.get_text(" ",strip=True))
+    if not 1<=len(whole)<=5:
+        return None
+    cents=doc.select_one("[data-e2e='pdp-price-current-decimal'],[data-e2e='pdp-price-current-decimals']")
+    if cents is None:
+        return None
+    decimals=re.sub(r"[^0-9]", "", cents.get_text(" ",strip=True))
+    if not 1<=len(decimals)<=2:
+        return None
+    return convert(whole+"."+decimals.zfill(2))
+
+
 def _primary_price(doc, convert, store=None):
     for selector in PRICE_META_SELECTORS:
         for node in doc.select(selector):
             number = _amount(node.get("content"), convert)
             if number is not None:
                 return number, "Product price metadata"
+    if store=="PcComponentes":
+        number=_pccomponentes_price(doc,convert)
+        if number is not None:
+            return number, "PcComponentes primary buybox price"
     for selector in STORE_PRICE_SELECTORS.get(store,()) + PRIMARY_PRICE_SELECTORS:
         for node in doc.select(selector):
             for key in ("content", "data-price-amount", "data-price", "value"):
