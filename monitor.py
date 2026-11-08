@@ -16,7 +16,13 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).parent
 DATA = ROOT / "docs/data.json"
 AGENT = {"User-Agent": "RAMDealHunter/1.0 (personal price research; low frequency)", "Accept-Language": "pt-PT,pt;q=0.9,es;q=0.7"}
-HOSTS = {"PCDIGA":"pcdiga.com", "PcComponentes":"pccomponentes.pt", "Globaldata":"globaldata.pt", "CHIP7":"chip7.pt", "ON4TECH":"on4tech.pt"}
+HOSTS = {
+    "PCDIGA": "pcdiga.com", "PcComponentes": "pccomponentes.pt",
+    "Globaldata": "globaldata.pt", "CHIP7": "chip7.pt", "ON4TECH": "on4tech.pt",
+    "Novo Atalho": "novoatalho.pt", "Castro Electrónica": "castroelectronica.pt",
+    "Chipman": "chipman.pt", "Switch Technology": "switchtechnology.pt",
+    "You Get": "youget.pt", "KIBO": "kibo.pt", "El Shop": "elshop.es",
+}
 NEG = ("outofstock","soldout","esgotado","sem stock","agotado","indisponivel","indisponível")
 POS = ("instock","in stock","em stock","disponivel","disponível","en stock")
 
@@ -27,11 +33,17 @@ def matches(name):
     s = re.sub(r"\s+","",str(name).lower().replace("×","x").replace("*","x"))
     if "ddr4" not in s or "ddr5" in s or any(t in s for t in ("sodimm","so-dimm","laptop","rdimm","registered","eccreg","260pin")):
         return None
-    if any(re.search(p,s) for p in (r"1x32(?:gb)?",r"4x8(?:gb)?",r"2x8(?:gb)?",r"2x32(?:gb)?")):
+    if any(re.search(p,s) for p in (r"1x32(?:gb)?",r"4x8(?:gb)?",r"2x8(?:gb)?",r"4x4(?:gb)?",r"2x32(?:gb)?",r"4x16(?:gb)?",r"8x4(?:gb)?")):
         return None
-    if re.search(r"(?:2x16(?:gb)?|16gbx2)",s):
+    if re.search(r"(?:2x16(?:gb)?|16gbx2)(?![a-z0-9])",s):
         return "kit"
-    if re.search(r"(?:1x16gb|16gbx1)",s) and "32gb" not in s:
+    if re.search(r"(?:1x16(?:gb)?|16gbx1)(?![a-z0-9])",s) and "32gb" not in s:
+        return "single_pair"
+    # A clearly named single 16GB desktop DIMM is also eligible, purchased twice.
+    # Never infer this from a kit/pack description or from a laptop/server product.
+    if re.search(r"(?<![0-9])16gb(?![0-9])",s) and "32gb" not in s and (
+        "dimm" in s or "udimm" in s or "modulo" in s or "module" in s
+    ) and not any(w in s for w in ("kit","pack","bundle")) and not re.search(r"[248]x[24816]",s):
         return "single_pair"
     return None
 
@@ -97,12 +109,26 @@ def download(url):
     return r.text
 
 def links(html,base,store):
+    """Collect candidates; the product page itself must independently prove the configuration."""
     doc=BeautifulSoup(html,"html.parser")
     found=[]
+    ddr4_category="ddr4" in base.lower()
     for a in doc.find_all("a",href=True):
         u=urljoin(base,a["href"]).split("?")[0].split("#")[0]
-        if allowed(store,u) and matches(a.get_text(" ",strip=True)+" "+u.replace("-"," ")) and u not in found: found.append(u)
-        if len(found)>=15: break
+        if not allowed(store,u) or u in found or u.rstrip("/")==base.rstrip("/"):
+            continue
+        title=a.get_text(" ",strip=True)
+        explicit=matches(title+" "+u.replace("-"," "))
+        # DDR4-only category pages may omit DDR4 or module counts in link text.
+        # Fetch a 16GB/32GB product candidate, then verify its Product JSON-LD.
+        category_candidate=ddr4_category and bool(
+            re.search(r"(?:16|32)\s*gb",title,re.I) and
+            re.search(r"(?:ram|mem[oó]ria|memory|dimm|kit)",title,re.I)
+        )
+        if explicit or category_candidate:
+            found.append(u)
+        if len(found)>=25:
+            break
     return found
 
 def notify(o):
@@ -124,23 +150,40 @@ def run():
         for row in csv.DictReader(f):
             if allowed(row["store"],row["url"]): targets[(row["store"],row["url"])]=True
     health=[]
+    blocked_stores=set()
     for store,url in cfg["retailer_pages"]:
         try:
             discovered=links(download(url),url,store)
             for u in discovered: targets[(store,u)]=True
             health.append({"source":store+" category","status":"ok","found":len(discovered)})
         except (requests.RequestException,ValueError) as e:
-            health.append({"source":store+" category","status":"error","detail":str(e)[:130]})
+            is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
+            if is_blocked: blocked_stores.add(store)
+            health.append({"source":store+" category","status":"blocked_403_or_429" if is_blocked else "error","detail":str(e)[:130]})
         time.sleep(0.3)
+    # Round-robin stores so one large catalogue cannot crowd out smaller shops.
+    grouped={}
+    for store,url in targets:
+        grouped.setdefault(store,[]).append(url)
+    queue=[]
+    while any(grouped.values()) and len(queue)<120:
+        for store,urls in grouped.items():
+            if urls and len(queue)<120: queue.append((store,urls.pop(0)))
     offers={}
-    for store,url in list(targets)[:75]:
+    for store,url in queue:
+        if store in blocked_stores:
+            continue
         try:
             item=product_info(download(url),store,url)
             if item: offers[item["id"]]=item
             else: health.append({"source":store+" product","status":"no_verified_price"})
         except (requests.RequestException,ValueError) as e:
-            health.append({"source":store+" product","status":"error","detail":str(e)[:130]})
+            is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
+            if is_blocked: blocked_stores.add(store)
+            health.append({"source":store+" product","status":"blocked_403_or_429" if is_blocked else "error","detail":str(e)[:130]})
         time.sleep(0.3)
+    for store in sorted(blocked_stores):
+        health.append({"source":store,"status":"automated_access_blocked","detail":"Host refused automated requests. Other stores continue; no bypass attempted."})
     # No paid API services are used. Only configured retailer pages are scanned.
     # Keep observations only when freshly confirmed. Older entries remain visible but stale.
     for ident,item in offers.items():
