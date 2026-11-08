@@ -274,3 +274,23 @@ def test_castro_custom_catalogue_online_price():
     offers=category_card_offers(html,"Castro Electrónica","https://www.castroelectronica.pt/pt/loja-virtual/ddr4-1",matches,price,stock,stamp,allowed)
     assert len(offers)==1 and offers[0]["price_eur"]==349.89
     assert offers[0]["stock"]=="unknown"
+
+
+def test_elshop_current_catalogue_card_price():
+    html = """
+    <article class="product-miniature js-product-miniature elshop-card">
+      <div class="product-miniature__inner">
+        <a href="https://elshop.es/en/15000-corsair-32gb-ddr4.html">
+          Corsair Vengeance LPX 32 GB DDR4 3200 MHz (2x16GB) DIMM
+        </a>
+        <div class="product-miniature__prices">
+          <div class="product-miniature__regular-price">€224.99</div>
+          <div class="product-miniature__price">€199.99</div>
+        </div>
+      </div>
+    </article>
+    """
+    o=category_card_offers(html,"El Shop","https://elshop.es/en/47-ddr4",
+        matches,price,stock,stamp,allowed)
+    assert len(o)==1 and o[0]["price_eur"]==199.99
+    assert o[0]["stock"]=="unknown" and o[0]["catalogue_only"]
