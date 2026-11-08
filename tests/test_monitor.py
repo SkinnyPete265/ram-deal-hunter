@@ -55,3 +55,19 @@ def test_category_discovery_checks_product_pages_independently():
     found=links(html,base,"Chipman")
     assert found==["https://chipman.pt/produto/ram-32gb/","https://chipman.pt/produto/ram-16gb/"]
     assert product_info("<html>not structured product data</html>","Chipman",found[0]) is None
+
+def test_structured_properties_and_pcbox_stock():
+    product={
+        "@type":"https://schema.org/Product",
+        "name":"Kingston Fury Beast Kit 32GB DIMM",
+        "additionalProperty":[
+            {"name":"Memory type","value":"DDR4"},
+            {"name":"Module configuration","value":"2 x 16 GB"}
+        ],
+        "offers":{"@type":"Offer","priceCurrency":"EUR","price":"159.90","availability":"https://schema.org/InStock"}
+    }
+    html='<script type="application/ld+json">'+json.dumps(product)+'</script>'
+    p=product_info(html,"PCBox","https://www.pcbox.pt/product/example")
+    assert p and p["price_eur"]==159.9 and p["stock"]=="in_stock"
+    p=product_info(html+"<p>Produto não disponível no momento</p>","PCBox","https://www.pcbox.pt/product/example")
+    assert p and p["stock"]=="out_of_stock"
