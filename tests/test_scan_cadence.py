@@ -25,3 +25,15 @@ def test_new_windows_install_and_existing_task_migration_are_eight_hours():
 def test_dashboard_tolerates_scheduled_scan_delays_without_permanent_freshness():
     merge = (ROOT / "docs/merge.js").read_text(encoding="utf-8")
     assert "MAX_AGE_MS = 12 * 60 * 60 * 1000" in merge
+
+def test_manual_launcher_can_repeat_without_reopening():
+    launcher = (ROOT / "RUN_LOCAL_SCAN.bat").read_text(encoding="utf-8")
+    scheduled = (ROOT / "scripts/Install-LocalScanner.ps1").read_text(encoding="utf-8")
+    assert ":scan_again" in launcher
+    assert "choice /C YN" in launcher
+    assert "if errorlevel 2 goto done" in launcher
+    assert "if errorlevel 1 goto scan_again" in launcher
+    assert launcher.index("powershell.exe -NoProfile") < launcher.index("choice /C YN")
+    # Scheduled jobs invoke PowerShell directly, never the interactive launcher.
+    assert 'Run-LocalScan.ps1' in scheduled
+    assert 'RUN_LOCAL_SCAN.bat' not in scheduled
