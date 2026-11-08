@@ -22,7 +22,7 @@ jobs:
       - name: Check Windows PowerShell script syntax
         shell: pwsh
         run: |
-          $paths = @('scripts/Run-LocalScan.ps1', 'scripts/Install-LocalScanner.ps1', 'scripts/Uninstall-LocalScanner.ps1')
+          $paths = @('scripts/Run-LocalScan.ps1', 'scripts/Install-LocalScanner.ps1', 'scripts/Uninstall-LocalScanner.ps1', 'scripts/Update-LocalSchedule.ps1')
           foreach ($path in $paths) {
             $tokens = $null
             $errors = $null
