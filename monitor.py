@@ -39,7 +39,7 @@ def stamp():
 
 def matches(name):
     s = re.sub(r"\s+","",str(name).lower().replace("×","x").replace("*","x"))
-    if "ddr4" not in s or "ddr5" in s or any(t in s for t in ("sodimm","so-dimm","laptop","rdimm","registered","eccreg","260pin")):
+    if "ddr4" not in s or "ddr5" in s or any(t in s for t in ("sodimm","so-dimm","laptop","rdimm","lrdimm","eccreg","260pin","registeredmemory","servermemory")):
         return None
     # Kingston KVRxxS... part numbers describe laptop SO-DIMMs even when
     # a seller's title incorrectly calls the module a generic DIMM.
