@@ -74,7 +74,7 @@ for(const h of (data.health||[])){
  const store=String(h.source||'Unknown') .replace(/ (category|product|browser fallback|browser render|transient fallback)$/,'');
  const g=grouped[store]||(grouped[store]={
    store,blockedHome:false,blockedCloud:false,okHome:0,okCloud:0,
-   errors:0,noPrice:0,notMatching:0,missingPage:0,fallback_attempted:0,fallback_recovered:0,render_attempted:0,render_recovered:0,transient_attempted:0,transient_recovered:0
+   errors:0,noPrice:0,notMatching:0,missingPage:0,contactPrice:0,fallback_attempted:0,fallback_recovered:0,render_attempted:0,render_recovered:0,transient_attempted:0,transient_recovered:0
  });
  const home=h.scan_origin==='Home PC';
  if(String(h.source).endsWith(' browser fallback')){
@@ -98,6 +98,7 @@ for(const h of (data.health||[])){
  if(h.status==='ok'){if(home)g.okHome++;else g.okCloud++}
  if(h.status==='error')g.errors++;
  if(['no_verified_price','price_not_found'].includes(h.status))g.noPrice++;
+ if(h.status==='contact_store_for_price')g.contactPrice++;
  if(h.status==='configuration_unverified')g.notMatching++;
  if(['no_primary_product','non_eur_price'].includes(h.status))g.missingPage++;
 }
@@ -119,6 +120,7 @@ E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b
  esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+rendered+transient+
      (g.errors?' · '+g.errors+' errors':'')+
      (g.noPrice?' · '+g.noPrice+' matching RAM pages with unreadable prices':'')+
+     (g.contactPrice?' · '+g.contactPrice+' CHIP7 listings require store quote':'')+
      (g.notMatching?' · '+g.notMatching+' pages without verified 2×16GB desktop configuration':'')+
      (g.missingPage?' · '+g.missingPage+' incomplete product pages':''))+
  '</small></div>';
