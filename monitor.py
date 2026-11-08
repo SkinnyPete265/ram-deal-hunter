@@ -464,6 +464,7 @@ def run():
     offers=dict(catalogue_offers)
     debug_counts={}
     browser_attempts={}
+    browser_challenged=set()
     for store,url in queue:
         if store in blocked_stores:
             continue
@@ -477,6 +478,7 @@ def run():
             budget={"PcComponentes":6,"CHIP7":3,"PCDIGA":3,
                     "Chipman":3,"Castro Electrónica":3}.get(store,0)
             should_render = (os.name=="nt" and
+                store not in browser_challenged and
                 browser_attempts.get(store,0)<budget and
                 ((item is not None and item.get("stock")=="unknown" and
                   item.get("configuration")=="kit" and
@@ -512,6 +514,8 @@ def run():
                                            "status":"ok","found":1,
                                            "detail":"stock_only_main_product"})
                         else:
+                            if stock_reason=="rendered_access_challenge":
+                                browser_challenged.add(store)
                             health.append({"source":store+" browser stock",
                                            "status":"unverified",
                                            "detail":stock_reason if rendered else
@@ -521,6 +525,8 @@ def run():
                     item=browser_offer
                     health.append({"source":store+" browser render","status":"ok","found":1})
                 else:
+                    if rendered and re.search(r"<title>\\s*(?:just a moment|attention required|access denied)",rendered,re.I):
+                        browser_challenged.add(store)
                     health.append({"source":store+" browser render",
                                    "status":"no_verified_price",
                                    "detail":"Browser rendering did not reveal a verified primary-product price"})
