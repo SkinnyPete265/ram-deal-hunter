@@ -188,6 +188,22 @@ def _request_with_transient_retry(url):
     raise RuntimeError("HTTP retry exhausted")
 
 
+def _castro_transient_fallback(url):
+    """Try a separate HTTP transport once after Castro server errors/timeouts.
+
+    Do not reuse cookies or a browser profile. Never turn an error page into
+    an offer: normal HTML and product-price verification still apply.
+    """
+    if browser_requests is None:
+        return None
+    try:
+        response=browser_requests.get(url,impersonate="chrome",
+            headers={"Accept-Language":BROWSER_LANGUAGE},timeout=20)
+        return response if response.status_code==200 else None
+    except Exception:
+        return None
+
+
 def download(url):
     """Request a public product page; retry one blocked request with a browser-like TLS client.
 
@@ -195,8 +211,26 @@ def download(url):
     Unsuccessful attempts remain visible as blocked rather than as product data.
     """
     host=urlparse(url).hostname or ""
-    record=FETCH_META.setdefault(host,{"attempted":0,"recovered":0,"still_blocked":0})
-    response=_request_with_transient_retry(url)
+    record=FETCH_META.setdefault(host,{"attempted":0,"recovered":0,"still_blocked":0,
+        "transient_attempted":0,"transient_recovered":0})
+    castro=(host=="castroelectronica.pt" or host.endswith(".castroelectronica.pt"))
+    try:
+        response=_request_with_transient_retry(url)
+    except requests.Timeout:
+        if not castro:
+            raise
+        record["transient_attempted"]+=1
+        recovered=_castro_transient_fallback(url)
+        if recovered is None:
+            raise
+        record["transient_recovered"]+=1
+        response=recovered
+    if castro and response.status_code in (502,503,504):
+        record["transient_attempted"]+=1
+        recovered=_castro_transient_fallback(url)
+        if recovered is not None:
+            record["transient_recovered"]+=1
+            response=recovered
     if response.status_code in (403,429):
         record["attempted"]+=1
         browser=None
@@ -452,6 +486,14 @@ def run():
         if counts["attempted"]:
             health.append({"source":store+" browser fallback","status":"ok" if counts["recovered"] else "blocked",
                            "found":counts["recovered"],"detail":str(counts["attempted"])+" retries"})
+        transient=sum(v.get("transient_attempted",0) for h,v in FETCH_META.items()
+            if h==host or h.endswith("."+host))
+        recovered=sum(v.get("transient_recovered",0) for h,v in FETCH_META.items()
+            if h==host or h.endswith("."+host))
+        if transient:
+            health.append({"source":store+" transient fallback",
+                           "status":"ok" if recovered else "failed","found":recovered,
+                           "detail":str(transient)+" retries after gateway error/timeout"})
     # No paid API services are used. Only configured retailer pages are scanned.
     # Keep observations only when freshly confirmed. Older entries remain visible but stale.
     for ident,item in offers.items():
