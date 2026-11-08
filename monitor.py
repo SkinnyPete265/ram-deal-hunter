@@ -83,7 +83,7 @@ def matches(name):
     # Never infer this from a kit/pack description or from a laptop/server product.
     if re.search(r"(?<![0-9])16\s*gb(?![0-9])",str(name).lower()) and "32gb" not in s and (
         "dimm" in s or "udimm" in s or "modulo" in s or "module" in s
-    ) and not any(w in s for w in ("kit","pack","bundle")) and not re.search(r"[248]x[24816]",s):
+    ) and not any(w in s for w in ("kit","pack","bundle")) and not re.search(r"\d+x\d+(?:gb)?",s):
         return "single_pair"
     return None
 
