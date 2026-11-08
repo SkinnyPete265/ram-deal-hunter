@@ -285,6 +285,19 @@ def price_diagnostic(html,url):
     output["price_meta"]=prices
     return output
 
+def eligible_for_alert(offer,budget):
+    """Only direct retailers' available items can trigger a deal notification.
+
+    Stock for two separate single DIMMs remains unverified, even if one is
+    listed in stock. Catalogue-only and comparison candidates aren't verified.
+    """
+    return (offer.get("price_eur",float("inf"))<=budget and
+            offer.get("stock")=="in_stock" and
+            not offer.get("catalogue_only") and
+            not offer.get("comparison_only") and
+            offer.get("configuration")=="kit" and
+            offer.get("units_to_buy")==1)
+
 def notify(o):
     token=os.getenv("TELEGRAM_BOT_TOKEN"); chat=os.getenv("TELEGRAM_CHAT_ID")
     if not token or not chat: return False
@@ -422,9 +435,9 @@ def run():
             history.append({"at":item["observed_at"],"price_eur":item["price_eur"],"stock":item["stock"]})
         item["history"]=history
         alerted=old.get("alerted_price_eur")
-        if item["price_eur"]<=cfg["budget_eur"] and item["stock"]!="out_of_stock" and (alerted is None or item["price_eur"]<=alerted-5):
+        if eligible_for_alert(item,cfg["budget_eur"]) and (alerted is None or item["price_eur"]<=alerted-5):
             if notify(item): alerted=item["price_eur"]
-        if item["price_eur"]>cfg["budget_eur"] or item["stock"]=="out_of_stock": alerted=None
+        if not eligible_for_alert(item,cfg["budget_eur"]): alerted=None
         item["alerted_price_eur"]=alerted
     for ident,item in earlier.items():
         if ident not in offers: offers[ident]={**item,"current":False}
