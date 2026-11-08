@@ -166,3 +166,10 @@ def test_well_defined_dual_16gb_ddr4_kit_skus():
     assert matches("Kingston DDR4 32GB DIMM KF432C16BB/32") is None
     assert matches("G.Skill DDR4 16GB F4-3200C16D-16GIS") is None
     assert matches("Corsair DDR5 32GB CMK32GX5M2B6000C36") is None
+
+
+def test_crucial_2x16_sku_when_retailer_omits_ddr4():
+    assert matches("Módulo de Memória Crucial CT2K16G4DFRA32A")=="kit"
+    assert matches("Kit de Memória Crucial CP2K16G4DFRA32A")=="kit"
+    assert matches("Crucial CT2K16G5DFRA32A") is None  # DDR5-like code not proven
+    assert matches("Crucial CT2K16G4DFRA32A DDR5") is None
