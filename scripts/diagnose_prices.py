@@ -73,6 +73,31 @@ def summarize(html,store,url,kind):
                           "text":title,"links":[[a.get_text(" ",strip=True)[:65],a.get("href","")[:100]] for a in anchors[:2]],
                           "prices":prices[:3]})
             if len(cards)>=4:break
+        if store in ("Novo Atalho","El Shop","PCBox"):
+            matches_links=[]
+            for anchor in doc.select("a[href]"):
+                href=anchor.get("href","")
+                label=anchor.get_text(" ",strip=True)
+                if (re.search(r"ddr4|memori|dimm",label+" "+href,re.I) and
+                        (re.search(r"(?:16|32)\\s*GB|2x16",label+" "+href,re.I) or "product" in href)):
+                    matches_links.append([label[:125],href[:155]])
+                if len(matches_links)>=5:break
+            price_trails=[]
+            for price_node in doc.select("[class*='price'],[itemprop='price']"):
+                value=price_node.get_text(" ",strip=True)
+                if len(value)>70 or not PRICES.search(value):continue
+                parent=price_node
+                trail=[]
+                for j in range(6):
+                    if not parent or not getattr(parent,"name",None):break
+                    as_=parent.select("a[href]")
+                    trail.append([parent.name," ".join(parent.get("class",[]))[:70],
+                                  len(as_),as_[0].get("href","")[:100] if as_ else ""])
+                    if len(as_)>3:break
+                    parent=parent.parent
+                price_trails.append({"value":value[:60],"trail":trail})
+                if len(price_trails)>=2:break
+            cards.append({"links":matches_links,"price_trails":price_trails})
         if store=="Castro Electrónica":
             for price_node in doc.select("span.price-web")[:2]:
                 ancestor=price_node
