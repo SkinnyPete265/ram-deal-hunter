@@ -320,6 +320,7 @@ def eligible_for_alert(offer,budget):
             offer.get("stock")=="in_stock" and
             not offer.get("catalogue_only") and
             not offer.get("comparison_only") and
+            not offer.get("indicative_only") and
             offer.get("configuration")=="kit" and
             offer.get("units_to_buy")==1)
 
