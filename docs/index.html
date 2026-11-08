@@ -71,15 +71,20 @@ return '<tr><td><div class="name">'+esc(o.title)+'</div><div class="spec">'+esc(
 }).join(''):'<tr><td colspan="6" class="empty">No matching offers. Check source status and retry later.</td></tr>';
 const grouped={};
 for(const h of (data.health||[])){
- const store=String(h.source||'Unknown').replace(/ (category|product|browser fallback)$/,'');
+ const store=String(h.source||'Unknown') .replace(/ (category|product|browser fallback|browser render)$/,'');
  const g=grouped[store]||(grouped[store]={
    store,blockedHome:false,blockedCloud:false,okHome:0,okCloud:0,
-   errors:0,noPrice:0,notMatching:0,missingPage:0,fallback_attempted:0,fallback_recovered:0
+   errors:0,noPrice:0,notMatching:0,missingPage:0,fallback_attempted:0,fallback_recovered:0,render_attempted:0,render_recovered:0
  });
  const home=h.scan_origin==='Home PC';
  if(String(h.source).endsWith(' browser fallback')){
    g.fallback_attempted+=Number.parseInt(h.detail,10)||0;
    g.fallback_recovered+=Number(h.found)||0;
+   continue;
+ }
+ if(String(h.source).endsWith(' browser render')){
+   g.render_attempted++;
+   if(h.status==='ok')g.render_recovered+=Number(h.found)||1;
    continue;
  }
  if(['blocked_403_or_429','automated_access_blocked'].includes(h.status)){
@@ -102,9 +107,10 @@ E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b
    g.blockedCloud&&!workingHome?'Cloud blocked'+(g.okHome?' (home reachable)':''):
    g.okHome||g.okCloud?'Reachable; no matching priced RAM yet':'Unverified';
  const css=blockedBoth||g.blockedHome||g.blockedCloud&&!workingHome?'blocked':workingHome||g.okCloud||found?'active':'';
- const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' browser retries worked':'';
+ const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' HTTP retries worked':'';
+ const rendered=g.render_attempted?' · '+g.render_recovered+'/'+g.render_attempted+' Chrome/Edge renders found prices':'';
  return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
- esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+
+ esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+rendered+
      (g.errors?' · '+g.errors+' errors':'')+
      (g.noPrice?' · '+g.noPrice+' matching RAM pages with unreadable prices':'')+
      (g.notMatching?' · '+g.notMatching+' pages without verified 2×16GB desktop configuration':'')+
