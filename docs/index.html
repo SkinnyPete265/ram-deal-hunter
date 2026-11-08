@@ -25,7 +25,7 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 @media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}header{display:block}}
 </style></head><body><main>
 <div class="brand">RAM HUNTER / PORTUGAL</div><header><div><h1>Less money.<br><span>More memory.</span></h1>
-<p class="muted">Desktop DDR4 · exactly 2 × 16 GB · Amazon.es prioritized · €200 maximum</p></div>
+<p class="muted">Desktop DDR4 · exactly 2 × 16 GB · Portuguese retailers · €200 maximum</p></div>
 <p class="muted" id="updated">No live scan yet</p></header>
 <section class="summary"><div class="card"><small>Budget</small><strong>€200</strong></div>
 <div class="card"><small>Current candidates</small><strong id="deals">0</strong></div>
@@ -33,7 +33,7 @@ footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
 <div class="card"><small>Tracked offers</small><strong id="tracked">0</strong></div></section>
 <div class="controls"><input id="search" placeholder="Search RAM models or specs">
 <select id="store"><option value="">All stores</option></select>
-<select id="sort"><option value="price">Lowest price</option><option value="recent">Newest checked</option><option value="store">Amazon.es first</option></select>
+<select id="sort"><option value="price">Lowest price</option><option value="recent">Newest checked</option><option value="store">Store A–Z</option></select>
 <label><input id="stale" type="checkbox"> Show stale</label>
 <button id="refresh">Refresh</button><button id="export">Export CSV</button><button id="scan" hidden>Scan now</button>
 <span class="muted" id="scan-status"></span></div>
@@ -55,7 +55,7 @@ let available=curr.filter(o=>o.stock==='in_stock');E('lowest').textContent=avail
 let q=E('search').value.toLowerCase(),st=E('store').value;
 visible=offers.filter(o=>(E('stale').checked||o.current)&&(!st||o.store===st)&&[o.title,o.store,o.speed_mhz,o.cas_latency].join(' ').toLowerCase().includes(q));
 let s=E('sort').value;
-visible.sort((a,b)=>s==='recent'?String(b.observed_at).localeCompare(String(a.observed_at)):s==='store'?(a.store==='Amazon.es'?-1:0)-(b.store==='Amazon.es'?-1:0)||a.price_eur-b.price_eur:a.price_eur-b.price_eur);
+visible.sort((a,b)=>s==='recent'?String(b.observed_at).localeCompare(String(a.observed_at)):s==='store'?a.store.localeCompare(b.store)||a.price_eur-b.price_eur:a.price_eur-b.price_eur);
 E('count').textContent='('+visible.length+')';
 E('rows').innerHTML=visible.length?visible.map(o=>{
 let specs=['DDR4',o.configuration==='single_pair'?'2 identical individual modules':'2 × 16 GB kit',o.speed_mhz?o.speed_mhz+' MHz':null,o.cas_latency?'CL'+o.cas_latency:null,o.configuration==='single_pair'?'2 × '+euro(o.unit_price_eur):null].filter(Boolean).join(' · ');
@@ -67,7 +67,7 @@ E('health').textContent=(data.health||[]).map(h=>h.source+': '+h.status).join(' 
 }
 async function load(){
 try{let r=await fetch('data.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);data=await r.json();E('updated').textContent=data.last_scan?'Last scan '+date(data.last_scan):'No live scan yet';
-let selected=E('store').value,stores=[...new Set((data.offers||[]).map(o=>o.store))].sort((a,b)=>a==='Amazon.es'?-1:b==='Amazon.es'?1:a.localeCompare(b));
+let selected=E('store').value,stores=[...new Set((data.offers||[]).map(o=>o.store))].sort((a,b)=>a.localeCompare(b));
 E('store').innerHTML='<option value="">All stores</option>'+stores.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');E('store').value=stores.includes(selected)?selected:'';draw()}catch(err){E('updated').textContent='Could not load data: '+err.message}}
 E('refresh').onclick=load;
 ['search','sort','store','stale'].forEach(id=>E(id).addEventListener(id==='search'?'input':'change',draw));
