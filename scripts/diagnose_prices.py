@@ -56,6 +56,34 @@ def summarize(html,store,url,kind):
             product_types.append(preview)
         except Exception: product_types.append("invalid JSON-LD")
         if len(product_types)>=2:break
+    if kind=="category" and store in ("Chipman","Castro Electrónica","Novo Atalho","El Shop"):
+        cards=[]
+        for item in doc.select("article")[:25]:
+            title=item.get_text(" ",strip=True)[:110]
+            if store=="Chipman" and not re.search(r"32\s*GB|16\s*GB",title,re.I):
+                continue
+            prices=[]
+            for q in item.select("[class*='price'],[class*='sale']"):
+                z=q.get_text(" ",strip=True)
+                if len(z)<35 and PRICES.search(z):
+                    prices.append([" ".join(q.get("class",[]))[:60],z])
+                if len(prices)>=3:break
+            anchors=[a for a in item.select("a[href]") if a.get("href","").startswith("/")]
+            cards.append({"class":" ".join(item.get("class",[]))[:100],
+                          "text":title,"links":[[a.get_text(" ",strip=True)[:65],a.get("href","")[:100]] for a in anchors[:2]],
+                          "prices":prices[:3]})
+            if len(cards)>=4:break
+        if store=="Castro Electrónica":
+            for price_node in doc.select("span.price-web")[:2]:
+                ancestor=price_node
+                trail=[]
+                for j in range(5):
+                    if not ancestor or not getattr(ancestor,"name",None):break
+                    trail.append([ancestor.name," ".join(ancestor.get("class",[]))[:80],
+                        len(ancestor.select("a[href]"))])
+                    ancestor=ancestor.parent
+                cards.append({"price_ancestor_trail":trail})
+        print(json.dumps({"store":store,"kind":"card_diagnostics","cards":cards},ensure_ascii=False))
     print(json.dumps({
         "store":store,"kind":kind,"url":url[:190],
         "h1":name[:220],"matches":matches(details),"metadata_excerpt":details[:350],
