@@ -52,7 +52,7 @@ def matches(name):
         return "kit"
     # Retailer descriptions sometimes express the actual kit as
     # "dois módulos de 16 GB" instead of "2x16GB".
-    if re.search(r"\b(?:2|dois|duas|two)\s+(?:m[oó]dulos?|dimms?|sticks?)\s*(?:(?:de|of|com|x)\s*)?16\s*gb\b",
+    if re.search(r"\b(?:2|dois|duas|two)\s+(?:m[oó]dulos?|modules?|dimms?|sticks?)\s*(?:(?:de|of|com|x)\s*)?16\s*gb\b",
                  str(name).lower(),re.I):
         return "kit"
     # Well-defined matched-kit part-number families (DDR4 only). The suffix
