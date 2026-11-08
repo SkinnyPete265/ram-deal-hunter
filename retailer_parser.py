@@ -400,6 +400,52 @@ def _castro_online_stock(doc):
     return "unknown"
 
 
+def browser_stock_only(html, store, expected_title, classify):
+    """Conservatively read a main-product stock signal without requiring price.
+
+    A headless browser sometimes renders availability but omits the price
+    widget. Never accept a signal unless the main h1 matches the previously
+    verified product, and never inspect recommendation-card availability.
+    """
+    if not html or store not in ("PcComponentes", "Chipman", "PCDIGA",
+                                  "CHIP7", "Castro Electrónica"):
+        return "unknown", "untrusted_render"
+    doc=BeautifulSoup(html, "html.parser")
+    main=doc.select_one("main") or doc.select_one("#product") or doc.body
+    heading=main.select_one("h1") if main else None
+    if heading is None:
+        return "unknown", "rendered_heading_missing"
+    name=heading.get_text(" ",strip=True)
+    def words(value):
+        return set(re.findall(r"[a-z0-9]{3,}",str(value).casefold()))
+    expected=words(expected_title)
+    seen=words(name)
+    if not expected or not seen or len(expected & seen)<3 or (
+            len(expected & seen)/len(expected | seen)<0.6):
+        return "unknown", "rendered_heading_mismatch"
+    if store=="PcComponentes":
+        result=_pccomponentes_stock(doc)
+        # The current PcComponentes adapter proves explicit unavailability
+        # only; visible cart controls are never positive stock evidence.
+        return result, "explicit_main_stock" if result!="unknown" else "no_explicit_main_stock"
+    if store=="Castro Electrónica":
+        result=_castro_online_stock(doc)
+        return result, "explicit_main_stock" if result!="unknown" else "no_explicit_main_stock"
+    for selector in ("#product-availability", ".product-availability",
+                     "#availability", "[itemprop='availability']"):
+        for node in main.select(selector):
+            if any(re.search(r"related|recommend|suggest|carousel|similar", 
+                             " ".join(parent.get("class",[]))+" "+str(parent.get("id","")),re.I)
+                   for parent in [node]+list(node.parents) if parent is not main):
+                continue
+            content=" ".join(filter(None,[node.get("href"),node.get("content"),
+                                          node.get_text(" ",strip=True)]))
+            result=classify(content)
+            if result!="unknown":
+                return result,"explicit_main_stock"
+    return "unknown","no_explicit_main_stock"
+
+
 def extract_html_offer(html, store, url, matches, price, stock, stamp):
     """Return (offer, reason). Never guess a price from a recommendation."""
     doc = BeautifulSoup(html, "html.parser")
