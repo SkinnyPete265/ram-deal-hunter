@@ -287,6 +287,38 @@ def category_card_offers(html, store, base, matches, price, stock, stamp, allowe
     return list(found.values())
 
 
+def _chip7_financing_pvp(doc, convert):
+    """Indicative amount only: CHIP7 sometimes lists PVP in a credit simulation.
+
+    Require the PVP and the financed amount to agree, within the main product
+    heading's nearby text. Credit terms aren't a confirmed checkout price;
+    the resulting offer must be explicitly flagged and stock unverified.
+    """
+    main=doc.select_one("main") or doc.select_one("#main") or doc.body
+    if main is None:
+        return None
+    heading=main.select_one("h1")
+    if heading is None:
+        return None
+    text=main.get_text(" ",strip=True)
+    label=heading.get_text(" ",strip=True)
+    pos=text.find(label)
+    if pos<0:
+        return None
+    near=text[pos+len(label):pos+len(label)+2600]
+    if not re.search(r"Cr[eé]dito\s*/\s*Presta[cç][oõ]es", near,re.I):
+        return None
+    if not re.search(r"Contacte\s+a\s+loja\s+CHIP7",near,re.I):
+        return None
+    pvp=re.findall(r"\bPVP\s+(\d{1,5}[.,]\d{2})\s*€",near,re.I)
+    financed=re.findall(r"Montante\s+Financiado\s+(\d{1,5}[.,]\d{2})\s*€",near,re.I)
+    amounts={convert(v) for v in pvp if convert(v) is not None}
+    financed_amounts={convert(v) for v in financed if convert(v) is not None}
+    if len(amounts)!=1 or amounts!=financed_amounts:
+        return None
+    return amounts.pop()
+
+
 def _primary_stock(doc, classify):
     for selector in ("#product-availability", ".product-availability", "#availability", "[itemprop='availability']"):
         for node in doc.select(selector):
@@ -342,6 +374,12 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
     if kind is None:
         return None, "configuration_unverified"
     unit, source = _primary_price(doc, price, store)
+    indicative_only=False
+    if unit is None and store=="CHIP7":
+        unit=_chip7_financing_pvp(doc,price)
+        if unit is not None:
+            source="CHIP7 financing PVP — indicative, contact shop"
+            indicative_only=True
     if unit is None and store=="Chipman":
         unit=_chipman_tax_price(doc,price)
         if unit is not None:
@@ -364,6 +402,8 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
         primary_text=main.get_text(" ",strip=True)[:2500] if main else ""
         if re.search(r"Produto\s+Esgotado",primary_text,re.I):
             status="out_of_stock"
+    if indicative_only:
+        status = "unknown"  # An installment example proves neither stock nor checkout price.
     if kind == "single_pair" and status == "in_stock":
         status = "unknown"  # Stock of one does not prove stock of two.
     total = round(unit * (2 if kind == "single_pair" else 1), 2)
@@ -378,4 +418,6 @@ def extract_html_offer(html, store, url, matches, price, stock, stamp):
         cas_latency=int(cl[1]) if cl else None,
         source=source + " (HTML fallback)", observed_at=stamp(), current=True
     )
-    return item, "verified_price"
+    if indicative_only:
+        item["indicative_only"]=True
+    return item, "indicative_price" if indicative_only else "verified_price"
