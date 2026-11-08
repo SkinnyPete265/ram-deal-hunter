@@ -445,3 +445,47 @@ def test_pccomponentes_ambiguous_primary_price_not_guessed():
     </main></body></html>"""
     assert product_info(html,"PcComponentes",
         "https://www.pccomponentes.pt/ambiguous-ram") is None
+
+
+def test_pccomponentes_no_restock_date_means_out_of_stock():
+    html = """
+    <html><body><main>
+      <h1>Memória RAM Kingston FURY Beast RGB DDR4 3200 MHz 32GB 2x16GB CL16</h1>
+      <div id="pdp-price-section">
+        <span id="pdp-price-current-container">130 , 11 €</span>
+      </div>
+      <p>Disponibilidade do produto Sem data exacta de chegada</p>
+      <div>Avisem-me quando estiver disponível</div>
+    </main></body></html>"""
+    o=product_info(html,"PcComponentes",
+        "https://www.pccomponentes.pt/kingston-fury-beast-rgb-ddr4-3200-mhz-32gb-2x16gb-cl16")
+    assert o is not None and o["price_eur"]==130.11
+    assert o["stock"]=="out_of_stock"
+
+
+def test_pccomponentes_purchase_button_without_positive_stock_stays_unknown():
+    html = """
+    <html><body><main>
+      <h1>Kingston FURY Beast RGB DDR4 3200 MHz 32GB 2x16GB CL16</h1>
+      <div id="pdp-price-current-container">140,90 €</div>
+      <button>Adicionar ao carrinho</button>
+    </main></body></html>"""
+    o=product_info(html,"PcComponentes",
+        "https://www.pccomponentes.pt/kingston-fury-beast-rgb-ddr4-3200-mhz-32gb-2x16gb-cl16")
+    assert o is not None and o["stock"]=="unknown"
+
+
+def test_pccomponentes_recommended_item_stock_notice_not_applied_to_main_item():
+    html = """
+    <html><body><main>
+      <h1>Kingston FURY Beast RGB DDR4 3200 MHz 32GB 2x16GB CL16</h1>
+      <div id="pdp-price-current-container">180,99 €</div>
+      <p>Adicionar ao carrinho</p>
+      <div id="product-details">Especificações da memória Kingston</div>
+      <div class="related-products">""" + ("Other recommendations "*140) + """
+        <div>Disponibilidade do produto Sem data exacta de chegada</div>
+      </div>
+    </main></body></html>"""
+    o=product_info(html,"PcComponentes",
+        "https://www.pccomponentes.pt/kingston-fury-beast-rgb-ddr4-3200-mhz-32gb-2x16gb-cl16")
+    assert o is not None and o["stock"]=="unknown"
