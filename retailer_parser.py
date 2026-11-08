@@ -190,6 +190,17 @@ def category_card_offers(html, store, base, matches, price, stock, stamp, allowe
         node=card.select_one(".product-price-and-shipping .price:not(.regular-price),.current-price .price,.price-final_price .price,.product-price,.price:not(.regular-price)")
         add(anchor,node,card)
 
+    if store=="El Shop":
+        # Current PrestaShop-derived cards use product-miniature__price
+        # and absolute product links instead of .product-title anchors.
+        for card in doc.select("article.product-miniature"):
+            anchor=next((a for a in card.select("a[href]") if
+                         len(a.get_text(" ",strip=True))>12 and
+                         ("ddr4" in a.get_text(" ",strip=True).lower() or
+                          "sodimm" in a.get_text(" ",strip=True).lower())),None)
+            node=card.select_one(".product-miniature__prices .product-miniature__price")
+            add(anchor,node,card)
+
     if store=="Chipman":
         # Current custom Tailwind storefront: <article class="group card-hover">
         # contains an image link, a second named link, a struck-out price and
