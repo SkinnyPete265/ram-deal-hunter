@@ -42,7 +42,7 @@ def matches(name):
         return "single_pair"
     # A clearly named single 16GB desktop DIMM is also eligible, purchased twice.
     # Never infer this from a kit/pack description or from a laptop/server product.
-    if re.search(r"(?<![0-9])16gb(?![0-9])",s) and "32gb" not in s and (
+    if re.search(r"(?<![0-9])16\s*gb(?![0-9])",str(name).lower()) and "32gb" not in s and (
         "dimm" in s or "udimm" in s or "modulo" in s or "module" in s
     ) and not any(w in s for w in ("kit","pack","bundle")) and not re.search(r"[248]x[24816]",s):
         return "single_pair"
