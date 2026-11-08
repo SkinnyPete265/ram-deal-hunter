@@ -66,6 +66,9 @@ jobs:
     name: Publish dashboard to GitHub Pages
     needs: scan
     runs-on: ubuntu-latest
+    concurrency:
+      group: ram-deal-hunter-pages
+      cancel-in-progress: true
     permissions:
       contents: read
       pages: write
