@@ -95,11 +95,11 @@ E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b
  const homeOffers=curr.filter(o=>o.store===g.store&&o.scan_origin==='Home PC').length;
  const workingHome=(g.okHome>0||homeOffers>0);
  const blockedBoth=g.blockedHome&&g.blockedCloud&&!workingHome;
- const state=workingHome?'Home PC checked'+(g.blockedCloud?' (cloud blocked)':''):
+ const state=found>0?'Priced RAM offers found'+(workingHome?' (home scanner active)':''):
    blockedBoth?'Blocked from both locations':
-   g.blockedHome?'Home PC blocked'+(g.okCloud?' (cloud checked)':''):
-   g.blockedCloud?'Cloud blocked'+(found?' (other data available)':''):
-   g.okCloud||found?'Cloud checked':'Unverified';
+   g.blockedHome?'Home PC blocked'+(g.okCloud?' (cloud reachable)':''):
+   g.blockedCloud&&!workingHome?'Cloud blocked'+(g.okHome?' (home reachable)':''):
+   g.okHome||g.okCloud?'Reachable; no matching priced RAM yet':'Unverified';
  const css=blockedBoth||g.blockedHome||g.blockedCloud&&!workingHome?'blocked':workingHome||g.okCloud||found?'active':'';
  const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' browser retries worked':'';
  return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
