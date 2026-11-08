@@ -70,8 +70,13 @@ return '<tr><td><div class="name">'+esc(o.title)+'</div><div class="spec">'+esc(
 }).join(''):'<tr><td colspan="6" class="empty">No matching offers. Check source status and retry later.</td></tr>';
 const grouped={};
 for(const h of (data.health||[])){
-  const store=String(h.source||'Unknown').replace(/ (category|product)$/,'');
-  const g=grouped[store]||(grouped[store]={store,blocked:false,errors:0,ok:0,products:0});
+  const store=String(h.source||'Unknown').replace(/ (category|product|browser fallback)$/,'');
+  const g=grouped[store]||(grouped[store]={store,blocked:false,errors:0,ok:0,products:0,fallback_attempted:0,fallback_recovered:0});
+  if(h.source.endsWith(' browser fallback')){
+    g.fallback_attempted=Number.parseInt(h.detail,10)||0;
+    g.fallback_recovered=Number(h.found)||0;
+    continue;
+  }
   if(['blocked_403_or_429','automated_access_blocked'].includes(h.status))g.blocked=true;
   if(h.status==='error')g.errors++;
   if(h.status==='ok')g.ok++;
@@ -79,10 +84,11 @@ for(const h of (data.health||[])){
 }
 E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b.store)).map(g=>{
  const found=curr.filter(o=>o.store===g.store).length;
- const state=g.blocked?'Blocked by retailer':g.ok||found?'Checked':'Unverified';
+ const state=g.blocked?'Blocked by retailer':g.fallback_recovered?'Recovered via browser-style request':g.ok||found?'Checked':'Unverified';
  const css=g.blocked?'blocked':g.ok||found?'active':'';
+ const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' browser retries worked':'';
  return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
- esc(state+' · '+found+' offer'+(found===1?'':'s')+(g.errors?' · '+g.errors+' errors':'')+(g.products?' · '+g.products+' without price data':''))+
+ esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+(g.errors?' · '+g.errors+' errors':'')+(g.products?' · '+g.products+' without price data':''))+
  '</small></div>';
 }).join('')||'<p class="muted">No checks recorded yet.</p>';
 }
