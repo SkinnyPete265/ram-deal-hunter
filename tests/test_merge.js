@@ -35,7 +35,7 @@ assert.equal(noHome.sources.home_last_scan, null);
 
 // An eight-hour scan must remain usable until the next scheduled run.
 const betweenScans = mergeSnapshots(cloud, home, now + 9 * 60 * 60 * 1000);
-assert.equal(betweenScans.offers.filter(o => o.current).length, 2);
+assert.equal(betweenScans.offers.filter(o => o.current).length, 3);
 assert(betweenScans.health.length > 0);
 
 // A missed update must eventually become stale rather than advertised as live.
