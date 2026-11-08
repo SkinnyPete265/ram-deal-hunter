@@ -92,25 +92,46 @@ def _name_and_metadata(doc):
 
 
 def _pccomponentes_price(doc, convert):
-    """Read the main PcComponentes purchase box, not recommended products.
+    """Extract PcComponentes' primary PDP price without touching recommendation cards.
 
-    Different versions render a complete amount or separate integer/cents
-    elements. An unrendered page must return None, never a related-card price.
+    Live home-PC diagnostics (2026-11-08) show the main-price IDs
+    #pdp-price-section, #pdp-price-current-container, and nested integer/
+    decimals spans. The visible text is sometimes spaced: "185 , 00 €".
     """
-    integer=doc.select_one("[data-e2e='pdp-price-current-integer']")
-    if integer is None:
-        return None
-    whole=re.sub(r"[^0-9]", "", integer.get_text(" ",strip=True))
-    if not 1<=len(whole)<=5:
-        return None
-    cents=doc.select_one("[data-e2e='pdp-price-current-decimal'],[data-e2e='pdp-price-current-decimals']")
-    if cents is None:
-        return None
-    decimals=re.sub(r"[^0-9]", "", cents.get_text(" ",strip=True))
-    if not 1<=len(decimals)<=2:
-        return None
-    return convert(whole+"."+decimals.zfill(2))
+    section = doc.select_one("#pdp-price-section")
+    container = section.select_one("#pdp-price-current-container") if section else None
+    if container is None:
+        container = doc.select_one("#pdp-price-current-container")
+    if container is not None:
+        raw = container.get_text(" ", strip=True).replace("\u00a0", " ")
+        amounts = re.findall(r"(?<!\d)(\d{1,5})\s*[,\.]\s*(\d{2})\s*(?:€|EUR)\b?", raw, re.I)
+        # Euro sign isn't a word character, so also support it explicitly.
+        if not amounts:
+            amounts = re.findall(r"(?<!\d)(\d{1,5})\s*[,\.]\s*(\d{2})\s*€", raw)
+        if len(amounts) == 1:
+            number = convert(amounts[0][0] + "." + amounts[0][1])
+            if number is not None:
+                return number
+        # Reject ambiguous containers containing multiple different prices.
+        if len(set(amounts)) > 1:
+            return None
 
+    parent = section or doc
+    integer = parent.select_one("#pdp-price-current-integer, [data-e2e='pdp-price-current-integer']")
+    decimals = parent.select_one(
+        "#pdp-price-current-decimals, #pdp-price-current-decimal, "
+        "[data-e2e='pdp-price-current-decimals'], [data-e2e='pdp-price-current-decimal']"
+    )
+    if integer is None or decimals is None:
+        return None
+    # Prefer the *direct* text node for the integer because the decimal may
+    # be nested inside it in the storefront's React markup.
+    direct = " ".join(str(node).strip() for node in integer.find_all(string=True, recursive=False))
+    whole = re.sub(r"[^0-9]", "", direct)
+    cents = re.search(r"[,\.]?\s*(\d{2})", decimals.get_text(" ", strip=True))
+    if not (1 <= len(whole) <= 5 and cents):
+        return None
+    return convert(whole + "." + cents.group(1))
 
 def _primary_price(doc, convert, store=None):
     for selector in PRICE_META_SELECTORS:
