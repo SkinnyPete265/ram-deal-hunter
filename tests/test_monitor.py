@@ -315,3 +315,9 @@ def test_transient_timeout_retried_once(monkeypatch):
     monkeypatch.setattr(monitor.time,"sleep",lambda *_:None)
     assert "DDR4 kit" in monitor.download("https://www.castroelectronica.pt/pt/product/ram")
     assert len(attempts)==2
+
+
+def test_crucial_ct_g4s_laptop_sodimm_is_never_desktop_pair():
+    assert matches("Crucial CT16G4SFRA32AT 16GB 1x16GB DDR4 3200MHz CL22") is None
+    assert matches("Crucial CT16G4SFD824A DDR4 16GB DIMM") is None
+    assert matches("Crucial CT16G4DFRA32A DDR4 16GB DIMM") == "single_pair"
