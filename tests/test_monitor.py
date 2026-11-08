@@ -260,3 +260,58 @@ def test_alerts_require_direct_in_stock_2x16gb_kit():
     assert not eligible_for_alert({**base,"catalogue_only":True},200)
     assert not eligible_for_alert({**base,"configuration":"single_pair","units_to_buy":2},200)
     assert not eligible_for_alert({**base,"units_to_buy":2},200)
+
+
+def test_transient_http_502_retried_once_without_changing_payload(monkeypatch):
+    from requests import Response
+    import monitor
+    calls=[]
+    def response(code):
+        r=Response()
+        r.status_code=code
+        r._content=b"<html><h1>RAM DDR4 kit</h1></html>"
+        r.headers["Content-Type"]="text/html"
+        r.url="https://www.castroelectronica.pt/product/example"
+        return r
+    def get(url,**kwargs):
+        calls.append(url)
+        return response(502 if len(calls)==1 else 200)
+    monkeypatch.setattr(monitor.requests,"get",get)
+    monkeypatch.setattr(monitor.time,"sleep",lambda *_:None)
+    assert "RAM DDR4 kit" in monitor.download("https://www.castroelectronica.pt/product/example")
+    assert len(calls)==2
+
+
+def test_transient_http_410_gone_is_not_retried(monkeypatch):
+    from requests import Response, HTTPError
+    import monitor, pytest
+    attempts=[]
+    def get(url,**kwargs):
+        attempts.append(url)
+        r=Response()
+        r.status_code=410
+        r.url=url
+        return r
+    monkeypatch.setattr(monitor.requests,"get",get)
+    with pytest.raises(HTTPError):
+        monitor.download("https://www.pccomponentes.pt/deleted-ddr4-kit")
+    assert len(attempts)==1
+
+
+def test_transient_timeout_retried_once(monkeypatch):
+    import monitor
+    from requests import Response, ReadTimeout
+    attempts=[]
+    def get(url,**kwargs):
+        attempts.append(url)
+        if len(attempts)==1: raise ReadTimeout("temporary read timeout")
+        r=Response()
+        r.status_code=200
+        r._content=b"<html><h1>DDR4 kit</h1></html>"
+        r.headers["Content-Type"]="text/html"
+        r.url=url
+        return r
+    monkeypatch.setattr(monitor.requests,"get",get)
+    monkeypatch.setattr(monitor.time,"sleep",lambda *_:None)
+    assert "DDR4 kit" in monitor.download("https://www.castroelectronica.pt/pt/product/ram")
+    assert len(attempts)==2
