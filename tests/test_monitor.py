@@ -71,3 +71,43 @@ def test_structured_properties_and_pcbox_stock():
     assert p and p["price_eur"]==159.9 and p["stock"]=="in_stock"
     p=product_info(html+"<p>Produto não disponível no momento</p>","PCBox","https://www.pcbox.pt/product/example")
     assert p and p["stock"]=="out_of_stock"
+
+def test_browser_fallback_recovers_public_product_html(monkeypatch):
+    import monitor
+    from types import SimpleNamespace
+    from requests import Response
+    def response(code, text):
+        r=Response()
+        r.status_code=code
+        r._content=text.encode("utf-8")
+        r.headers["Content-Type"]="text/html; charset=utf-8"
+        r.url="https://www.pcdiga.com/test"
+        return r
+    monkeypatch.setattr(monitor.requests,"get",lambda *a,**k:response(403,"Blocked"))
+    calls=[]
+    def browser_get(url,**kwargs):
+        calls.append((url,kwargs))
+        return response(200,"<html><title>DDR4 test</title></html>")
+    monkeypatch.setattr(monitor,"browser_requests",SimpleNamespace(get=browser_get))
+    monitor.FETCH_META.clear()
+    assert "DDR4 test" in monitor.download("https://www.pcdiga.com/test")
+    assert calls[0][1]["impersonate"]=="chrome"
+    assert monitor.FETCH_META["www.pcdiga.com"]["recovered"]==1
+
+def test_browser_fallback_keeps_blocked_failure(monkeypatch):
+    import monitor, pytest
+    from types import SimpleNamespace
+    from requests import Response, HTTPError
+    def response(code):
+        r=Response()
+        r.status_code=code
+        r._content=b"Forbidden"
+        r.headers["Content-Type"]="text/html"
+        r.url="https://chip7.pt/test"
+        return r
+    monkeypatch.setattr(monitor.requests,"get",lambda *a,**k:response(403))
+    monkeypatch.setattr(monitor,"browser_requests",SimpleNamespace(get=lambda *a,**k:response(403)))
+    monitor.FETCH_META.clear()
+    with pytest.raises(HTTPError):
+        monitor.download("https://chip7.pt/test")
+    assert monitor.FETCH_META["chip7.pt"]["still_blocked"]==1
