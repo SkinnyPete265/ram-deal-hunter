@@ -38,3 +38,15 @@ def test_manual_launcher_can_repeat_without_reopening():
     assert 'Run-LocalScan.ps1' in scheduled
     assert "-NonInteractive" in scheduled and "-Unattended" in scheduled
     assert 'New-ScheduledTaskAction -Execute $powershellPath -Argument $arguments' in scheduled
+
+
+def test_scan_provenance_is_set_by_both_launchers():
+    workflow = (ROOT / ".github/workflows/scan.yml").read_text(encoding="utf-8")
+    runner = (ROOT / "scripts/Run-LocalScan.ps1").read_text(encoding="utf-8")
+    monitor = (ROOT / "monitor.py").read_text(encoding="utf-8")
+    assert "RAM_DEAL_SCAN_TRIGGER:" in workflow
+    assert "github.event_name == 'workflow_dispatch'" in workflow
+    assert "github.event_name == 'schedule'" in workflow
+    assert '$env:RAM_DEAL_SCAN_TRIGGER = "scheduled"' in runner
+    assert '$env:RAM_DEAL_SCAN_TRIGGER = "manual"' in runner
+    assert '"scan_trigger":scan_trigger()' in monitor
