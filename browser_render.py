@@ -11,7 +11,8 @@ import subprocess
 import tempfile
 from urllib.parse import urlparse
 
-_ALLOWED_HOSTS = ("pccomponentes.pt", "chip7.pt")
+_ALLOWED_HOSTS = ("pccomponentes.pt", "chip7.pt", "pcdiga.com",
+                  "chipman.pt", "castroelectronica.pt")
 _MAX_HTML_CHARS = 5_000_000
 
 
