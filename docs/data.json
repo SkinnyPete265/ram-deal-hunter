@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-11-08T08:34:26+00:00",
+  "last_scan": "2026-11-08T09:31:25+00:00",
   "budget_eur": 200,
   "offers": [
     {
@@ -16,7 +16,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:19+00:00",
+      "observed_at": "2026-11-08T09:29:27+00:00",
       "current": true,
       "history": [
         {
@@ -41,7 +41,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:16+00:00",
+      "observed_at": "2026-11-08T09:29:24+00:00",
       "current": true,
       "history": [
         {
@@ -76,7 +76,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:54+00:00",
+      "observed_at": "2026-11-08T09:30:57+00:00",
       "current": true,
       "history": [
         {
@@ -101,7 +101,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -127,7 +127,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:42+00:00",
+      "observed_at": "2026-11-08T09:29:50+00:00",
       "current": true,
       "history": [
         {
@@ -152,7 +152,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:52+00:00",
+      "observed_at": "2026-11-08T09:30:55+00:00",
       "current": true,
       "history": [
         {
@@ -177,7 +177,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -203,7 +203,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -234,7 +234,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -260,7 +260,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -286,7 +286,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -312,7 +312,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:48+00:00",
+      "observed_at": "2026-11-08T09:30:52+00:00",
       "current": true,
       "history": [
         {
@@ -337,7 +337,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:45+00:00",
+      "observed_at": "2026-11-08T09:30:49+00:00",
       "current": true,
       "history": [
         {
@@ -362,7 +362,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -388,7 +388,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -414,7 +414,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:32:40+00:00",
+      "observed_at": "2026-11-08T09:29:48+00:00",
       "current": true,
       "history": [
         {
@@ -439,7 +439,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:27+00:00",
+      "observed_at": "2026-11-08T09:29:35+00:00",
       "current": true,
       "history": [
         {
@@ -464,7 +464,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:58+00:00",
+      "observed_at": "2026-11-08T09:31:00+00:00",
       "current": true,
       "history": [
         {
@@ -489,7 +489,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:45+00:00",
+      "observed_at": "2026-11-08T09:30:48+00:00",
       "current": true,
       "history": [
         {
@@ -514,7 +514,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:15+00:00",
+      "observed_at": "2026-11-08T09:29:23+00:00",
       "current": true,
       "history": [
         {
@@ -539,7 +539,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -565,7 +565,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -591,7 +591,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:43+00:00",
+      "observed_at": "2026-11-08T09:29:52+00:00",
       "current": true,
       "history": [
         {
@@ -616,7 +616,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -642,7 +642,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -668,7 +668,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:32:32+00:00",
+      "observed_at": "2026-11-08T09:29:40+00:00",
       "current": true,
       "history": [
         {
@@ -693,7 +693,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -719,7 +719,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -745,7 +745,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -771,7 +771,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:34:20+00:00",
+      "observed_at": "2026-11-08T09:31:20+00:00",
       "current": true,
       "history": [
         {
@@ -796,7 +796,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -822,7 +822,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -848,7 +848,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -874,7 +874,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -900,7 +900,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:22+00:00",
+      "observed_at": "2026-11-08T09:29:30+00:00",
       "current": true,
       "history": [
         {
@@ -925,7 +925,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -951,7 +951,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-08T08:32:10+00:00",
+      "observed_at": "2026-11-08T09:29:18+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -977,7 +977,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1003,7 +1003,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:32:23+00:00",
+      "observed_at": "2026-11-08T09:29:31+00:00",
       "current": true,
       "history": [
         {
@@ -1028,7 +1028,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:40+00:00",
+      "observed_at": "2026-11-08T09:30:44+00:00",
       "current": true,
       "history": [
         {
@@ -1053,7 +1053,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:25+00:00",
+      "observed_at": "2026-11-08T09:30:29+00:00",
       "current": true,
       "history": [
         {
@@ -1078,7 +1078,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:50+00:00",
+      "observed_at": "2026-11-08T09:29:59+00:00",
       "current": true,
       "history": [
         {
@@ -1103,7 +1103,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:37+00:00",
+      "observed_at": "2026-11-08T09:30:40+00:00",
       "current": true,
       "history": [
         {
@@ -1128,7 +1128,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:34:09+00:00",
+      "observed_at": "2026-11-08T09:31:10+00:00",
       "current": true,
       "history": [
         {
@@ -1153,7 +1153,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1179,7 +1179,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:37+00:00",
+      "observed_at": "2026-11-08T09:29:45+00:00",
       "current": true,
       "history": [
         {
@@ -1204,7 +1204,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:34:18+00:00",
+      "observed_at": "2026-11-08T09:31:18+00:00",
       "current": true,
       "history": [
         {
@@ -1229,7 +1229,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1255,7 +1255,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:34:12+00:00",
+      "observed_at": "2026-11-08T09:31:13+00:00",
       "current": true,
       "history": [
         {
@@ -1280,7 +1280,7 @@
       "speed_mhz": 3600,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:34:11+00:00",
+      "observed_at": "2026-11-08T09:31:12+00:00",
       "current": true,
       "history": [
         {
@@ -1305,7 +1305,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:34:03+00:00",
+      "observed_at": "2026-11-08T09:31:04+00:00",
       "current": true,
       "history": [
         {
@@ -1330,7 +1330,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:33:33+00:00",
+      "observed_at": "2026-11-08T09:30:36+00:00",
       "current": true,
       "history": [
         {
@@ -1355,7 +1355,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1381,7 +1381,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:13+00:00",
+      "observed_at": "2026-11-08T09:30:19+00:00",
       "current": true,
       "history": [
         {
@@ -1406,7 +1406,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:22+00:00",
+      "observed_at": "2026-11-08T09:30:27+00:00",
       "current": true,
       "history": [
         {
@@ -1431,7 +1431,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:06+00:00",
+      "observed_at": "2026-11-08T09:30:13+00:00",
       "current": true,
       "history": [
         {
@@ -1456,7 +1456,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:32:25+00:00",
+      "observed_at": "2026-11-08T09:29:33+00:00",
       "current": true,
       "history": [
         {
@@ -1481,7 +1481,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:34:23+00:00",
+      "observed_at": "2026-11-08T09:31:21+00:00",
       "current": true,
       "history": [
         {
@@ -1506,7 +1506,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:18+00:00",
+      "observed_at": "2026-11-08T09:29:26+00:00",
       "current": true,
       "history": [
         {
@@ -1531,7 +1531,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:34:25+00:00",
+      "observed_at": "2026-11-08T09:31:23+00:00",
       "current": true,
       "history": [
         {
@@ -1561,7 +1561,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:41+00:00",
+      "observed_at": "2026-11-08T09:29:50+00:00",
       "current": true,
       "history": [
         {
@@ -1586,7 +1586,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:27+00:00",
+      "observed_at": "2026-11-08T09:30:31+00:00",
       "current": true,
       "history": [
         {
@@ -1616,7 +1616,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:32:56+00:00",
+      "observed_at": "2026-11-08T09:30:05+00:00",
       "current": true,
       "history": [
         {
@@ -1641,7 +1641,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:56+00:00",
+      "observed_at": "2026-11-08T09:30:04+00:00",
       "current": true,
       "history": [
         {
@@ -1666,7 +1666,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:16+00:00",
+      "observed_at": "2026-11-08T09:30:21+00:00",
       "current": true,
       "history": [
         {
@@ -1691,7 +1691,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:32:30+00:00",
+      "observed_at": "2026-11-08T09:29:38+00:00",
       "current": true,
       "history": [
         {
@@ -1716,7 +1716,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-08T08:34:26+00:00",
+      "observed_at": "2026-11-08T09:31:25+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1742,7 +1742,7 @@
       "speed_mhz": 3200,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:28+00:00",
+      "observed_at": "2026-11-08T09:29:36+00:00",
       "current": true,
       "history": [
         {
@@ -1767,7 +1767,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:11+00:00",
+      "observed_at": "2026-11-08T09:30:17+00:00",
       "current": true,
       "history": [
         {
@@ -1792,7 +1792,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-08T08:33:30+00:00",
+      "observed_at": "2026-11-08T09:30:34+00:00",
       "current": true,
       "history": [
         {
@@ -1817,7 +1817,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-08T08:32:20+00:00",
+      "observed_at": "2026-11-08T09:29:28+00:00",
       "current": true,
       "history": [
         {
@@ -2396,7 +2396,7 @@
             "div",
             "prod-list-price-wrapper",
             "",
-            "144,79 € Loja: 152,50 €"
+            "27,89 € Loja: 29,50 €"
           ]
         ],
         "price_meta": []
