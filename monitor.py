@@ -13,6 +13,7 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 from retailer_parser import extract_html_offer, category_card_offers
+from browser_render import render_dom
 try:
     from curl_cffi import requests as browser_requests
 except ImportError:
@@ -343,6 +344,7 @@ def run():
             if urls and len(queue)<120: queue.append((store,urls.pop(0)))
     offers=dict(catalogue_offers)
     debug_counts={}
+    browser_attempts={}
     for store,url in queue:
         if store in blocked_stores:
             continue
@@ -353,6 +355,25 @@ def run():
                 offers[item["id"]]=item
             else:
                 _,reason=extract_html_offer(html,store,url,matches,price,stock,stamp)
+                # Some PcComponentes/CHIP7 purchase boxes are filled by JavaScript.
+                # A limited number of *Windows-only* Chrome/Edge DOM renders are
+                # attempted after a normal page proved its product identity.
+                # Never infer the main item's price from recommendation cards.
+                budget={"PcComponentes":6,"CHIP7":3}.get(store,0)
+                if (reason=="price_not_found" and os.name=="nt" and
+                        browser_attempts.get(store,0)<budget):
+                    browser_attempts[store]=browser_attempts.get(store,0)+1
+                    rendered=render_dom(url)
+                    if rendered:
+                        browser_offer=product_info(rendered,store,url)
+                        if browser_offer is not None:
+                            browser_offer["source"]+=" (headless browser render)"
+                            offers[browser_offer["id"]]=browser_offer
+                            health.append({"source":store+" browser render","status":"ok","found":1})
+                            continue
+                    health.append({"source":store+" browser render",
+                                   "status":"no_verified_price",
+                                   "detail":"Browser rendering did not reveal a verified primary-product price"})
                 detail={"source":store+" product","status":reason}
                 # Collect useful diagnostics for price failures, without
                 # allowing unrelated products to exhaust each store's quota.
