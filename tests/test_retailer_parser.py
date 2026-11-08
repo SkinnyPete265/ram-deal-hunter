@@ -393,3 +393,55 @@ def test_browser_renderer_returns_none_on_unrendered_page(monkeypatch):
     monkeypatch.setattr(browser_render.subprocess,"run",
         lambda *a,**k:SimpleNamespace(returncode=0,stdout="<html><body>Challenge</body></html>"))
     assert browser_render.render_dom("https://chip7.pt/ram-ddr4") is None
+
+
+def test_pccomponentes_actual_home_scan_primary_price_ids_and_spaces():
+    # Captured public selector shapes in the 2026-11-08 Windows scan.
+    # The primary price box is NOT a data-e2e attribute in the observed HTML.
+    html = """
+    <html><body><main>
+      <h1>Kingston HyperX Fury Black 32GB DDR4 3000Mhz PC-24000 (2x16GB) CL15</h1>
+      <div class="section-oxftTZ" id="pdp-price-section">
+        <span class="price-UYqrOK" id="pdp-price-current-container">
+          <span class="integer-KBIKRg" id="pdp-price-current-integer">185
+            <span class="decimal-fsn90Y" id="pdp-price-current-decimals">, 00 €</span>
+          </span>
+        </span>
+      </div>
+      <div class="product-card__price-container">
+         <span class="styledPrice-roCPNV">9,99 €</span>
+      </div>
+    </main></body></html>"""
+    o=product_info(html,"PcComponentes",
+        "https://www.pccomponentes.pt/kingston-hyperx-fury-black-32gb-ddr4-3000mhz-pc-24000-2x16gb-cl15")
+    assert o is not None and o["price_eur"]==185.0
+    assert "PcComponentes primary buybox" in o["source"]
+    assert o["stock"]=="unknown"
+
+
+def test_pccomponentes_actual_home_scan_fractional_price():
+    html = """
+    <html><body><main>
+      <h1>Memória RAM KingBank KJXB 32GB 2x16GB DDR4 3200MHz CL16 UDIMM Preto XMP</h1>
+      <div id="pdp-price-section">
+         <span id="pdp-price-current-container">
+            <span id="pdp-price-current-integer">243</span>
+            <span id="pdp-price-current-decimals">, 92 €</span>
+         </span>
+      </div>
+      <article class="product-card__price-container">9,99 €</article>
+    </main></body></html>"""
+    o=product_info(html,"PcComponentes",
+        "https://www.pccomponentes.pt/memoria-ram-kingbank-kjxb-32gb-2x16gb-ddr4-3200mhz-cl16-udimm-preto-xmp")
+    assert o and o["price_eur"]==243.92
+
+
+def test_pccomponentes_ambiguous_primary_price_not_guessed():
+    html = """
+    <html><body><main><h1>DDR4 32GB (2x16GB) UDIMM</h1>
+      <div id="pdp-price-section">
+        <span id="pdp-price-current-container">179,00 € 190,00 €</span>
+      </div>
+    </main></body></html>"""
+    assert product_info(html,"PcComponentes",
+        "https://www.pccomponentes.pt/ambiguous-ram") is None
