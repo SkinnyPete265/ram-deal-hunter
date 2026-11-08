@@ -6,7 +6,7 @@ A small self-hosted desktop-DDR4 price monitor for **32 GB in exactly two 16 GB 
 
 The repository includes working application source and GitHub Actions schedules. **A successful real-world retailer scan, GitHub-hosted public dashboard, and Telegram notifications have not yet been verified.** Stock and shipping to Portugal are not guaranteed from retailer metadata. Every deal is a **candidate** until checkout verifies the exact configuration, availability and shipping.
 
-The repository is currently **private**. A static GitHub Pages site is not enabled by the provided scan workflow. To see results, run the dashboard locally or inspect `docs/data.json` after an Actions scan commits it.
+The repository is **public**. The static dashboard is ready for GitHub Pages hosting, but Pages is not automatically activated by the scan workflow. To publish it, open **Settings → Pages → Build and deployment**, select **Deploy from a branch**, choose **`main`** and **`/docs`**, then click **Save**. Once deployment succeeds, visit **https://skinnypete265.github.io/ram-deal-hunter/**. This page displays the latest `docs/data.json` that the scan workflow commits; it cannot trigger manual scans itself. The site is read-only and data is public, so never place API keys or Telegram tokens inside `docs/`.
 
 A separate ChatGPT hourly price-watch automation was previously created. It is distinct from this project.
 
