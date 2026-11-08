@@ -177,7 +177,13 @@ def download(url):
     response.raise_for_status()
     if "html" not in response.headers.get("Content-Type","").lower() or len(response.content)>5000000:
         raise ValueError("Unsupported response")
-    body=response.text
+    # Some retailers omit a charset header. requests then falls back to
+    # Latin-1 and corrupts UTF-8 euro symbols ("€" -> "â\u0082¬"), which
+    # prevents our locale-aware price parser from recognizing the amount.
+    try:
+        body=response.content.decode("utf-8")
+    except UnicodeDecodeError:
+        body=response.text
     # A successful HTTP response can still be an anti-bot challenge, not a product.
     if re.search(r"<title>\s*(just a moment|attention required|access denied)[^<]*</title>",body,re.I):
         raise ValueError("Browser challenge shown instead of a retailer page")
