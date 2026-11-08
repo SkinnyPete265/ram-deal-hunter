@@ -171,6 +171,41 @@ def links(html,base,store):
             break
     return found
 
+def comparison_offers(html, base, source="KuantoKusta"):
+    """Extract *unverified* lowest listed prices from a public PT comparison category.
+
+    These are discovery candidates, never an assertion of store inventory or
+    delivered price. Product titles must independently identify DDR4 and 2x16GB.
+    """
+    doc=BeautifulSoup(html,"html.parser")
+    found={}
+    for a in doc.select("a[href]"):
+        link=urljoin(base,a.get("href","")).split("#")[0]
+        parsed=urlparse(link)
+        if parsed.scheme!="https" or parsed.hostname not in ("kuantokusta.pt","www.kuantokusta.pt"):
+            continue
+        if not re.match(r"^/p/\d+/",parsed.path): continue
+        raw=a.get_text(" ",strip=True)
+        m=re.search(r"(?:desde\s*)?(\d{1,5}(?:[.,]\d{2}))\s*€",raw,re.I)
+        if not m: continue
+        title=re.split(r"\s+desde\s*\d",raw,maxsplit=1,flags=re.I)[0].strip()
+        kind=matches(title)
+        if not kind: continue
+        unit=price(m.group(1))
+        if not unit: continue
+        total=round(unit*(2 if kind=="single_pair" else 1),2)
+        identity=hashlib.sha256(("comparison:"+link).encode()).hexdigest()[:16]
+        mhz=re.search(r"\b(2133|2400|2666|2933|3000|3200|3466|3600|3733|4000|4266)\b",title)
+        cl=re.search(r"\bCL\s*(\d\d)\b",title,re.I)
+        found[identity]=dict(id=identity,store=source+" comparison",url=link,title=title,
+            configuration=kind,units_to_buy=2 if kind=="single_pair" else 1,
+            unit_price_eur=unit,price_eur=total,stock="unknown",
+            shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,
+            cas_latency=int(cl[1]) if cl else None,
+            source="Comparison lowest advertised price, merchant/stock/shipping not verified",
+            observed_at=stamp(),current=True,comparison_only=True)
+    return list(found.values())
+
 def notify(o):
     token=os.getenv("TELEGRAM_BOT_TOKEN"); chat=os.getenv("TELEGRAM_CHAT_ID")
     if not token or not chat: return False
@@ -222,6 +257,20 @@ def run():
             is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
             if is_blocked: blocked_stores.add(store)
             health.append({"source":store+" product","status":"blocked_403_or_429" if is_blocked else "error","detail":str(e)[:130]})
+        time.sleep(0.3)
+    # Public price-comparison pages give indirect visibility into shops that
+    # deny automated requests; treat all extracted amounts as *candidates*.
+    for source,url in cfg.get("comparison_pages",[]):
+        if source!="KuantoKusta" or not url.startswith("https://www.kuantokusta.pt/"):
+            continue
+        try:
+            gathered=comparison_offers(download(url),url,source)
+            for item in gathered:
+                offers[item["id"]]=item
+            health.append({"source":source+" comparison","status":"ok","found":len(gathered),
+                           "detail":"Lowest advertised prices; seller and delivery not verified"})
+        except (requests.RequestException,ValueError) as e:
+            health.append({"source":source+" comparison","status":"error","detail":str(e)[:120]})
         time.sleep(0.3)
     for store in sorted(blocked_stores):
         health.append({"source":store,"status":"automated_access_blocked","detail":"Both standard and browser-like requests failed; this store remains a coverage gap."})
