@@ -51,6 +51,14 @@ def matches(name):
         return None
     if any(re.search(p,s) for p in (r"1x32(?:gb)?",r"4x8(?:gb)?",r"2x8(?:gb)?",r"4x4(?:gb)?",r"2x32(?:gb)?",r"4x16(?:gb)?",r"8x4(?:gb)?")):
         return None
+    raw=str(name).lower()
+    # Manufacturer part numbers can reveal a 16GB *kit of two 8GB sticks*
+    # even when the retail title merely says "16 GB DIMM".
+    if (re.search(r"\bf4-[a-z0-9]+d-16[a-z0-9]*\b",raw) or
+        re.search(r"\bkf4\d{2}[a-z0-9]+k2[/\-]16\b",raw) or
+        re.search(r"\bcm[a-z]+16gx4m2[a-z0-9]+\b",raw) or
+        re.search(r"\b(?:cp|ct)2k8g4[a-z0-9]+\b",raw)):
+        return None
     if re.search(r"(?:2x16(?:gb)?|16gbx2)(?!\d)",s):
         return "kit"
     # Retailer descriptions sometimes express the actual kit as
