@@ -26,12 +26,23 @@ td a{color:var(--accent);text-decoration:none;white-space:nowrap}
 .source small{display:block;color:var(--muted);line-height:1.45}
 .source.blocked{border-color:#85514f}
 .source.active{border-color:#326952}.empty{text-align:center;color:var(--muted);padding:45px}
+.scan-overview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0 -4px}
+.scan-item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 16px;min-width:0}
+.scan-item small{display:block;margin-bottom:5px}
+.scan-item strong{display:block;font-size:1rem;font-weight:650;overflow-wrap:anywhere}
+.scan-item .muted{display:block;margin-top:5px;font-size:.82rem}
 footer{color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:25px}
-@media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}header{display:block}}
+@media(max-width:700px){.summary{grid-template-columns:repeat(2,1fr)}.scan-overview{grid-template-columns:1fr}header{display:block}}
 </style></head><body><main>
 <div class="brand">RAM HUNTER / PORTUGAL</div><header><div><h1>Less money.<br><span>More memory.</span></h1>
 <p class="muted">Desktop DDR4 · exactly 2 × 16 GB · Portugal-friendly shops · €200 maximum</p></div>
-<p class="muted" id="updated">No live scan yet</p></header>
+<p class="muted" id="updated" aria-live="polite">Loading scan history…</p></header>
+<section class="scan-overview" aria-label="Last completed scans">
+  <div class="scan-item"><small>Home PC · last completed scan</small>
+    <strong id="scan-home-time">—</strong><span class="muted" id="scan-home-kind">Checking scan data…</span></div>
+  <div class="scan-item"><small>GitHub cloud · last completed scan</small>
+    <strong id="scan-cloud-time">—</strong><span class="muted" id="scan-cloud-kind">Checking scan data…</span></div>
+</section>
 <section class="summary"><div class="card"><small>Budget</small><strong>€200</strong></div>
 <div class="card"><small>Listed in stock ≤€200</small><strong id="deals">0</strong></div>
 <div class="card"><small>Lowest available</small><strong id="lowest">—</strong></div>
@@ -53,6 +64,32 @@ const E=id=>document.getElementById(id);
 const euro=n=>Number.isFinite(n)?new Intl.NumberFormat('pt-PT',{style:'currency',currency:'EUR'}).format(n):'—';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const date=s=>s?new Date(s).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon'}):'—';
+const scanDate=s=>s&&!Number.isNaN(Date.parse(s))
+  ?new Date(s).toLocaleString('pt-PT',{timeZone:'Europe/Lisbon',year:'numeric',
+     month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false})+' (Portugal)'
+  :'—';
+function scanKind(trigger,origin){
+ if(trigger==='manual')return origin==='home'?'Manual · started on this PC':'Manual · GitHub Actions';
+ if(trigger==='scheduled')return origin==='home'?'Automated · Windows Task Scheduler':'Automated · GitHub schedule';
+ if(trigger==='push')return 'Automated · GitHub configuration update';
+ return 'How scan started: not recorded (older snapshot)';
+}
+function drawScanInfo(){
+ const sources=data.sources||{};
+ for(const [key,origin] of [['home','home'],['cloud','cloud']]){
+   const at=sources[key+'_last_scan'];
+   E('scan-'+key+'-time').textContent=at?scanDate(at):'No completed scan recorded';
+   E('scan-'+key+'-kind').textContent=at
+      ?scanKind(sources[key+'_scan_trigger'],origin)+(sources[key+'_is_fresh']?'':' · Snapshot outdated')
+      :'No data available';
+ }
+ const latest=sources.latest_scan_origin;
+ const key=latest==='Home PC'?'home':'cloud';
+ E('updated').textContent=latest
+   ?'Latest: '+scanDate(data.last_scan)+' · '+latest+' · '+scanKind(sources.latest_scan_trigger,key)
+      +(sources.latest_is_fresh?'':' · Snapshot outdated')
+   :'No completed scans recorded';
+}
 function draw(){
 let offers=data.offers||[],curr=offers.filter(o=>o.current),budget=data.budget_eur||200;
 E('tracked').textContent=curr.length;
@@ -136,8 +173,7 @@ let [cloudResponse,homeResponse]=await Promise.all([
 if(!cloudResponse.ok)throw Error('HTTP '+cloudResponse.status);
 let [cloud,home]=await Promise.all([cloudResponse.json(),homeResponse&&homeResponse.ok?homeResponse.json():Promise.resolve(null)]);
 data=RAMHunterMerge.mergeSnapshots(cloud,home);
-let homeState=data.sources.home_last_scan?date(data.sources.home_last_scan):'not connected';
-E('updated').textContent=(data.last_scan?'Latest scan '+date(data.last_scan):'No live scan yet')+' · Home PC: '+homeState;
+drawScanInfo();
 let selected=E('store').value,stores=[...new Set((data.offers||[]).map(o=>o.store))].sort((a,b)=>a.localeCompare(b));
 E('store').innerHTML='<option value="">All stores</option>'+stores.map(x=>'<option value="'+esc(x)+'">'+esc(x)+'</option>').join('');E('store').value=stores.includes(selected)?selected:'';draw()}catch(err){E('updated').textContent='Could not load data: '+err.message}}
 E('refresh').onclick=load;
