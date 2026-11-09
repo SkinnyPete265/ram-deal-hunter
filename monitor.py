@@ -6,6 +6,7 @@ import json
 import os
 import re
 import time
+from xml.etree import ElementTree
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urljoin, urlparse
@@ -380,6 +381,74 @@ def links(html,base,store):
                 break
     return found
 
+def _pcdiga_sitemap_urls(xml_body):
+    """Read URL loc elements from the public PCDIGA sitemap XML only."""
+    try:
+        root=ElementTree.fromstring(xml_body)
+    except ElementTree.ParseError:
+        return []
+    result=[]
+    for element in root.iter():
+        if element.tag.rsplit("}",1)[-1]!="loc" or not element.text:
+            continue
+        url=element.text.strip()
+        if allowed("PCDIGA",url) and url not in result:
+            result.append(url)
+    return result
+
+
+def _pcdiga_sitemap_fetch(url):
+    """Bounded public XML request, not a bot challenge workaround."""
+    if not allowed("PCDIGA",url):
+        return None
+    try:
+        response=requests.get(url,headers=AGENT,timeout=10)
+        response.raise_for_status()
+        if (not allowed("PCDIGA",response.url) or
+                len(response.content)>5_000_000 or
+                not response.content.lstrip().startswith(b"<?xml") and
+                not response.content.lstrip().startswith((b"<urlset",b"<sitemapindex"))):
+            return None
+        return response.content
+    except (requests.RequestException,ValueError):
+        return None
+
+
+def pcdiga_sitemap_candidates(fetch=_pcdiga_sitemap_fetch):
+    """At most three sitemap requests, using the site's published index.
+
+    A sitemap URL is just a candidate. Normal primary-product RAM,
+    configuration, price and stock validation still applies.
+    """
+    index="https://www.pcdiga.com/sitemap/sitemap.xml"
+    root=fetch(index)
+    if not root:
+        return [], "index_unavailable"
+    urls=_pcdiga_sitemap_urls(root)
+    paths=[]
+    for u in urls:
+        if "/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-" in urlparse(u).path.lower():
+            paths.append(u.split("?")[0])
+    children=[u for u in urls if urlparse(u).path.lower().endswith(".xml")
+              and u!=index and
+              re.search(r"product|produto|catalog",urlparse(u).path,re.I)]
+    # Use only two likely product sitemaps, never recursively crawl an index.
+    for child in children[:2]:
+        data=fetch(child)
+        if not data:
+            continue
+        for u in _pcdiga_sitemap_urls(data):
+            if "/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-" in urlparse(u).path.lower():
+                cleaned=u.split("?")[0].rstrip("/")
+                if cleaned not in paths:
+                    paths.append(cleaned)
+            if len(paths)>=25:
+                break
+        if len(paths)>=25:
+            break
+    return paths[:25], "ok" if paths else "no_matching_product_urls"
+
+
 def comparison_offers(html, base, source="KuantoKusta"):
     """Extract *unverified* lowest listed prices from a public PT comparison category.
 
@@ -541,12 +610,23 @@ def run():
             for item in cards:
                 catalogue_offers[item["id"]]=item
                 targets[(store,item["url"])]=True
-            health.append({"source":store+" category","status":"ok","found":len(discovered),"priced_cards":len(cards)})
+            health.append({"source":store+" category",
+                           "status":"empty_catalogue" if store=="PCDIGA" and not discovered and not cards else "ok",
+                           "found":len(discovered),"priced_cards":len(cards)})
         except (requests.RequestException,ValueError) as e:
             is_blocked=isinstance(e,requests.HTTPError) and e.response is not None and e.response.status_code in (403,429)
             if is_blocked: blocked_stores.add(store)
             health.append({"source":store+" category","status":"blocked_403_or_429" if is_blocked else "error","detail":str(e)[:130]})
         time.sleep(0.3)
+    # When PCDIGA's dynamic category returns no product links, ask its public
+    # sitemap index for at most 25 independently verified product candidates.
+    if any(h.get("source")=="PCDIGA category" and
+           h.get("status")=="empty_catalogue" for h in health):
+        discovered, sitemap_status=pcdiga_sitemap_candidates()
+        for candidate in discovered:
+            targets[("PCDIGA",candidate)]=True
+        health.append({"source":"PCDIGA sitemap","status":sitemap_status,
+                       "found":len(discovered)})
     # Round-robin stores so one large catalogue cannot crowd out smaller shops.
     grouped={}
     for store,url in targets:
