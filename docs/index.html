@@ -161,12 +161,20 @@ return '<tr><td><div class="name">'+esc(o.title)+'</div><div class="spec">'+esc(
 }).join(''):'<tr><td colspan="6" class="empty">No matching offers. Check source status and retry later.</td></tr>';
 const grouped={};
 for(const h of (data.health||[])){
- const store=String(h.source||'Unknown') .replace(/ (category|product|browser fallback|browser render|transient fallback)$/,'');
+ const store=String(h.source||'Unknown') .replace(/ (category|sitemap|product|browser fallback|browser render|transient fallback)$/,'');
  const g=grouped[store]||(grouped[store]={
    store,blockedHome:false,blockedCloud:false,okHome:0,okCloud:0,
-   errors:0,noPrice:0,notMatching:0,missingPage:0,contactPrice:0,fallback_attempted:0,fallback_recovered:0,render_attempted:0,render_recovered:0,transient_attempted:0,transient_recovered:0
+   errors:0,noPrice:0,notMatching:0,missingPage:0,contactPrice:0,fallback_attempted:0,fallback_recovered:0,render_attempted:0,render_recovered:0,transient_attempted:0,transient_recovered:0,sitemap_found:0,sitemap_status:null,empty_catalogue:false
  });
  const home=h.scan_origin==='Home PC';
+ if(String(h.source).endsWith(' sitemap')){
+   g.sitemap_found=Math.max(g.sitemap_found,Number(h.found)||0);
+   g.sitemap_status=h.status;
+   continue;
+ }
+ if(String(h.source).endsWith(' category')&&h.status==='empty_catalogue'){
+   g.empty_catalogue=true;
+ }
  if(String(h.source).endsWith(' browser fallback')){
    g.fallback_attempted+=Number.parseInt(h.detail,10)||0;
    g.fallback_recovered+=Number(h.found)||0;
@@ -206,8 +214,10 @@ E('health').innerHTML=Object.values(grouped).sort((a,b)=>a.store.localeCompare(b
  const fallback=g.fallback_attempted?' · '+g.fallback_recovered+'/'+g.fallback_attempted+' HTTP retries worked':'';
  const rendered=g.render_attempted?' · '+g.render_recovered+'/'+g.render_attempted+' Chrome/Edge renders found prices':'';
  const transient=g.transient_attempted?' · '+g.transient_recovered+'/'+g.transient_attempted+' gateway retries recovered':'';
+ const sitemap=g.sitemap_status?' · Sitemap discovery: '+(g.sitemap_found?g.sitemap_found+' candidate links':g.sitemap_status.replace(/_/g,' ')):'';
+ const catalogue=g.empty_catalogue?' · Category HTML has no discoverable products':'';
  return '<div class="source '+css+'"><strong>'+esc(g.store)+'</strong><small>'+
- esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+rendered+transient+
+ esc(state+' · '+found+' offer'+(found===1?'':'s')+fallback+rendered+transient+sitemap+catalogue+
      (g.errors?' · '+g.errors+' errors':'')+
      (g.noPrice?' · '+g.noPrice+' matching RAM pages with unreadable prices':'')+
      (g.contactPrice?' · '+g.contactPrice+' CHIP7 listings require store quote':'')+
