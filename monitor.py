@@ -145,11 +145,11 @@ def _worten_visible_seller(doc):
         return "unverified"
     nearby=text[pos+len(title):pos+len(title)+1600]
     nearby=re.split(r"Ver outras ofertas|Outras ofertas|Produtos relacionados",nearby,maxsplit=1,flags=re.I)[0]
-    found=re.search(r"Vendido(?:\\s+e\\s+enviado)?\\s+por\\s*:?\\s*([A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .&'-]{0,65})",nearby,re.I)
+    found=re.search(r"Vendido(?:\s+e\s+enviado)?\s+por\s*:?\s*([A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .&'-]{0,65})",nearby,re.I)
     if not found:
         return "unverified"
-    seller=re.split(r"\\s*(?:Adicionar ao carrinho|Saber mais|Entrega|Vendedor Premium|Avalia[cç][aã]o|Devolu[cç][aã]o|\\d+ avalia[cç][oõ]es|Paga em presta[cç][oõ]es)",found.group(1),maxsplit=1,flags=re.I)[0].strip(" .:-")
-    if re.fullmatch(r"Worten(?:\\.pt)?",seller,re.I):
+    seller=re.split(r"\s*(?:Adicionar ao carrinho|Saber mais|Entrega|Vendedor Premium|Avalia[cç][aã]o|Devolu[cç][aã]o|\d+ avalia[cç][oõ]es|Paga em presta[cç][oõ]es)",found.group(1),maxsplit=1,flags=re.I)[0].strip(" .:-")
+    if re.fullmatch(r"Worten(?:\.pt)?",seller,re.I):
         return "Worten"
     return "marketplace" if seller else "unverified"
 
