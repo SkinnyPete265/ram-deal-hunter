@@ -23,6 +23,12 @@ The dashboard offers quick one-click views for **All**, **In stock**, **≤€20
 
 A small panel above the table identifies the **cheapest verified retailer-listed in-stock kit**, with a link and the amount above/below the **€200 product-price-only budget**. **Shipping is intentionally not calculated or included**, because delivery fees and options vary at checkout. The buyer will assess shipping separately once an eligible kit appears.
 
+## PCDIGA and Worten coverage
+
+- **PCDIGA:** The catalogue sometimes returns a JavaScript shell without product links in the HTML response. The scanner can now discover candidate product paths embedded in the returned catalogue HTML, and the watchlist includes five additional publicly indexed DDR4 2×16 GB products. The direct product pages are independently checked; neither embedded URLs nor search-index listings establish a current price or stock level. If the category returns no product data at all, the live discovery count may still be zero.
+- **Worten:** Added as an additional Portuguese retailer with four initial product URLs. Its search/category response has not yet been verified for safe automatic discovery, so coverage starts with direct watchlist pages, not an unvalidated category request. Marketplace sellers are distinguished from Worten itself. Product data without a seller explicitly tied to the quoted structured offer remains **stock unverified** and cannot trigger an automated deal alert. A third-party marketplace price is not treated as Worten's own offer.
+- Both changes preserve the **€200 product-price-only** limit, original RAM requirements, and eight-hour scan cadence. No shipping fees are included in any price calculation.
+
 ## Always-on Windows home scanner
 
 Since residential connections may work where GitHub cloud runners receive HTTP 403, a **separate Windows Task Scheduler job** can scan the same public retailer pages from your home PC and upload results to `docs/local-data.json` every 8 hours. The hosted dashboard merges that home snapshot with the GitHub cloud snapshot (`docs/data.json`), preserving distinct timestamps, scan origins, and stale indicators. A snapshot remains current for up to **12 hours** to tolerate schedule delays; missed scans become stale. The cloud scanner runs three times per day at 02:17, 10:17 and 18:17 UTC. GitHub cron timing is best-effort.
