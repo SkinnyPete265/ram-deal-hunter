@@ -321,8 +321,8 @@ def links(html,base,store):
         # scripts instead of rendering product anchors. Treat them only as
         # discovery candidates; every PDP must still independently verify
         # its RAM configuration, price and availability.
-        decoded=html.replace("\\\\/","/").replace("\\u002F","/")
-        pattern=r'(?:https://(?:www\\.)?pcdiga\\.com)?(/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-[a-z0-9/_-]{15,240})'
+        decoded=html.replace(chr(92)+"/","/").replace(chr(92)+"u002F","/")
+        pattern=r'(?:https://(?:www\.)?pcdiga\.com)?(/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-[a-z0-9/_-]{15,240})'
         for match in re.finditer(pattern,decoded,re.I):
             u=urljoin("https://www.pcdiga.com",match.group(1)).rstrip("/")
             if allowed(store,u) and u not in found and u!=base.rstrip("/"):
