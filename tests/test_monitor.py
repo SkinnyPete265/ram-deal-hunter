@@ -437,3 +437,39 @@ def test_worten_marketplace_url_scope():
     assert allowed("Worten","https://www.worten.pt/produtos/ram-ddr4")
     assert not allowed("Worten","https://worten.pt.evil.example/produtos/ram-ddr4")
     assert not allowed("Worten","http://www.worten.pt/produtos/ram-ddr4")
+
+
+def test_worten_visible_seller_labels_page_without_claiming_stock():
+    url="https://www.worten.pt/produtos/memoria-ram-ddr4-kingston-kit"
+    p={"@type":"Product","name":"Kingston DDR4 32GB (2x16GB) DIMM",
+       "offers":{"priceCurrency":"EUR","price":"189.95","availability":"https://schema.org/InStock"}}
+    def html(seller):
+        return ('<html><body><main><h1>Kingston DDR4 32GB (2x16GB) DIMM</h1>'
+                '<p>189,95 €</p><p>Vendido por: '+seller+'</p>'
+                '<p>Adicionar ao carrinho</p><p>Ver outras ofertas</p>'
+                '<p>Vendido por Worten</p></main>'
+                '<script type="application/ld+json">'+json.dumps(p)+'</script>'
+                '</body></html>')
+    morele=product_info(html("Morele"),"Worten",url)
+    assert morele and morele["seller_status"]=="marketplace"
+    assert morele["seller_evidence"]=="page"
+    assert morele["marketplace_only"] and morele["stock"]=="unknown"
+    worten=product_info(html("Worten"),"Worten",url)
+    assert worten and worten["seller_status"]=="Worten"
+    assert worten["seller_evidence"]=="page"
+    assert worten["seller_unverified"] and worten["stock"]=="unknown"
+
+
+def test_worten_conflicting_page_and_structured_seller_keeps_stock_unknown():
+    url="https://www.worten.pt/produtos/memoria-ram-ddr4-kit"
+    html="""<html><body><main><h1>Kingston DDR4 32GB (2x16GB) DIMM</h1>
+      <p>Vendido por: Morele</p><p>Adicionar ao carrinho</p></main>
+      <script type="application/ld+json">""" + json.dumps({
+        "@type":"Product","name":"Kingston DDR4 32GB (2x16GB) DIMM",
+        "offers":{"priceCurrency":"EUR","price":"175.00",
+          "availability":"https://schema.org/InStock","seller":{"name":"Worten"}}
+      }) + """</script></body></html>"""
+    result=product_info(html,"Worten",url)
+    assert result["stock"]=="unknown" and result["seller_unverified"]
+    assert result["seller_status"]=="unverified"
+    assert result["seller_evidence"]=="conflict"
