@@ -123,6 +123,37 @@ def allowed(store,url):
     d=HOSTS.get(store,"")
     return p.scheme=="https" and bool(d) and (h==d or h.endswith("."+d))
 
+def _worten_visible_seller(doc):
+    """Identify the visible buy-box seller without trusting unrelated cards.
+
+    This is a PAGE-LEVEL hint only. It is insufficient to mark structured
+    stock as verified unless the exact structured offer also names its seller.
+    """
+    main=doc.select_one("main") or doc.body
+    if main is None:
+        return "unverified"
+    heading=main.select_one("h1")
+    if heading is None:
+        return "unverified"
+    # Use the primary product area; stop before alternate offers and
+    # recommendations. Do not read the site header or footer.
+    parent=heading.parent
+    text=main.get_text(" ",strip=True)
+    title=heading.get_text(" ",strip=True)
+    pos=text.find(title)
+    if pos<0:
+        return "unverified"
+    nearby=text[pos+len(title):pos+len(title)+1600]
+    nearby=re.split(r"Ver outras ofertas|Outras ofertas|Produtos relacionados",nearby,maxsplit=1,flags=re.I)[0]
+    found=re.search(r"Vendido(?:\\s+e\\s+enviado)?\\s+por\\s*:?\\s*([A-Za-zÀ-ÿ0-9][A-Za-zÀ-ÿ0-9 .&'-]{0,65})",nearby,re.I)
+    if not found:
+        return "unverified"
+    seller=re.split(r"\\s*(?:Adicionar ao carrinho|Saber mais|Entrega|Vendedor Premium|Avalia[cç][aã]o|Devolu[cç][aã]o|\\d+ avalia[cç][oõ]es|Paga em presta[cç][oõ]es)",found.group(1),maxsplit=1,flags=re.I)[0].strip(" .:-")
+    if re.fullmatch(r"Worten(?:\\.pt)?",seller,re.I):
+        return "Worten"
+    return "marketplace" if seller else "unverified"
+
+
 def _worten_seller(offer):
     """Return the seller explicitly attached to this exact structured offer."""
     seller=offer.get("seller")
@@ -174,6 +205,10 @@ def product_info(html,store,url):
                 # Worten operates a marketplace. A price from an unidentified
                 # or third-party seller cannot count as verified Worten stock.
                 seller_status=_worten_seller(o) if store=="Worten" else None
+                page_seller=_worten_visible_seller(doc) if store=="Worten" else None
+                # An unnamed structured offer does not establish that its
+                # advertised availability belongs to the page's seller.
+                seller_source="offer" if seller_status else "page" if page_seller!="unverified" else "unverified"
                 if store=="Worten" and seller_status!="Worten":
                     availability="unknown"
                 # Prefer an explicit primary-product out-of-stock statement on PCBox pages
@@ -187,11 +222,12 @@ def product_info(html,store,url):
                 cl=re.search(r"\bCL\s*(\d\d)\b",name,re.I)
                 result=dict(id=identity,store=store,url=url,title=name,configuration=kind,units_to_buy=2 if kind=="single_pair" else 1,unit_price_eur=unit,price_eur=amount,stock=availability,shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,cas_latency=int(cl[1]) if cl else None,source="Retailer product JSON-LD",observed_at=stamp(),current=True)
                 if store=="Worten":
-                    result["seller_status"]=seller_status or "unverified"
+                    result["seller_status"]=seller_status or page_seller
+                    result["seller_evidence"]=seller_source
                     if seller_status!="Worten":
                         result["seller_unverified"]=True
-                        if seller_status=="marketplace":
-                            result["marketplace_only"]=True
+                    if (seller_status or page_seller)=="marketplace":
+                        result["marketplace_only"]=True
                 return result
     # Retailers such as Chipman and Castro Electrónica expose prices in
     # product-level HTML widgets even when their JSON-LD is absent/incomplete.
@@ -199,7 +235,10 @@ def product_info(html,store,url):
     if offer and store=="Worten":
         offer["stock"]="unknown"
         offer["seller_unverified"]=True
-        offer["seller_status"]="unverified"
+        offer["seller_status"]=_worten_visible_seller(doc)
+        offer["seller_evidence"]="page" if offer["seller_status"]!="unverified" else "unverified"
+        if offer["seller_status"]=="marketplace":
+            offer["marketplace_only"]=True
     return offer
 
 def _request_with_transient_retry(url):
