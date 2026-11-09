@@ -316,6 +316,19 @@ def links(html,base,store):
             found.append(u)
         if len(found)>=25:
             break
+    if store=="PCDIGA" and len(found)<25:
+        # Some PCDIGA DDR4 category versions serialize product URLs inside
+        # scripts instead of rendering product anchors. Treat them only as
+        # discovery candidates; every PDP must still independently verify
+        # its RAM configuration, price and availability.
+        decoded=html.replace("\\\\/","/").replace("\\u002F","/")
+        pattern=r'(?:https://(?:www\\.)?pcdiga\\.com)?(/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-[a-z0-9/_-]{15,240})'
+        for match in re.finditer(pattern,decoded,re.I):
+            u=urljoin("https://www.pcdiga.com",match.group(1)).rstrip("/")
+            if allowed(store,u) and u not in found and u!=base.rstrip("/"):
+                found.append(u)
+            if len(found)>=25:
+                break
     return found
 
 def comparison_offers(html, base, source="KuantoKusta"):
