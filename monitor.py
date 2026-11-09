@@ -138,7 +138,6 @@ def _worten_visible_seller(doc):
         return "unverified"
     # Use the primary product area; stop before alternate offers and
     # recommendations. Do not read the site header or footer.
-    parent=heading.parent
     text=main.get_text(" ",strip=True)
     title=heading.get_text(" ",strip=True)
     pos=text.find(title)
@@ -388,11 +387,13 @@ def _pcdiga_sitemap_urls(xml_body):
     except ElementTree.ParseError:
         return []
     result=[]
+    seen=set()
     for element in root.iter():
         if element.tag.rsplit("}",1)[-1]!="loc" or not element.text:
             continue
         url=element.text.strip()
-        if allowed("PCDIGA",url) and url not in result:
+        if allowed("PCDIGA",url) and url not in seen:
+            seen.add(url)
             result.append(url)
     return result
 
