@@ -473,3 +473,29 @@ def test_worten_conflicting_page_and_structured_seller_keeps_stock_unknown():
     assert result["stock"]=="unknown" and result["seller_unverified"]
     assert result["seller_status"]=="unverified"
     assert result["seller_evidence"]=="conflict"
+
+
+def test_pcdiga_sitemap_bounded_candidates_from_public_product_index():
+    from monitor import pcdiga_sitemap_candidates
+    index="https://www.pcdiga.com/sitemap/sitemap.xml"
+    child="https://public.pcdiga.com/sitemap/product-1.xml"
+    product=("https://www.pcdiga.com/componentes/memorias-ram/"
+             "memorias-ram-ddr4/memoria-ram-udimm-teamgroup-32gb-2x16gb-ddr4")
+    xmlindex=f'<sitemapindex><sitemap><loc>{child}</loc></sitemap></sitemapindex>'
+    xmlchild=f'<urlset><url><loc>{product}</loc></url><url><loc>https://evil.example/ram</loc></url></urlset>'
+    calls=[]
+    def fetch(url):
+        calls.append(url)
+        return {index:xmlindex.encode(),child:xmlchild.encode()}.get(url)
+    found,status=pcdiga_sitemap_candidates(fetch)
+    assert found==[product] and status=="ok"
+    assert calls==[index,child]
+
+
+def test_pcdiga_sitemap_unavailable_does_not_generate_fake_products():
+    from monitor import pcdiga_sitemap_candidates, _pcdiga_sitemap_urls
+    assert pcdiga_sitemap_candidates(lambda url:None)==([],"index_unavailable")
+    assert _pcdiga_sitemap_urls(b"<bad")==[]
+    assert _pcdiga_sitemap_urls(
+        b"<urlset><url><loc>https://evil.example/memoria-ram-ddr4</loc></url></urlset>"
+    )==[]
