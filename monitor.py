@@ -324,6 +324,13 @@ def links(html,base,store):
         decoded=html.replace(chr(92)+"/","/").replace(chr(92)+"u002F","/")
         pattern=r'(?:https://(?:www\.)?pcdiga\.com)?(/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-[a-z0-9/_-]{15,240})'
         for match in re.finditer(pattern,decoded,re.I):
+            # Do not reinterpret paths from a different absolute URL as
+            # PCDIGA products, even if that URL contains the same path.
+            quote_start=max(decoded.rfind('"',0,match.start()),
+                            decoded.rfind("'",0,match.start()))
+            token_prefix=decoded[quote_start+1:match.start()]
+            if "://" in token_prefix:
+                continue
             u=urljoin("https://www.pcdiga.com",match.group(1)).rstrip("/")
             if allowed(store,u) and u not in found and u!=base.rstrip("/"):
                 found.append(u)
