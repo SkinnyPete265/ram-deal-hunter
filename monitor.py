@@ -28,7 +28,7 @@ HOSTS = {
     "Novo Atalho": "novoatalho.pt", "Castro Electrónica": "castroelectronica.pt",
     "Chipman": "chipman.pt", "Switch Technology": "switchtechnology.pt",
     "You Get": "youget.pt", "KIBO": "kibo.pt", "El Shop": "elshop.es",
-    "PCBox": "pcbox.pt", "Fnac": "fnac.pt",
+    "PCBox": "pcbox.pt", "Fnac": "fnac.pt", "Worten": "worten.pt",
 }
 NEG = ("outofstock","soldout","esgotado","sem stock","agotado","indisponivel","indisponível")
 POS = ("instock","in stock","em stock","disponivel","disponível","en stock")
@@ -123,6 +123,19 @@ def allowed(store,url):
     d=HOSTS.get(store,"")
     return p.scheme=="https" and bool(d) and (h==d or h.endswith("."+d))
 
+def _worten_seller(offer):
+    """Return the seller explicitly attached to this exact structured offer."""
+    seller=offer.get("seller")
+    if isinstance(seller,dict):
+        seller=seller.get("name") or seller.get("@id") or ""
+    if not isinstance(seller,str):
+        return ""
+    name=seller.strip().lower()
+    if name in ("worten","worten.pt","worten - equipamentos para o lar, s.a."):
+        return "Worten"
+    return "marketplace" if name else ""
+
+
 def product_info(html,store,url):
     doc=BeautifulSoup(html,"html.parser")
     for el in doc.find_all("script",type="application/ld+json"):
@@ -158,6 +171,11 @@ def product_info(html,store,url):
                 unit=price(o.get("price") or o.get("lowPrice"))
                 if unit is None: continue
                 availability=stock(o.get("availability"))
+                # Worten operates a marketplace. A price from an unidentified
+                # or third-party seller cannot count as verified Worten stock.
+                seller_status=_worten_seller(o) if store=="Worten" else None
+                if store=="Worten" and seller_status!="Worten":
+                    availability="unknown"
                 # Prefer an explicit primary-product out-of-stock statement on PCBox pages
                 # to potentially stale structured availability.
                 if store=="PCBox" and re.search(r"produto n[aã]o dispon[ií]vel no momento",html,re.I):
@@ -167,10 +185,22 @@ def product_info(html,store,url):
                 identity=hashlib.sha256((store+":"+url.split("?")[0]).encode()).hexdigest()[:16]
                 mhz=re.search(r"\b(2133|2400|2666|2933|3000|3200|3466|3600|3733|4000|4266)\b",name)
                 cl=re.search(r"\bCL\s*(\d\d)\b",name,re.I)
-                return dict(id=identity,store=store,url=url,title=name,configuration=kind,units_to_buy=2 if kind=="single_pair" else 1,unit_price_eur=unit,price_eur=amount,stock=availability,shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,cas_latency=int(cl[1]) if cl else None,source="Retailer product JSON-LD",observed_at=stamp(),current=True)
+                result=dict(id=identity,store=store,url=url,title=name,configuration=kind,units_to_buy=2 if kind=="single_pair" else 1,unit_price_eur=unit,price_eur=amount,stock=availability,shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,cas_latency=int(cl[1]) if cl else None,source="Retailer product JSON-LD",observed_at=stamp(),current=True)
+                if store=="Worten":
+                    result["seller_status"]=seller_status or "unverified"
+                    if seller_status!="Worten":
+                        result["seller_unverified"]=True
+                        if seller_status=="marketplace":
+                            result["marketplace_only"]=True
+                return result
     # Retailers such as Chipman and Castro Electrónica expose prices in
     # product-level HTML widgets even when their JSON-LD is absent/incomplete.
-    return extract_html_offer(html, store, url, matches, price, stock, stamp)[0]
+    offer=extract_html_offer(html, store, url, matches, price, stock, stamp)[0]
+    if offer and store=="Worten":
+        offer["stock"]="unknown"
+        offer["seller_unverified"]=True
+        offer["seller_status"]="unverified"
+    return offer
 
 def _request_with_transient_retry(url):
     """One gentle retry for intermittent 502/503/504 or request timeouts.
@@ -360,6 +390,8 @@ def eligible_for_alert(offer,budget):
             not offer.get("catalogue_only") and
             not offer.get("comparison_only") and
             not offer.get("indicative_only") and
+            not offer.get("seller_unverified") and
+            not offer.get("marketplace_only") and
             offer.get("configuration")=="kit" and
             offer.get("units_to_buy")==1)
 
