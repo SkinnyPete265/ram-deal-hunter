@@ -25,9 +25,10 @@ A small panel above the table identifies the **cheapest verified retailer-listed
 
 ## PCDIGA and Worten coverage
 
-- **PCDIGA:** The catalogue sometimes returns a JavaScript shell without product links in the HTML response. The scanner can now discover candidate product paths embedded in the returned catalogue HTML, and the watchlist includes five additional publicly indexed DDR4 2×16 GB products. The direct product pages are independently checked; neither embedded URLs nor search-index listings establish a current price or stock level. If the category returns no product data at all, the live discovery count may still be zero.
-- **Worten:** Added as an additional Portuguese retailer with four initial product URLs. Its search/category response has not yet been verified for safe automatic discovery, so coverage starts with direct watchlist pages, not an unvalidated category request. Marketplace sellers are distinguished from Worten itself. Product data without a seller explicitly tied to the quoted structured offer remains **stock unverified** and cannot trigger an automated deal alert. A third-party marketplace price is not treated as Worten's own offer.
-- Both changes preserve the **€200 product-price-only** limit, original RAM requirements, and eight-hour scan cadence. No shipping fees are included in any price calculation.
+- **PCDIGA:** Its DDR4 category often returns a dynamic page with no product links. The scanner first checks on-page anchors and embedded product URLs; if both are empty, it now tries the site's publicly advertised sitemap index and at most two likely product sitemap files, selecting up to 25 DDR4 product candidates. This discovery is strictly bounded, may still be blocked or return zero matches, and **never** treats a sitemap entry as a verified deal. Additional direct product URLs are in `watchlist.csv` to provide coverage when the catalogue/sitemap is unavailable. The dashboard distinguishes an empty catalogue from an actually discovered sitemap.
+- **Worten:** The direct product watchlist includes DDR4 2×16 GB kits. The scanner checks the actual structured offer's seller, and can also classify the main product page's visible seller as **Worten** or **third-party marketplace**. A page-level label is informational only: without an explicitly seller-linked structured offer, stock remains unverified, and such offers cannot trigger deal alerts. Contradictory seller evidence is treated as unverified. The dashboard displays this distinction.
+- Shipping is **never added to the product price**, the €200 budget remains unchanged, and both local and cloud scan schedules remain at eight-hour intervals.
+
 
 ## Always-on Windows home scanner
 
