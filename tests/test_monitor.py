@@ -393,3 +393,47 @@ def test_scan_trigger_records_only_known_non_identifying_values(monkeypatch):
         assert scan_trigger()==expected
     monkeypatch.delenv("RAM_DEAL_SCAN_TRIGGER")
     assert scan_trigger()=="unknown"
+
+
+def test_pcdiga_discovers_embedded_product_urls_but_not_other_domains():
+    url="https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4"
+    path="/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-kingston-fury-32gb-2x16gb-ddr4-3200mhz"
+    html='<script type="application/json">'+json.dumps({
+        "url":"https://www.pcdiga.com"+path,
+        "unrelated":"https://pcdiga.com.evil.example"+path,
+    })+'</script>'
+    assert links(html,url,"PCDIGA")==["https://www.pcdiga.com"+path]
+    assert links(html,url,"Worten")==[]
+
+
+def test_worten_only_explicit_first_party_seller_can_verify_stock():
+    url="https://www.worten.pt/produtos/memoria-ram-ddr4-kit-2x16gb"
+    base={
+        "@type":"Product",
+        "name":"Kingston DDR4 32GB (2 x 16 GB) UDIMM",
+        "offers":{
+            "priceCurrency":"EUR", "price":"175.00",
+            "availability":"https://schema.org/InStock",
+        },
+    }
+    for seller,expected,status in [
+        ({"name":"Worten"},"in_stock","Worten"),
+        ({"name":"Morele"},"unknown","marketplace"),
+        (None,"unknown","unverified"),
+    ]:
+        offer=dict(base["offers"])
+        if seller:
+            offer["seller"]=seller
+        product=dict(base,offers=offer)
+        html='<script type="application/ld+json">'+json.dumps(product)+'</script>'
+        result=product_info(html,"Worten",url)
+        assert result and result["stock"]==expected
+        assert result["seller_status"]==status
+        from monitor import eligible_for_alert
+        assert eligible_for_alert(result,200)==(status=="Worten")
+
+
+def test_worten_marketplace_url_scope():
+    assert allowed("Worten","https://www.worten.pt/produtos/ram-ddr4")
+    assert not allowed("Worten","https://worten.pt.evil.example/produtos/ram-ddr4")
+    assert not allowed("Worten","http://www.worten.pt/produtos/ram-ddr4")
