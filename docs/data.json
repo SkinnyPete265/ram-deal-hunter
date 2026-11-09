@@ -1,6 +1,6 @@
 {
-  "last_scan": "2026-11-09T13:05:03+00:00",
-  "scan_trigger": "push",
+  "last_scan": "2026-11-09T19:17:48+00:00",
+  "scan_trigger": "scheduled",
   "budget_eur": 200,
   "offers": [
     {
@@ -17,7 +17,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:13+00:00",
+      "observed_at": "2026-11-09T19:14:49+00:00",
       "current": true,
       "history": [
         {
@@ -42,7 +42,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:10+00:00",
+      "observed_at": "2026-11-09T19:14:45+00:00",
       "current": true,
       "history": [
         {
@@ -70,19 +70,50 @@
       "title": "Memória RAM DIMM 16GB 2666MHz DDR4 - GOODRAM",
       "configuration": "single_pair",
       "units_to_buy": 2,
-      "unit_price_eur": 125.29,
-      "price_eur": 250.58,
+      "unit_price_eur": 125.59,
+      "price_eur": 251.18,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:37+00:00",
+      "observed_at": "2026-11-09T19:17:12+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T01:25:13+00:00",
           "price_eur": 250.58,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-09T19:17:12+00:00",
+          "price_eur": 251.18,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "0a586d49ec78e9c7",
+      "store": "KuantoKusta comparison",
+      "url": "https://www.kuantokusta.pt/p/6841608/patriot-32gb-ddr4-2x16gb-3200mhz-kit-pve2432g320c8k",
+      "title": "Boa compra Memória RAM Patriot 32GB DDR4 (2x16GB) 3200Mhz Kit - PVE2432G320C8K",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 256.41,
+      "price_eur": 256.41,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": null,
+      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
+      "observed_at": "2026-11-09T19:17:48+00:00",
+      "current": true,
+      "comparison_only": true,
+      "history": [
+        {
+          "at": "2026-11-09T19:17:48+00:00",
+          "price_eur": 256.41,
           "stock": "unknown"
         }
       ],
@@ -102,7 +133,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -128,7 +159,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:34+00:00",
+      "observed_at": "2026-11-09T19:15:26+00:00",
       "current": true,
       "history": [
         {
@@ -153,7 +184,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:40+00:00",
+      "observed_at": "2026-11-09T19:17:14+00:00",
       "current": true,
       "history": [
         {
@@ -178,7 +209,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -204,7 +235,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -245,7 +276,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -271,7 +302,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -297,7 +328,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -323,7 +354,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:38+00:00",
+      "observed_at": "2026-11-09T19:17:10+00:00",
       "current": true,
       "history": [
         {
@@ -348,7 +379,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:29+00:00",
+      "observed_at": "2026-11-09T19:16:58+00:00",
       "current": true,
       "history": [
         {
@@ -373,7 +404,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -399,7 +430,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -407,6 +438,31 @@
           "at": "2026-11-08T00:50:19+00:00",
           "price_eur": 273.51,
           "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "20099064d5837ed7",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-aegis-32gb-2x16gb-ddr4-3200-mhz-cl16--gskill",
+      "title": "Memória RAM Aegis 32GB (2x16GB) DDR4 3200 MHz CL16 - G.SKILL",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 277.79,
+      "price_eur": 277.79,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3200,
+      "cas_latency": 16,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-09T19:16:14+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-09T19:16:14+00:00",
+          "price_eur": 277.79,
+          "stock": "in_stock"
         }
       ],
       "alerted_price_eur": null
@@ -425,7 +481,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:32+00:00",
+      "observed_at": "2026-11-09T19:15:24+00:00",
       "current": true,
       "history": [
         {
@@ -455,7 +511,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:20+00:00",
+      "observed_at": "2026-11-09T19:15:02+00:00",
       "current": true,
       "history": [
         {
@@ -480,7 +536,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:35+00:00",
+      "observed_at": "2026-11-09T19:17:07+00:00",
       "current": true,
       "history": [
         {
@@ -505,7 +561,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:39+00:00",
+      "observed_at": "2026-11-09T19:17:09+00:00",
       "current": true,
       "history": [
         {
@@ -533,19 +589,24 @@
       "title": "Crucial Kit 32GB (2 x 16GB) DDR4 3200MHz Pro CL22",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 289.9,
-      "price_eur": 289.9,
+      "unit_price_eur": 294.9,
+      "price_eur": 294.9,
       "stock": "in_stock",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:08+00:00",
+      "observed_at": "2026-11-09T19:14:43+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T00:23:03+00:00",
           "price_eur": 289.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-09T19:14:43+00:00",
+          "price_eur": 294.9,
           "stock": "in_stock"
         }
       ],
@@ -565,7 +626,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -591,7 +652,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -617,7 +678,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:36+00:00",
+      "observed_at": "2026-11-09T19:15:31+00:00",
       "current": true,
       "history": [
         {
@@ -642,7 +703,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -668,7 +729,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -694,7 +755,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:25+00:00",
+      "observed_at": "2026-11-09T19:15:11+00:00",
       "current": true,
       "history": [
         {
@@ -724,7 +785,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:28+00:00",
+      "observed_at": "2026-11-09T19:16:52+00:00",
       "current": true,
       "history": [
         {
@@ -749,7 +810,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -775,13 +836,38 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
         {
           "at": "2026-11-08T01:25:49+00:00",
           "price_eur": 299.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "ec05595203160117",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-16gb-1x16gb-ddr4-udimm-3200mhz-cl22--afox",
+      "title": "Memória RAM 16GB (1x16GB) DDR4 UDIMM 3200MHz CL22 - AFOX",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 150.59,
+      "price_eur": 301.18,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 22,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-09T19:17:28+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-09T19:17:28+00:00",
+          "price_eur": 301.18,
           "stock": "unknown"
         }
       ],
@@ -801,7 +887,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -827,7 +913,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:58+00:00",
+      "observed_at": "2026-11-09T19:17:43+00:00",
       "current": true,
       "history": [
         {
@@ -852,7 +938,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -878,7 +964,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -904,7 +990,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -930,7 +1016,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -956,7 +1042,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:15+00:00",
+      "observed_at": "2026-11-09T19:14:51+00:00",
       "current": true,
       "history": [
         {
@@ -981,7 +1067,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1007,7 +1093,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:35+00:00",
+      "observed_at": "2026-11-09T19:15:28+00:00",
       "current": true,
       "history": [
         {
@@ -1032,7 +1118,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-09T13:03:04+00:00",
+      "observed_at": "2026-11-09T19:14:37+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -1058,7 +1144,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1084,7 +1170,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:16+00:00",
+      "observed_at": "2026-11-09T19:14:56+00:00",
       "current": true,
       "history": [
         {
@@ -1109,7 +1195,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:32+00:00",
+      "observed_at": "2026-11-09T19:17:02+00:00",
       "current": true,
       "history": [
         {
@@ -1134,7 +1220,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:11+00:00",
+      "observed_at": "2026-11-09T19:16:28+00:00",
       "current": true,
       "history": [
         {
@@ -1159,7 +1245,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:42+00:00",
+      "observed_at": "2026-11-09T19:15:42+00:00",
       "current": true,
       "history": [
         {
@@ -1189,7 +1275,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:21+00:00",
+      "observed_at": "2026-11-09T19:15:04+00:00",
       "current": true,
       "history": [
         {
@@ -1214,7 +1300,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:29+00:00",
+      "observed_at": "2026-11-09T19:15:17+00:00",
       "current": true,
       "history": [
         {
@@ -1239,7 +1325,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:25+00:00",
+      "observed_at": "2026-11-09T19:16:47+00:00",
       "current": true,
       "history": [
         {
@@ -1264,7 +1350,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1290,7 +1376,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:30+00:00",
+      "observed_at": "2026-11-09T19:15:20+00:00",
       "current": true,
       "history": [
         {
@@ -1320,7 +1406,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:56+00:00",
+      "observed_at": "2026-11-09T19:17:41+00:00",
       "current": true,
       "history": [
         {
@@ -1350,7 +1436,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1376,7 +1462,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:51+00:00",
+      "observed_at": "2026-11-09T19:17:29+00:00",
       "current": true,
       "history": [
         {
@@ -1401,7 +1487,7 @@
       "speed_mhz": 3600,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:50+00:00",
+      "observed_at": "2026-11-09T19:17:34+00:00",
       "current": true,
       "history": [
         {
@@ -1431,7 +1517,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:22+00:00",
+      "observed_at": "2026-11-09T19:16:42+00:00",
       "current": true,
       "history": [
         {
@@ -1456,7 +1542,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:04:46+00:00",
+      "observed_at": "2026-11-09T19:17:21+00:00",
       "current": true,
       "history": [
         {
@@ -1481,7 +1567,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1494,36 +1580,6 @@
           "at": "2026-11-09T12:43:31+00:00",
           "price_eur": 355.97,
           "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "9eee93e96d249d96",
-      "store": "Castro Electrónica",
-      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-vengeance-lpx-32gb-2x16gb-ddr4-3200-mhz-cl16-preto--corsair",
-      "title": "Memória RAM Vengeance LPX 32GB (2x16GB) DDR4-3200 MHz CL16  (Preto) - CORSAIR",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 357.09,
-      "price_eur": 357.09,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": 3200,
-      "cas_latency": 16,
-      "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:01+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:24:31+00:00",
-          "price_eur": 357.09,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-08T19:03:37+00:00",
-          "price_eur": 357.09,
-          "stock": "in_stock"
         }
       ],
       "alerted_price_eur": null
@@ -1542,7 +1598,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:56+00:00",
+      "observed_at": "2026-11-09T19:16:06+00:00",
       "current": true,
       "history": [
         {
@@ -1567,7 +1623,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:18+00:00",
+      "observed_at": "2026-11-09T19:14:58+00:00",
       "current": true,
       "history": [
         {
@@ -1597,7 +1653,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:05:00+00:00",
+      "observed_at": "2026-11-09T19:17:45+00:00",
       "current": true,
       "history": [
         {
@@ -1622,7 +1678,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:12+00:00",
+      "observed_at": "2026-11-09T19:14:47+00:00",
       "current": true,
       "history": [
         {
@@ -1647,7 +1703,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:09+00:00",
+      "observed_at": "2026-11-09T19:16:25+00:00",
       "current": true,
       "history": [
         {
@@ -1669,51 +1725,6 @@
       "alerted_price_eur": null
     },
     {
-      "id": "d09d3a81847b4e7d",
-      "store": "Castro Electrónica",
-      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-vengeance-rgb-pro-sl-32gb-2x16gb-ddr4-3200mhz-cl16-branco--corsair",
-      "title": "Memória RAM Vengeance RGB Pro SL 32GB (2x16GB) DDR4-3200MHz CL16 (Branco) - CORSAIR",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 374.69,
-      "price_eur": 374.69,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:05:01+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:25:48+00:00",
-          "price_eur": 374.69,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-08T03:09:16+00:00",
-          "price_eur": 373.39,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-08T11:23:18+00:00",
-          "price_eur": 392.49,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-08T19:04:54+00:00",
-          "price_eur": 392.49,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-09T03:07:26+00:00",
-          "price_eur": 374.69,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "60dc0d38284c2492",
       "store": "El Shop",
       "url": "https://elshop.es/en/5022-kingston-fury-beast-32-gb-2-x-16-gb-ddr4-3200-mhz-cl16-kf432c16bbk2-32.html",
@@ -1727,12 +1738,37 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:34+00:00",
+      "observed_at": "2026-11-09T19:15:25+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T00:41:34+00:00",
           "price_eur": 375.99,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "75a40b31a2cfd666",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-fury-renegade-32gb-2x16gb-ddr4-3600-mhz-cl16--kingston",
+      "title": "Memória RAM Fury Renegade 32GB (2x16GB) DDR4 3600 MHz CL16 - KINGSTON",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 386.59,
+      "price_eur": 386.59,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3600,
+      "cas_latency": 16,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-09T19:16:30+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-09T19:16:30+00:00",
+          "price_eur": 386.59,
           "stock": "in_stock"
         }
       ],
@@ -1752,7 +1788,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:13+00:00",
+      "observed_at": "2026-11-09T19:16:35+00:00",
       "current": true,
       "history": [
         {
@@ -1787,7 +1823,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:48+00:00",
+      "observed_at": "2026-11-09T19:15:51+00:00",
       "current": true,
       "history": [
         {
@@ -1812,7 +1848,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:47+00:00",
+      "observed_at": "2026-11-09T19:15:50+00:00",
       "current": true,
       "history": [
         {
@@ -1842,7 +1878,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:04+00:00",
+      "observed_at": "2026-11-09T19:16:17+00:00",
       "current": true,
       "history": [
         {
@@ -1867,7 +1903,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:23+00:00",
+      "observed_at": "2026-11-09T19:15:09+00:00",
       "current": true,
       "history": [
         {
@@ -1892,7 +1928,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-09T13:05:03+00:00",
+      "observed_at": "2026-11-09T19:17:48+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1918,7 +1954,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:03:59+00:00",
+      "observed_at": "2026-11-09T19:16:12+00:00",
       "current": true,
       "history": [
         {
@@ -1943,7 +1979,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-09T13:04:15+00:00",
+      "observed_at": "2026-11-09T19:16:33+00:00",
       "current": true,
       "history": [
         {
@@ -1968,7 +2004,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-09T13:03:14+00:00",
+      "observed_at": "2026-11-09T19:14:50+00:00",
       "current": true,
       "history": [
         {
@@ -2265,6 +2301,81 @@
       "alerted_price_eur": null
     },
     {
+      "id": "9eee93e96d249d96",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-vengeance-lpx-32gb-2x16gb-ddr4-3200-mhz-cl16-preto--corsair",
+      "title": "Memória RAM Vengeance LPX 32GB (2x16GB) DDR4-3200 MHz CL16  (Preto) - CORSAIR",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 357.09,
+      "price_eur": 357.09,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3200,
+      "cas_latency": 16,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-09T13:04:01+00:00",
+      "current": false,
+      "history": [
+        {
+          "at": "2026-11-08T01:24:31+00:00",
+          "price_eur": 357.09,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-08T19:03:37+00:00",
+          "price_eur": 357.09,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "d09d3a81847b4e7d",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-vengeance-rgb-pro-sl-32gb-2x16gb-ddr4-3200mhz-cl16-branco--corsair",
+      "title": "Memória RAM Vengeance RGB Pro SL 32GB (2x16GB) DDR4-3200MHz CL16 (Branco) - CORSAIR",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 374.69,
+      "price_eur": 374.69,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-09T13:05:01+00:00",
+      "current": false,
+      "history": [
+        {
+          "at": "2026-11-08T01:25:48+00:00",
+          "price_eur": 374.69,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-08T03:09:16+00:00",
+          "price_eur": 373.39,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-08T11:23:18+00:00",
+          "price_eur": 392.49,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-08T19:04:54+00:00",
+          "price_eur": 392.49,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-09T03:07:26+00:00",
+          "price_eur": 374.69,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
       "id": "cc75fcf21341e353",
       "store": "Globaldata",
       "url": "https://www.globaldata.pt/kingston-kit-32gb-2-x-16gb-ddr4-3200mhz-fury-beast-rgb-preto-1rx8-cl16/KF432C16BB2AK232.html",
@@ -2373,7 +2484,7 @@
       "source": "Castro Electrónica category",
       "status": "ok",
       "found": 25,
-      "priced_cards": 11
+      "priced_cards": 12
     },
     {
       "source": "Chipman category",
@@ -2607,7 +2718,7 @@
             "div",
             "prod-list-price-wrapper",
             "",
-            "39,89 € Loja: 42,00 €"
+            "44,59 € Loja: 47,00 €"
           ]
         ],
         "price_meta": []
@@ -2686,10 +2797,6 @@
       "status": "configuration_unverified"
     },
     {
-      "source": "Castro Electrónica product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "Globaldata product",
       "status": "configuration_unverified"
     },
@@ -2747,6 +2854,10 @@
     },
     {
       "source": "Globaldata product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Castro Electrónica product",
       "status": "configuration_unverified"
     },
     {
@@ -2760,7 +2871,7 @@
     {
       "source": "KuantoKusta comparison",
       "status": "ok",
-      "found": 25,
+      "found": 26,
       "detail": "Lowest advertised prices; seller and delivery not verified"
     },
     {
