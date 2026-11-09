@@ -208,8 +208,11 @@ def product_info(html,store,url):
                 page_seller=_worten_visible_seller(doc) if store=="Worten" else None
                 # An unnamed structured offer does not establish that its
                 # advertised availability belongs to the page's seller.
-                seller_source="offer" if seller_status else "page" if page_seller!="unverified" else "unverified"
-                if store=="Worten" and seller_status!="Worten":
+                seller_conflict=(store=="Worten" and seller_status and
+                    page_seller not in (None,"unverified",seller_status))
+                seller_source="conflict" if seller_conflict else (
+                    "offer" if seller_status else "page" if page_seller!="unverified" else "unverified")
+                if store=="Worten" and (seller_status!="Worten" or seller_conflict):
                     availability="unknown"
                 # Prefer an explicit primary-product out-of-stock statement on PCBox pages
                 # to potentially stale structured availability.
@@ -222,11 +225,11 @@ def product_info(html,store,url):
                 cl=re.search(r"\bCL\s*(\d\d)\b",name,re.I)
                 result=dict(id=identity,store=store,url=url,title=name,configuration=kind,units_to_buy=2 if kind=="single_pair" else 1,unit_price_eur=unit,price_eur=amount,stock=availability,shipping_to_pt="unverified",speed_mhz=int(mhz[1]) if mhz else None,cas_latency=int(cl[1]) if cl else None,source="Retailer product JSON-LD",observed_at=stamp(),current=True)
                 if store=="Worten":
-                    result["seller_status"]=seller_status or page_seller
+                    result["seller_status"]="unverified" if seller_conflict else (seller_status or page_seller)
                     result["seller_evidence"]=seller_source
-                    if seller_status!="Worten":
+                    if seller_status!="Worten" or seller_conflict:
                         result["seller_unverified"]=True
-                    if (seller_status or page_seller)=="marketplace":
+                    if result["seller_status"]=="marketplace":
                         result["marketplace_only"]=True
                 return result
     # Retailers such as Chipman and Castro Electrónica expose prices in
