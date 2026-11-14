@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-11-14T05:55:34+00:00",
+  "last_scan": "2026-11-14T13:56:17+00:00",
   "scan_trigger": "scheduled",
   "budget_eur": 200,
   "offers": [
@@ -17,7 +17,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:57+00:00",
+      "observed_at": "2026-11-14T13:53:10+00:00",
       "current": true,
       "history": [
         {
@@ -42,7 +42,7 @@
       "speed_mhz": null,
       "cas_latency": 17,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:16+00:00",
+      "observed_at": "2026-11-14T13:54:43+00:00",
       "current": true,
       "history": [
         {
@@ -67,7 +67,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:25+00:00",
+      "observed_at": "2026-11-14T13:54:53+00:00",
       "current": true,
       "history": [
         {
@@ -92,7 +92,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:28+00:00",
+      "observed_at": "2026-11-14T13:53:46+00:00",
       "current": true,
       "history": [
         {
@@ -122,7 +122,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:49+00:00",
+      "observed_at": "2026-11-14T13:55:22+00:00",
       "current": true,
       "history": [
         {
@@ -147,7 +147,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:55+00:00",
+      "observed_at": "2026-11-14T13:53:06+00:00",
       "current": true,
       "history": [
         {
@@ -172,7 +172,7 @@
       "speed_mhz": null,
       "cas_latency": 15,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:52+00:00",
+      "observed_at": "2026-11-14T13:53:04+00:00",
       "current": true,
       "history": [
         {
@@ -202,7 +202,7 @@
       "speed_mhz": 2400,
       "cas_latency": 12,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:23+00:00",
+      "observed_at": "2026-11-14T13:53:40+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -231,7 +231,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:10+00:00",
+      "observed_at": "2026-11-14T13:53:26+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -260,7 +260,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:14+00:00",
+      "observed_at": "2026-11-14T13:54:41+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -289,7 +289,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:15+00:00",
+      "observed_at": "2026-11-14T13:53:31+00:00",
       "current": true,
       "history": [
         {
@@ -329,7 +329,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:11+00:00",
+      "observed_at": "2026-11-14T13:54:25+00:00",
       "current": true,
       "history": [
         {
@@ -354,7 +354,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -380,7 +380,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:12+00:00",
+      "observed_at": "2026-11-14T13:53:27+00:00",
       "current": true,
       "history": [
         {
@@ -405,7 +405,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:34+00:00",
+      "observed_at": "2026-11-14T13:54:37+00:00",
       "current": true,
       "history": [
         {
@@ -430,7 +430,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -443,178 +443,20 @@
       "alerted_price_eur": null
     },
     {
-      "id": "f91d1e77514ce61b",
-      "store": "Globaldata",
-      "url": "https://www.globaldata.pt/team-group-kit-32gb-2-x-16gb-ddr4-3200mhz-delta-rgb-black-cl16/TF3D432G3200HC16FD.html",
-      "title": "Team Group Kit 32GB (2 x 16GB) DDR4 3200MHz Delta RGB Black CL16",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 259.9,
-      "price_eur": 259.9,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:44+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:00:41+00:00",
-          "price_eur": 259.9,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-13T05:53:45+00:00",
-          "price_eur": 259.9,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "3ca9fdbc205c7553",
-      "store": "PCDIGA",
-      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-vulcan-z-32gb-2x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-cinzenta-tlzgd432g3200hc16fdc01-765441654204",
-      "title": "Memória RAM UDIMM TEAMGROUP T-Force Vulcan Z 32GB (2x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Cinzenta",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 259.9,
-      "price_eur": 259.9,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:41+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-11T21:55:23+00:00",
-          "price_eur": 259.9,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "6ad509803a874ea3",
-      "store": "Globaldata",
-      "url": "https://www.globaldata.pt/team-group-kit-32gb-2-x-16gb-ddr4-3200mhz-delta-rgb-white-cl16/TF4D432G3200HC16FD.html",
-      "title": "Team Group Kit 32GB (2 x 16GB) DDR4 3200MHz Delta RGB White CL16",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 259.9,
-      "price_eur": 259.9,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:32+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:01:46+00:00",
-          "price_eur": 259.9,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "ef95f4b453384cb9",
-      "store": "KuantoKusta comparison",
-      "url": "https://www.kuantokusta.pt/p/264070/team-group-kit-32gb-dark-pro-2-x-16gb-ddr4-3200mhz-delta-preto-rgb-cl16-tf3d432g3200hc16fd",
-      "title": "Memória RAM Team Group Kit 32GB Dark Pro (2 x 16GB) DDR4 3200MHz Delta Preto RGB CL16 - TF3D432G3200HC16FD",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 259.9,
-      "price_eur": 259.9,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
-      "current": true,
-      "comparison_only": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:02:01+00:00",
-          "price_eur": 259.9,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "f56cb0c329986d26",
-      "store": "KuantoKusta comparison",
-      "url": "https://www.kuantokusta.pt/p/132485/gskill-32gb-ripjaws-v-2x-16gb-ddr4-3200mhz-pc4-25600-cl16-f4-3200c16d-32gvk",
-      "title": "Boa compra Memória RAM G.Skill 32GB Ripjaws V (2x 16GB) DDR4 3200MHz PC4-25600 CL16 - F4-3200C16D-32GVK",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 260.21,
-      "price_eur": 260.21,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
-      "current": true,
-      "comparison_only": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:02:01+00:00",
-          "price_eur": 260.21,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "53aa016cb83f20d1",
-      "store": "KuantoKusta comparison",
-      "url": "https://www.kuantokusta.pt/p/78706/corsair-32gb-vengeance-lpx-2x-16gb-ddr4-cl16-3200mhz-black-cmk32gx4m2e3200c16",
-      "title": "Boa compra Memória RAM Corsair 32GB Vengeance LPX (2x 16GB) DDR4 CL16 3200Mhz Black - CMK32GX4M2E3200C16",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 264.29,
-      "price_eur": 264.29,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
-      "current": true,
-      "comparison_only": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:02:01+00:00",
-          "price_eur": 264.29,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "30e2e5244a16e5ad",
       "store": "PcComponentes",
       "url": "https://www.pccomponentes.pt/team-group-t-force-vulcan-z-ddr4-3200mhz-pc4-25600-32-gb-2x16gb-cl16-cinzentas",
       "title": "Team Group T-Force Vulcan Z DDR4 3200Mhz PC4-25600 32 GB 2x16GB CL16 Cinzentas",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 265.99,
-      "price_eur": 265.99,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
       "stock": "in_stock",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:43+00:00",
+      "observed_at": "2026-11-14T13:54:02+00:00",
       "current": true,
       "history": [
         {
@@ -676,6 +518,117 @@
           "at": "2026-11-13T21:53:56+00:00",
           "price_eur": 265.99,
           "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-14T13:54:02+00:00",
+          "price_eur": 259.9,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "f91d1e77514ce61b",
+      "store": "Globaldata",
+      "url": "https://www.globaldata.pt/team-group-kit-32gb-2-x-16gb-ddr4-3200mhz-delta-rgb-black-cl16/TF3D432G3200HC16FD.html",
+      "title": "Team Group Kit 32GB (2 x 16GB) DDR4 3200MHz Delta RGB Black CL16",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-14T13:54:03+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:00:41+00:00",
+          "price_eur": 259.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-13T05:53:45+00:00",
+          "price_eur": 259.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "3ca9fdbc205c7553",
+      "store": "PCDIGA",
+      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-vulcan-z-32gb-2x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-cinzenta-tlzgd432g3200hc16fdc01-765441654204",
+      "title": "Memória RAM UDIMM TEAMGROUP T-Force Vulcan Z 32GB (2x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Cinzenta",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-14T13:55:13+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-11T21:55:23+00:00",
+          "price_eur": 259.9,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "6ad509803a874ea3",
+      "store": "Globaldata",
+      "url": "https://www.globaldata.pt/team-group-kit-32gb-2-x-16gb-ddr4-3200mhz-delta-rgb-white-cl16/TF4D432G3200HC16FD.html",
+      "title": "Team Group Kit 32GB (2 x 16GB) DDR4 3200MHz Delta RGB White CL16",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-14T13:56:15+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:01:46+00:00",
+          "price_eur": 259.9,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "ef95f4b453384cb9",
+      "store": "KuantoKusta comparison",
+      "url": "https://www.kuantokusta.pt/p/264070/team-group-kit-32gb-dark-pro-2-x-16gb-ddr4-3200mhz-delta-preto-rgb-cl16-tf3d432g3200hc16fd",
+      "title": "Memória RAM Team Group Kit 32GB Dark Pro (2 x 16GB) DDR4 3200MHz Delta Preto RGB CL16 - TF3D432G3200HC16FD",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
+      "observed_at": "2026-11-14T13:56:17+00:00",
+      "current": true,
+      "comparison_only": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:02:01+00:00",
+          "price_eur": 259.9,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -684,17 +637,17 @@
       "id": "e59a90d47f967623",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/263855/team-group-32gb-2-x-16gb-ddr4-3200mhz-vulcan-z-grey-cl16-tlzgd432g3200hc16c",
-      "title": "Memória RAM Team Group 32GB (2 x 16GB) DDR4 3200MHz Vulcan Z Grey CL16 - TLZGD432G3200HC16C 265,99€ Pc Componentes",
+      "title": "Boa compra Memória RAM Team Group 32GB (2 x 16GB) DDR4 3200MHz Vulcan Z Grey CL16 - TLZGD432G3200HC16C 259,90€ Pc Componentes",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 265.99,
-      "price_eur": 265.99,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -762,6 +715,63 @@
           "at": "2026-11-13T21:56:04+00:00",
           "price_eur": 265.99,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-14T13:56:17+00:00",
+          "price_eur": 259.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "f56cb0c329986d26",
+      "store": "KuantoKusta comparison",
+      "url": "https://www.kuantokusta.pt/p/132485/gskill-32gb-ripjaws-v-2x-16gb-ddr4-3200mhz-pc4-25600-cl16-f4-3200c16d-32gvk",
+      "title": "Boa compra Memória RAM G.Skill 32GB Ripjaws V (2x 16GB) DDR4 3200MHz PC4-25600 CL16 - F4-3200C16D-32GVK",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 260.21,
+      "price_eur": 260.21,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
+      "observed_at": "2026-11-14T13:56:17+00:00",
+      "current": true,
+      "comparison_only": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:02:01+00:00",
+          "price_eur": 260.21,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "53aa016cb83f20d1",
+      "store": "KuantoKusta comparison",
+      "url": "https://www.kuantokusta.pt/p/78706/corsair-32gb-vengeance-lpx-2x-16gb-ddr4-cl16-3200mhz-black-cmk32gx4m2e3200c16",
+      "title": "Boa compra Memória RAM Corsair 32GB Vengeance LPX (2x 16GB) DDR4 CL16 3200Mhz Black - CMK32GX4M2E3200C16",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 264.29,
+      "price_eur": 264.29,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
+      "observed_at": "2026-11-14T13:56:17+00:00",
+      "current": true,
+      "comparison_only": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:02:01+00:00",
+          "price_eur": 264.29,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -780,7 +790,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:33+00:00",
+      "observed_at": "2026-11-14T13:55:03+00:00",
       "current": true,
       "history": [
         {
@@ -805,7 +815,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:43+00:00",
+      "observed_at": "2026-11-14T13:52:53+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -836,7 +846,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:28+00:00",
+      "observed_at": "2026-11-14T13:56:10+00:00",
       "current": true,
       "history": [
         {
@@ -866,7 +876,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:42+00:00",
+      "observed_at": "2026-11-14T13:54:01+00:00",
       "current": true,
       "history": [
         {
@@ -891,7 +901,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:51+00:00",
+      "observed_at": "2026-11-14T13:53:03+00:00",
       "current": true,
       "history": [
         {
@@ -915,9 +925,10 @@
       "shipping_to_pt": "unverified",
       "speed_mhz": 3200,
       "cas_latency": null,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:33+00:00",
+      "source": "Retailer catalogue price (verify product page)",
+      "observed_at": "2026-11-14T13:52:54+00:00",
       "current": true,
+      "catalogue_only": true,
       "history": [
         {
           "at": "2026-11-08T01:34:46+00:00",
@@ -941,7 +952,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -967,7 +978,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:31+00:00",
+      "observed_at": "2026-11-14T13:55:00+00:00",
       "current": true,
       "history": [
         {
@@ -992,7 +1003,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1018,7 +1029,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:22+00:00",
+      "observed_at": "2026-11-14T13:56:03+00:00",
       "current": true,
       "history": [
         {
@@ -1048,7 +1059,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:37+00:00",
+      "observed_at": "2026-11-14T13:53:55+00:00",
       "current": true,
       "history": [
         {
@@ -1083,7 +1094,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:16+00:00",
+      "observed_at": "2026-11-14T13:53:32+00:00",
       "current": true,
       "history": [
         {
@@ -1113,7 +1124,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:14+00:00",
+      "observed_at": "2026-11-14T13:53:30+00:00",
       "current": true,
       "history": [
         {
@@ -1138,7 +1149,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "PcComponentes primary buybox price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:55+00:00",
+      "observed_at": "2026-11-14T13:54:16+00:00",
       "current": true,
       "history": [
         {
@@ -1173,7 +1184,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1204,7 +1215,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:24+00:00",
+      "observed_at": "2026-11-14T13:56:05+00:00",
       "current": true,
       "history": [
         {
@@ -1234,7 +1245,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:08+00:00",
+      "observed_at": "2026-11-14T13:55:52+00:00",
       "current": true,
       "history": [
         {
@@ -1264,7 +1275,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:13+00:00",
+      "observed_at": "2026-11-14T13:54:33+00:00",
       "current": true,
       "history": [
         {
@@ -1294,7 +1305,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:18+00:00",
+      "observed_at": "2026-11-14T13:55:58+00:00",
       "current": true,
       "history": [
         {
@@ -1324,7 +1335,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1350,7 +1361,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1376,7 +1387,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:42+00:00",
+      "observed_at": "2026-11-14T13:55:23+00:00",
       "current": true,
       "history": [
         {
@@ -1401,7 +1412,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:32+00:00",
+      "observed_at": "2026-11-14T13:53:50+00:00",
       "current": true,
       "history": [
         {
@@ -1426,7 +1437,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1452,7 +1463,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1478,7 +1489,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:21+00:00",
+      "observed_at": "2026-11-14T13:54:49+00:00",
       "current": true,
       "history": [
         {
@@ -1503,7 +1514,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1529,7 +1540,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1555,13 +1566,38 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:27+00:00",
+      "observed_at": "2026-11-14T13:53:45+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T01:32:56+00:00",
           "price_eur": 300.0,
           "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "c3454d9e2ff19861",
+      "store": "KIBO",
+      "url": "https://www.kibo.pt/produto/apacer-el-16g21-gsh-memoria-ram-16gb-ddr4-3200mhz-cl22-dimm/",
+      "title": "Apacer EL.16G21.GSH Memória RAM 16GB DDR4 3200MHz CL22 DIMM",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 150.79,
+      "price_eur": 301.58,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 22,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-14T13:53:33+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-14T13:53:33+00:00",
+          "price_eur": 301.58,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -1580,7 +1616,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1606,7 +1642,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:04+00:00",
+      "observed_at": "2026-11-14T13:54:29+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -1655,7 +1691,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:14+00:00",
+      "observed_at": "2026-11-14T13:55:53+00:00",
       "current": true,
       "history": [
         {
@@ -1695,7 +1731,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:43+00:00",
+      "observed_at": "2026-11-14T13:52:53+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -1741,7 +1777,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:22+00:00",
+      "observed_at": "2026-11-14T13:53:39+00:00",
       "current": true,
       "history": [
         {
@@ -1786,7 +1822,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:53+00:00",
+      "observed_at": "2026-11-14T13:53:05+00:00",
       "current": true,
       "history": [
         {
@@ -1826,7 +1862,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:59+00:00",
+      "observed_at": "2026-11-14T13:53:12+00:00",
       "current": true,
       "history": [
         {
@@ -1871,44 +1907,13 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
         {
           "at": "2026-11-11T13:56:16+00:00",
           "price_eur": 311.51,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "7727f45316be6827",
-      "store": "Castro Electrónica",
-      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-trident-z-rgb-32gb-2x16gb-ddr4-3600-mhz-cl18--gskill",
-      "title": "Memória RAM Trident Z RGB 32GB (2x16GB) DDR4 3600 MHz CL18 - G.SKILL",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 311.69,
-      "price_eur": 311.69,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": 3600,
-      "cas_latency": 18,
-      "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:43+00:00",
-      "current": true,
-      "catalogue_only": true,
-      "history": [
-        {
-          "at": "2026-11-13T05:52:41+00:00",
-          "price_eur": 321.89,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-13T13:52:52+00:00",
-          "price_eur": 311.69,
           "stock": "unknown"
         }
       ],
@@ -1928,7 +1933,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1954,7 +1959,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1980,7 +1985,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2006,7 +2011,7 @@
       "speed_mhz": 3600,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:58+00:00",
+      "observed_at": "2026-11-14T13:55:40+00:00",
       "current": true,
       "history": [
         {
@@ -2031,7 +2036,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:50+00:00",
+      "observed_at": "2026-11-14T13:54:11+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -2070,7 +2075,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:00+00:00",
+      "observed_at": "2026-11-14T13:53:13+00:00",
       "current": true,
       "history": [
         {
@@ -2095,7 +2100,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2121,7 +2126,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:59+00:00",
+      "observed_at": "2026-11-14T13:54:36+00:00",
       "current": true,
       "history": [
         {
@@ -2146,13 +2151,49 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:44+00:00",
+      "observed_at": "2026-11-14T13:52:54+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
         {
           "at": "2026-11-08T01:32:21+00:00",
           "price_eur": 320.92,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "7727f45316be6827",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-trident-z-rgb-32gb-2x16gb-ddr4-3600-mhz-cl18--gskill",
+      "title": "Memória RAM Trident Z RGB 32GB (2x16GB) DDR4 3600 MHz CL18 - G.SKILL",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 321.89,
+      "price_eur": 321.89,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3600,
+      "cas_latency": 18,
+      "source": "Retailer catalogue price (verify product page)",
+      "observed_at": "2026-11-14T13:52:53+00:00",
+      "current": true,
+      "catalogue_only": true,
+      "history": [
+        {
+          "at": "2026-11-13T05:52:41+00:00",
+          "price_eur": 321.89,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-13T13:52:52+00:00",
+          "price_eur": 311.69,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-14T13:52:53+00:00",
+          "price_eur": 321.89,
           "stock": "unknown"
         }
       ],
@@ -2172,7 +2213,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2198,7 +2239,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:01+00:00",
+      "observed_at": "2026-11-14T13:53:14+00:00",
       "current": true,
       "history": [
         {
@@ -2218,18 +2259,23 @@
       "units_to_buy": 1,
       "unit_price_eur": 324.9,
       "price_eur": 324.9,
-      "stock": "in_stock",
+      "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:19+00:00",
+      "observed_at": "2026-11-14T13:55:59+00:00",
       "current": true,
       "history": [
         {
           "at": "2026-11-08T01:01:36+00:00",
           "price_eur": 324.9,
           "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-14T13:55:59+00:00",
+          "price_eur": 324.9,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -2248,7 +2294,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:10+00:00",
+      "observed_at": "2026-11-14T13:55:49+00:00",
       "current": true,
       "history": [
         {
@@ -2273,7 +2319,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2304,7 +2350,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:03+00:00",
+      "observed_at": "2026-11-14T13:55:46+00:00",
       "current": true,
       "history": [
         {
@@ -2339,7 +2385,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:45+00:00",
+      "observed_at": "2026-11-14T13:54:06+00:00",
       "current": true,
       "history": [
         {
@@ -2369,7 +2415,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:31+00:00",
+      "observed_at": "2026-11-14T13:54:05+00:00",
       "current": true,
       "history": [
         {
@@ -2394,7 +2440,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:45+00:00",
+      "observed_at": "2026-11-14T13:54:22+00:00",
       "current": true,
       "history": [
         {
@@ -2419,7 +2465,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:09+00:00",
+      "observed_at": "2026-11-14T13:55:47+00:00",
       "current": true,
       "history": [
         {
@@ -2444,7 +2490,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:07+00:00",
+      "observed_at": "2026-11-14T13:55:45+00:00",
       "current": true,
       "history": [
         {
@@ -2469,7 +2515,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2495,7 +2541,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2511,17 +2557,17 @@
       "id": "cf7a93cf5c0d5658",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/10456252/kingston-32gb-fury-beast-rgb-2x16gb-ddr4-3200mhz-cl16-black-kf432c16bb12ak232",
-      "title": "Memória RAM Kingston 32GB FURY Beast RGB (2x16GB) DDR4 3200MHz CL16 Black - KF432C16BB12AK2/32",
+      "title": "Boa compra Memória RAM Kingston 32GB FURY Beast RGB (2x16GB) DDR4 3200MHz CL16 Black - KF432C16BB12AK2/32",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 340.8,
-      "price_eur": 340.8,
+      "unit_price_eur": 338.99,
+      "price_eur": 338.99,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2533,6 +2579,11 @@
         {
           "at": "2026-11-12T21:56:44+00:00",
           "price_eur": 340.8,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-14T13:56:17+00:00",
+          "price_eur": 338.99,
           "stock": "unknown"
         }
       ],
@@ -2552,7 +2603,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:19+00:00",
+      "observed_at": "2026-11-14T13:53:35+00:00",
       "current": true,
       "history": [
         {
@@ -2577,7 +2628,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "CHIP7 financing PVP — indicative, contact shop (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:33+00:00",
+      "observed_at": "2026-11-14T13:53:52+00:00",
       "current": true,
       "indicative_only": true,
       "history": [
@@ -2603,7 +2654,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:55:04+00:00",
+      "observed_at": "2026-11-14T13:55:41+00:00",
       "current": true,
       "history": [
         {
@@ -2628,7 +2679,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2704,7 +2755,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:27+00:00",
+      "observed_at": "2026-11-14T13:56:09+00:00",
       "current": true,
       "history": [
         {
@@ -2744,7 +2795,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:45+00:00",
+      "observed_at": "2026-11-14T13:55:18+00:00",
       "current": true,
       "history": [
         {
@@ -2769,7 +2820,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:09+00:00",
+      "observed_at": "2026-11-14T13:53:24+00:00",
       "current": true,
       "history": [
         {
@@ -2814,7 +2865,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:43+00:00",
+      "observed_at": "2026-11-14T13:52:53+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -2840,7 +2891,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:02+00:00",
+      "observed_at": "2026-11-14T13:55:39+00:00",
       "current": true,
       "history": [
         {
@@ -2877,45 +2928,20 @@
       "alerted_price_eur": null
     },
     {
-      "id": "60dc0d38284c2492",
-      "store": "El Shop",
-      "url": "https://elshop.es/en/5022-kingston-fury-beast-32-gb-2-x-16-gb-ddr4-3200-mhz-cl16-kf432c16bbk2-32.html",
-      "title": "Kingston FURY Beast 32 GB (2 x 16 GB) DDR4 3200 MHz CL16 (KF432C16BBK2/32)",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 375.99,
-      "price_eur": 375.99,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": 3200,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:41+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:00:31+00:00",
-          "price_eur": 375.99,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "eecfe2db66a62d5f",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/12296616/adata-xpg-gammix-d35-32gb-2x16gb-ddr4-3600mhz-cl18-white",
-      "title": "Boa compra Memória RAM ADATA XPG GAMMIX D35 32GB (2x16GB) DDR4 3600MHz CL18 White 377,90€ Chipman",
+      "title": "Boa compra Memória RAM ADATA XPG GAMMIX D35 32GB (2x16GB) DDR4 3600MHz CL18 White 371,90€ Chipman",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 377.9,
-      "price_eur": 377.9,
+      "unit_price_eur": 371.9,
+      "price_eur": 371.9,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-14T05:55:34+00:00",
+      "observed_at": "2026-11-14T13:56:17+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2933,6 +2959,36 @@
           "at": "2026-11-12T13:56:10+00:00",
           "price_eur": 377.9,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-14T13:56:17+00:00",
+          "price_eur": 371.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "60dc0d38284c2492",
+      "store": "El Shop",
+      "url": "https://elshop.es/en/5022-kingston-fury-beast-32-gb-2-x-16-gb-ddr4-3200-mhz-cl16-kf432c16bbk2-32.html",
+      "title": "Kingston FURY Beast 32 GB (2 x 16 GB) DDR4 3200 MHz CL16 (KF432C16BBK2/32)",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 375.99,
+      "price_eur": 375.99,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3200,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-14T13:54:00+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:00:31+00:00",
+          "price_eur": 375.99,
+          "stock": "in_stock"
         }
       ],
       "alerted_price_eur": null
@@ -2951,7 +3007,7 @@
       "speed_mhz": 3600,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:55+00:00",
+      "observed_at": "2026-11-14T13:55:29+00:00",
       "current": true,
       "history": [
         {
@@ -2986,7 +3042,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:00+00:00",
+      "observed_at": "2026-11-14T13:54:23+00:00",
       "current": true,
       "history": [
         {
@@ -3016,7 +3072,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:00+00:00",
+      "observed_at": "2026-11-14T13:55:37+00:00",
       "current": true,
       "history": [
         {
@@ -3041,7 +3097,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:53:20+00:00",
+      "observed_at": "2026-11-14T13:53:36+00:00",
       "current": true,
       "history": [
         {
@@ -3066,7 +3122,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:17+00:00",
+      "observed_at": "2026-11-14T13:54:44+00:00",
       "current": true,
       "history": [
         {
@@ -3091,7 +3147,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:56+00:00",
+      "observed_at": "2026-11-14T13:53:09+00:00",
       "current": true,
       "history": [
         {
@@ -3121,7 +3177,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Product price metadata (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:41+00:00",
+      "observed_at": "2026-11-14T13:55:12+00:00",
       "current": true,
       "history": [
         {
@@ -3161,7 +3217,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:43+00:00",
+      "observed_at": "2026-11-14T13:52:53+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -3197,7 +3253,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:54:53+00:00",
+      "observed_at": "2026-11-14T13:55:27+00:00",
       "current": true,
       "history": [
         {
@@ -3222,7 +3278,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-14T05:55:15+00:00",
+      "observed_at": "2026-11-14T13:55:55+00:00",
       "current": true,
       "history": [
         {
@@ -3247,7 +3303,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-14T05:52:43+00:00",
+      "observed_at": "2026-11-14T13:52:53+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -3278,7 +3334,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:53+00:00",
+      "observed_at": "2026-11-14T13:54:14+00:00",
       "current": true,
       "history": [
         {
@@ -3303,7 +3359,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:54:07+00:00",
+      "observed_at": "2026-11-14T13:54:32+00:00",
       "current": true,
       "history": [
         {
@@ -3328,7 +3384,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:38+00:00",
+      "observed_at": "2026-11-14T13:53:57+00:00",
       "current": true,
       "seller_status": "Worten",
       "seller_evidence": "page",
@@ -3356,7 +3412,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:52:58+00:00",
+      "observed_at": "2026-11-14T13:53:11+00:00",
       "current": true,
       "history": [
         {
@@ -3401,7 +3457,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-14T05:53:17+00:00",
+      "observed_at": "2026-11-14T13:53:49+00:00",
       "current": true,
       "history": [
         {
@@ -4368,7 +4424,7 @@
     {
       "source": "KIBO category",
       "status": "ok",
-      "found": 4,
+      "found": 5,
       "priced_cards": 0
     },
     {
@@ -4445,7 +4501,7 @@
             "div",
             "product-miniature__prices",
             "",
-            "€201.99"
+            "€197.99"
           ]
         ],
         "price_meta": [
@@ -4585,55 +4641,59 @@
       }
     },
     {
-      "source": "You Get product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "Chipman product",
       "status": "configuration_unverified",
       "sample": {
-        "url": "https://chipman.pt/memorias-ram-ddr4/g-skill-memoria-ram-f4-3600c16d-16gtznc-3600-mhz-16-gb",
-        "heading": "Memória RAM G.SKILL F4-3600C16D-16GTZNC (3600 MHz - 16 GB - DIMM)",
+        "url": "https://chipman.pt/memorias-ram-ddr4/g-skill-memoria-ram-aegis-f4-3200c16d-16gis-3200-mhz-16",
+        "heading": "Memória RAM G.SKILL Aegis F4-3200C16D-16GIS (3200 MHz - 16 GB - DIMM)",
         "price_nodes": [],
         "price_meta": []
       }
     },
     {
+      "source": "You Get product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Chipman product",
+      "status": "configuration_unverified"
+    },
+    {
       "source": "Castro Electrónica product",
       "status": "configuration_unverified",
       "sample": {
-        "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-aegis-16gb-2x8gb-ddr4-3200-mhz-cl16--gskill",
-        "heading": "Memória RAM Aegis 16GB (2x8GB) DDR4 3200 MHz CL16 - G.SKILL",
+        "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-aegis16gb-ddr4-3200mhz-cl16--gskill",
+        "heading": "Memória RAM Aegis 16GB DDR4-3200MHz CL16 - G.SKILL",
         "price_nodes": [
           [
             "div",
             "col-12 store-price-energetic",
             "",
-            "142,00 € Preço Loja - Iva incluído"
+            "140,00 € Preço Loja - Iva incluído"
           ],
           [
             "div",
             "product-store-price-wrapper product-bg-radius product-bg-light-blue col-6",
             "",
-            "142,00 € Preço Loja - Iva incluído"
+            "140,00 € Preço Loja - Iva incluído"
           ],
           [
             "span",
             "product-store-price",
             "",
-            "142,00 €"
+            "140,00 €"
           ],
           [
             "div",
             "product-opportunity-price-wrapper",
             "",
-            "134,99 € Preço Online - IVA incluído"
+            "132,89 € Preço Online - IVA incluído"
           ],
           [
             "span",
             "product-opportunity-new-price",
             "",
-            "134,99 €"
+            "132,89 €"
           ],
           [
             "div",
@@ -4643,9 +4703,9 @@
           ],
           [
             "div",
-            "col-auto product-assurance-price",
+            "prod-list-price-wrapper",
             "",
-            "+ 35,99  €"
+            "68,99 € Loja: 72,50 €"
           ]
         ],
         "price_meta": []
@@ -4665,15 +4725,19 @@
       "status": "configuration_unverified"
     },
     {
-      "source": "Chipman product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "Castro Electrónica product",
       "status": "configuration_unverified"
     },
     {
       "source": "You Get product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Globaldata product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Castro Electrónica product",
       "status": "configuration_unverified"
     },
     {
@@ -4738,18 +4802,6 @@
       "status": "configuration_unverified"
     },
     {
-      "source": "PcComponentes product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "Globaldata product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "Castro Electrónica product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "PCDIGA product",
       "status": "error",
       "detail": "404 Client Error: Not Found for url: https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup"
@@ -4787,14 +4839,6 @@
       "status": "configuration_unverified"
     },
     {
-      "source": "Globaldata product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "Castro Electrónica product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "PcComponentes product",
       "status": "configuration_unverified"
     },
@@ -4803,7 +4847,19 @@
       "status": "configuration_unverified"
     },
     {
+      "source": "Castro Electrónica product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Globaldata product",
+      "status": "configuration_unverified"
+    },
+    {
       "source": "You Get product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "PcComponentes product",
       "status": "configuration_unverified"
     },
     {
