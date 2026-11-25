@@ -1,5 +1,5 @@
 {
-  "last_scan": "2026-11-25T05:55:41+00:00",
+  "last_scan": "2026-11-25T13:55:58+00:00",
   "scan_trigger": "scheduled",
   "budget_eur": 200,
   "offers": [
@@ -17,7 +17,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:58+00:00",
+      "observed_at": "2026-11-25T13:52:58+00:00",
       "current": true,
       "history": [
         {
@@ -42,7 +42,7 @@
       "speed_mhz": null,
       "cas_latency": 17,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:39+00:00",
+      "observed_at": "2026-11-25T13:54:53+00:00",
       "current": true,
       "history": [
         {
@@ -67,7 +67,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:47+00:00",
+      "observed_at": "2026-11-25T13:55:02+00:00",
       "current": true,
       "history": [
         {
@@ -92,7 +92,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:30+00:00",
+      "observed_at": "2026-11-25T13:53:31+00:00",
       "current": true,
       "history": [
         {
@@ -122,7 +122,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:04+00:00",
+      "observed_at": "2026-11-25T13:55:18+00:00",
       "current": true,
       "history": [
         {
@@ -147,7 +147,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:54+00:00",
+      "observed_at": "2026-11-25T13:52:54+00:00",
       "current": true,
       "history": [
         {
@@ -172,7 +172,7 @@
       "speed_mhz": null,
       "cas_latency": 15,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:52+00:00",
+      "observed_at": "2026-11-25T13:52:52+00:00",
       "current": true,
       "history": [
         {
@@ -202,7 +202,7 @@
       "speed_mhz": 2400,
       "cas_latency": 12,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:25+00:00",
+      "observed_at": "2026-11-25T13:53:26+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -231,7 +231,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:11+00:00",
+      "observed_at": "2026-11-25T13:53:11+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -260,7 +260,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:18+00:00",
+      "observed_at": "2026-11-25T13:54:21+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -289,7 +289,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:16+00:00",
+      "observed_at": "2026-11-25T13:53:16+00:00",
       "current": true,
       "history": [
         {
@@ -344,7 +344,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -385,7 +385,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -428,6 +428,61 @@
       "alerted_price_eur": null
     },
     {
+      "id": "8ab2633f9527d949",
+      "store": "Castro Electrónica",
+      "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-udimm-elite-16gb-1x16gb-ddr4-3200mhz-cl22-120v--teamgroup",
+      "title": "Memória RAM UDIMM Elite 16GB (1x16GB) DDR4-3200MHz CL22 1.20V  - TEAMGROUP",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 123.89,
+      "price_eur": 247.78,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 22,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-25T13:54:08+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-25T13:54:08+00:00",
+          "price_eur": 247.78,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "24dc75822c9e214b",
+      "store": "Chipman",
+      "url": "https://chipman.pt/memorias-ram-ddr4/g-skill-kit-memoria-ram-aegis-f4-3200c16d-32gis-3200",
+      "title": "Kit Memória RAM G.SKILL Aegis F4-3200C16D-32GIS (3200 MHz - 32 GB - DIMM)",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 249.9,
+      "price_eur": 249.9,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3200,
+      "cas_latency": null,
+      "source": "Primary product price (HTML fallback)",
+      "observed_at": "2026-11-25T13:53:52+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-11T13:54:08+00:00",
+          "price_eur": 258.31,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-23T05:54:09+00:00",
+          "price_eur": 249.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
       "id": "d9e9e83639f844b8",
       "store": "PcComponentes",
       "url": "https://www.pccomponentes.pt/memoria-ram-forgeon-cyclone-plus-v2-ddr4-3200mhz-32gb-2x16gb-cl16-pretas",
@@ -441,7 +496,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:45+00:00",
+      "observed_at": "2026-11-25T13:53:46+00:00",
       "current": true,
       "history": [
         {
@@ -473,46 +528,6 @@
       "alerted_price_eur": null
     },
     {
-      "id": "3913b3f1c4b3b10a",
-      "store": "Chipman",
-      "url": "https://chipman.pt/memorias-ram-ddr4/patriot-kit-memoria-ram-viper-elite-ii-pve2432g320c8k",
-      "title": "Kit de Memória RAM PATRIOT Viper Elite II PVE2432G320C8K (3200 MHz - 32 GB - DIMM)",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 252.9,
-      "price_eur": 252.9,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": 3200,
-      "cas_latency": null,
-      "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:03+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-12T13:54:29+00:00",
-          "price_eur": 256.41,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-17T05:54:08+00:00",
-          "price_eur": 269.9,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-17T13:56:50+00:00",
-          "price_eur": 274.9,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-23T05:53:45+00:00",
-          "price_eur": 252.9,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "0a586d49ec78e9c7",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/6841608/patriot-32gb-ddr4-2x16gb-3200mhz-kit-pve2432g320c8k",
@@ -526,7 +541,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -567,7 +582,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:10+00:00",
+      "observed_at": "2026-11-25T13:54:13+00:00",
       "current": true,
       "history": [
         {
@@ -597,7 +612,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:15+00:00",
+      "observed_at": "2026-11-25T13:54:18+00:00",
       "current": true,
       "history": [
         {
@@ -642,7 +657,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:13+00:00",
+      "observed_at": "2026-11-25T13:53:13+00:00",
       "current": true,
       "history": [
         {
@@ -654,10 +669,10 @@
       "alerted_price_eur": null
     },
     {
-      "id": "3ca9fdbc205c7553",
-      "store": "PCDIGA",
-      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-vulcan-z-32gb-2x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-cinzenta-tlzgd432g3200hc16fdc01-765441654204",
-      "title": "Memória RAM UDIMM TEAMGROUP T-Force Vulcan Z 32GB (2x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Cinzenta",
+      "id": "30e2e5244a16e5ad",
+      "store": "PcComponentes",
+      "url": "https://www.pccomponentes.pt/team-group-t-force-vulcan-z-ddr4-3200mhz-pc4-25600-32-gb-2x16gb-cl16-cinzentas",
+      "title": "Team Group T-Force Vulcan Z DDR4 3200Mhz PC4-25600 32 GB 2x16GB CL16 Cinzentas",
       "configuration": "kit",
       "units_to_buy": 1,
       "unit_price_eur": 259.9,
@@ -667,72 +682,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:48+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-11T21:55:23+00:00",
-          "price_eur": 259.9,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "69b8e543e631d34d",
-      "store": "Globaldata",
-      "url": "https://www.globaldata.pt/g.skill-kit-32gb-2-x-16gb-ddr4-3000mhz-aegis-cl16/F4-3000C16D-32GISB.html",
-      "title": "G.Skill Kit 32GB (2 x 16GB) DDR4 3000MHz Aegis CL16",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 264.9,
-      "price_eur": 264.9,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:35+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:01:43+00:00",
-          "price_eur": 265.9,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-12T21:56:37+00:00",
-          "price_eur": 267.9,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-16T13:56:17+00:00",
-          "price_eur": 265.9,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-25T05:55:35+00:00",
-          "price_eur": 264.9,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "30e2e5244a16e5ad",
-      "store": "PcComponentes",
-      "url": "https://www.pccomponentes.pt/team-group-t-force-vulcan-z-ddr4-3200mhz-pc4-25600-32-gb-2x16gb-cl16-cinzentas",
-      "title": "Team Group T-Force Vulcan Z DDR4 3200Mhz PC4-25600 32 GB 2x16GB CL16 Cinzentas",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 265.99,
-      "price_eur": 265.99,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:58+00:00",
+      "observed_at": "2026-11-25T13:54:00+00:00",
       "current": true,
       "history": [
         {
@@ -894,6 +844,36 @@
           "at": "2026-11-24T21:54:05+00:00",
           "price_eur": 265.99,
           "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-25T13:54:00+00:00",
+          "price_eur": 259.9,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "3ca9fdbc205c7553",
+      "store": "PCDIGA",
+      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-vulcan-z-32gb-2x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-cinzenta-tlzgd432g3200hc16fdc01-765441654204",
+      "title": "Memória RAM UDIMM TEAMGROUP T-Force Vulcan Z 32GB (2x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Cinzenta",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:55:03+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-11T21:55:23+00:00",
+          "price_eur": 259.9,
+          "stock": "in_stock"
         }
       ],
       "alerted_price_eur": null
@@ -902,17 +882,17 @@
       "id": "e59a90d47f967623",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/263855/team-group-32gb-2-x-16gb-ddr4-3200mhz-vulcan-z-grey-cl16-tlzgd432g3200hc16c",
-      "title": "Memória RAM Team Group 32GB (2 x 16GB) DDR4 3200MHz Vulcan Z Grey CL16 - TLZGD432G3200HC16C 265,99€ Pc Componentes",
+      "title": "Boa compra Memória RAM Team Group 32GB (2 x 16GB) DDR4 3200MHz Vulcan Z Grey CL16 - TLZGD432G3200HC16C 259,90€ Pc Componentes",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 265.99,
-      "price_eur": 265.99,
+      "unit_price_eur": 259.9,
+      "price_eur": 259.9,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1080,6 +1060,51 @@
           "at": "2026-11-25T05:55:40+00:00",
           "price_eur": 265.99,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 259.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "69b8e543e631d34d",
+      "store": "Globaldata",
+      "url": "https://www.globaldata.pt/g.skill-kit-32gb-2-x-16gb-ddr4-3000mhz-aegis-cl16/F4-3000C16D-32GISB.html",
+      "title": "G.Skill Kit 32GB (2 x 16GB) DDR4 3000MHz Aegis CL16",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 264.9,
+      "price_eur": 264.9,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:55:49+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:01:43+00:00",
+          "price_eur": 265.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-12T21:56:37+00:00",
+          "price_eur": 267.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-16T13:56:17+00:00",
+          "price_eur": 265.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-25T05:55:35+00:00",
+          "price_eur": 264.9,
+          "stock": "in_stock"
         }
       ],
       "alerted_price_eur": null
@@ -1098,7 +1123,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:40+00:00",
+      "observed_at": "2026-11-25T13:54:54+00:00",
       "current": true,
       "history": [
         {
@@ -1110,100 +1135,20 @@
       "alerted_price_eur": null
     },
     {
-      "id": "86519a4f785fd7a0",
-      "store": "PCDIGA",
-      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-vulcan-z-16gb-1x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-cinzenta-tlzgd416g3200hc16f01-765441654174",
-      "title": "Memória RAM UDIMM TEAMGROUP T-Force Vulcan Z 16GB (1x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Cinzenta",
-      "configuration": "single_pair",
-      "units_to_buy": 2,
-      "unit_price_eur": 134.9,
-      "price_eur": 269.8,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:44+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:33:09+00:00",
-          "price_eur": 269.8,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "b2675531269a1222",
-      "store": "PCDIGA",
-      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-delta-rgb-32gb-2x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-branca-tf4d432g3200hc16fdc01-765441654570",
-      "title": "Memória RAM UDIMM TEAMGROUP T-Force Delta RGB 32GB (2x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Branca",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 269.9,
-      "price_eur": 269.9,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:51+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:00:01+00:00",
-          "price_eur": 269.9,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "6a4d427a61fde44f",
-      "store": "PcComponentes",
-      "url": "https://www.pccomponentes.pt/memoria-ram-forgeon-cyclone-plus-16gb-1x16gb-ddr4-3200mhz-cl22-preto",
-      "title": "Memória RAM Forgeon Cyclone PLUS 16GB 1x16GB DDR4 3200MHz CL22 Preto",
-      "configuration": "single_pair",
-      "units_to_buy": 2,
-      "unit_price_eur": 134.99,
-      "price_eur": 269.98,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 22,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:11+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T13:56:14+00:00",
-          "price_eur": 297.9,
-          "stock": "unknown"
-        },
-        {
-          "at": "2026-11-23T05:54:58+00:00",
-          "price_eur": 269.98,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "4b8ff2e2b66db3f5",
       "store": "Castro Electrónica",
       "url": "https://www.castroelectronica.pt/pt/product/memoria-ram-udimm-aegis-32gb-2x16gb-ddr4-3000mhz-intel-xmp-cl16-135v-preta--gskill-1",
       "title": "Memória RAM UDIMM Aegis 32GB (2x16GB) DDR4-3000MHz (Intel XMP) CL16 1.35V (Preta) - G.SKILL",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 270.79,
-      "price_eur": 270.79,
+      "unit_price_eur": 267.39,
+      "price_eur": 267.39,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -1256,6 +1201,91 @@
           "at": "2026-11-24T05:52:42+00:00",
           "price_eur": 270.79,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-25T13:52:41+00:00",
+          "price_eur": 267.39,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "86519a4f785fd7a0",
+      "store": "PCDIGA",
+      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-vulcan-z-16gb-1x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-cinzenta-tlzgd416g3200hc16f01-765441654174",
+      "title": "Memória RAM UDIMM TEAMGROUP T-Force Vulcan Z 16GB (1x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Cinzenta",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 134.9,
+      "price_eur": 269.8,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:53:45+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:33:09+00:00",
+          "price_eur": 269.8,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "b2675531269a1222",
+      "store": "PCDIGA",
+      "url": "https://www.pcdiga.com/componentes/memorias-ram/memorias-ram-ddr4/memoria-ram-udimm-teamgroup-t-force-delta-rgb-32gb-2x16gb-ddr4-3200mhz-intel-xmp-cl16-16-20-20-40-1-35v-branca-tf4d432g3200hc16fdc01-765441654570",
+      "title": "Memória RAM UDIMM TEAMGROUP T-Force Delta RGB 32GB (2x16GB) DDR4-3200MHz (Intel XMP) CL16 (16-20-20-40) 1.35V Branca",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 269.9,
+      "price_eur": 269.9,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:52:51+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T01:00:01+00:00",
+          "price_eur": 269.9,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "6a4d427a61fde44f",
+      "store": "PcComponentes",
+      "url": "https://www.pccomponentes.pt/memoria-ram-forgeon-cyclone-plus-16gb-1x16gb-ddr4-3200mhz-cl22-preto",
+      "title": "Memória RAM Forgeon Cyclone PLUS 16GB 1x16GB DDR4 3200MHz CL22 Preto",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 134.99,
+      "price_eur": 269.98,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 22,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:55:25+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T13:56:14+00:00",
+          "price_eur": 297.9,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-23T05:54:58+00:00",
+          "price_eur": 269.98,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -1274,7 +1304,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1310,7 +1340,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1411,7 +1441,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:39+00:00",
+      "observed_at": "2026-11-25T13:53:40+00:00",
       "current": true,
       "history": [
         {
@@ -1456,7 +1486,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1507,7 +1537,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:17+00:00",
+      "observed_at": "2026-11-25T13:53:18+00:00",
       "current": true,
       "history": [
         {
@@ -1537,7 +1567,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:15+00:00",
+      "observed_at": "2026-11-25T13:53:15+00:00",
       "current": true,
       "history": [
         {
@@ -1555,14 +1585,14 @@
       "title": "Memória RAM G.Skill 32GB Ripjaws V (2x 16GB) DDR4 3200MHz PC4-25600 CL16 - F4-3200C16D-32GVK",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 281.9,
-      "price_eur": 281.9,
+      "unit_price_eur": 281.89,
+      "price_eur": 281.89,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1590,6 +1620,11 @@
           "at": "2026-11-21T05:55:45+00:00",
           "price_eur": 281.9,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 281.89,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -1608,7 +1643,7 @@
       "speed_mhz": 3600,
       "cas_latency": 18,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:17+00:00",
+      "observed_at": "2026-11-25T13:54:44+00:00",
       "current": true,
       "history": [
         {
@@ -1636,14 +1671,14 @@
       "title": "Memória RAM G.Skill 32GB Ripjaws V (2x16GB) DDR4 3600MHz PC4-28800 CL18 Black - F4-3600C18D-32GVK",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 283.0,
-      "price_eur": 283.0,
+      "unit_price_eur": 282.99,
+      "price_eur": 282.99,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1666,6 +1701,11 @@
           "at": "2026-11-24T21:55:50+00:00",
           "price_eur": 283.0,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 282.99,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -1684,7 +1724,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:36+00:00",
+      "observed_at": "2026-11-25T13:55:50+00:00",
       "current": true,
       "history": [
         {
@@ -1719,7 +1759,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1760,7 +1800,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1796,7 +1836,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1827,7 +1867,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -1853,7 +1893,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:06+00:00",
+      "observed_at": "2026-11-25T13:54:09+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -1947,7 +1987,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:55:02+00:00",
+      "observed_at": "2026-11-25T13:55:30+00:00",
       "current": true,
       "history": [
         {
@@ -1969,31 +2009,6 @@
       "alerted_price_eur": null
     },
     {
-      "id": "aaecbce734e9e839",
-      "store": "PCBox",
-      "url": "https://www.pcbox.pt/product/ad4u320016g22-sgn-adata--ad4u320016g22-sgn--16gb-ddr4-3200mhz---1x16---cl22",
-      "title": "Memória RAM ADATA Premier 16GB DDR4 3200Mhz 1x16GB",
-      "configuration": "single_pair",
-      "units_to_buy": 2,
-      "unit_price_eur": 149.0,
-      "price_eur": 298.0,
-      "stock": "out_of_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": null,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:14+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:00:34+00:00",
-          "price_eur": 298.0,
-          "stock": "out_of_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "f704cc995b084f59",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/132380/gskill-32gb-2x-16gb-ripjaws-v-ddr4-3600mhz-cl16-black-f4-3600c16d-32gvkc",
@@ -2007,7 +2022,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2053,7 +2068,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:29+00:00",
+      "observed_at": "2026-11-25T13:53:30+00:00",
       "current": true,
       "history": [
         {
@@ -2078,7 +2093,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:48+00:00",
+      "observed_at": "2026-11-25T13:53:50+00:00",
       "current": true,
       "history": [
         {
@@ -2108,13 +2123,39 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
         {
           "at": "2026-11-21T05:54:24+00:00",
           "price_eur": 301.78,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "c080468868355c83",
+      "store": "KuantoKusta comparison",
+      "url": "https://www.kuantokusta.pt/p/137776/goodram-32gb-2x16gb-irdm-pro-3600mhz-ddr4",
+      "title": "Memória RAM Goodram 32GB (2x16GB) IRDM PRO 3600MHz DDR4 301,99€ Pc Componentes",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 301.99,
+      "price_eur": 301.99,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": null,
+      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
+      "observed_at": "2026-11-25T13:55:58+00:00",
+      "current": true,
+      "comparison_only": true,
+      "history": [
+        {
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 301.99,
           "stock": "unknown"
         }
       ],
@@ -2134,7 +2175,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:51+00:00",
+      "observed_at": "2026-11-25T13:54:06+00:00",
       "current": true,
       "history": [
         {
@@ -2159,7 +2200,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:29+00:00",
+      "observed_at": "2026-11-25T13:55:44+00:00",
       "current": true,
       "history": [
         {
@@ -2199,7 +2240,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:54+00:00",
+      "observed_at": "2026-11-25T13:53:56+00:00",
       "current": true,
       "seller_status": "marketplace",
       "seller_evidence": "page",
@@ -2283,7 +2324,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2319,7 +2360,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2345,7 +2386,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2396,7 +2437,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:33+00:00",
+      "observed_at": "2026-11-25T13:54:41+00:00",
       "current": true,
       "history": [
         {
@@ -2433,6 +2474,46 @@
       "alerted_price_eur": null
     },
     {
+      "id": "9d8ff2e3548319d8",
+      "store": "KIBO",
+      "url": "https://www.kibo.pt/produto/corsair-vengeance-lpx-cmk32gx4m2d3000c16-kit-memoria-ram-ddr4-32gb-2x16gb-3000mhz-cl16-preto/",
+      "title": "Corsair Vengeance LPX CMK32GX4M2D3000C16 Kit Memória RAM DDR4 32GB (2x16GB) 3000MHz CL16 Preto",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 318.8,
+      "price_eur": 318.8,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:54:29+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-09T12:44:40+00:00",
+          "price_eur": 320.7,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-16T13:54:55+00:00",
+          "price_eur": 324.0,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-24T05:54:22+00:00",
+          "price_eur": 325.7,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-25T13:54:29+00:00",
+          "price_eur": 318.8,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
       "id": "e9c7206dd27ecaea",
       "store": "Novo Atalho",
       "url": "https://www.novoatalho.pt/dimm-ddr4-pack-2x-16gb-32gb-teamgroup-cl18-3600mhz-t-create-expert-cinza-0765441654792-ttced432g3600hc18jdc",
@@ -2446,7 +2527,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:01+00:00",
+      "observed_at": "2026-11-25T13:53:01+00:00",
       "current": true,
       "history": [
         {
@@ -2471,7 +2552,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2497,7 +2578,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2509,32 +2590,6 @@
         {
           "at": "2026-11-23T05:55:33+00:00",
           "price_eur": 319.9,
-          "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "22be246abb957a3e",
-      "store": "KuantoKusta comparison",
-      "url": "https://www.kuantokusta.pt/p/12202282/goodram-rival-radiant-32gb-2x16gb-ddr4-3200mhz-cl16-red",
-      "title": "-5% Black Friday Memória RAM Goodram Rival Radiant 32GB (2x16GB) DDR4 3200MHz CL16 Red 320,49€ 303,99€ em 2 lojas",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 320.49,
-      "price_eur": 320.49,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
-      "current": true,
-      "comparison_only": true,
-      "history": [
-        {
-          "at": "2026-11-22T21:55:40+00:00",
-          "price_eur": 320.49,
           "stock": "unknown"
         }
       ],
@@ -2554,7 +2609,7 @@
       "speed_mhz": 3600,
       "cas_latency": 18,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:38+00:00",
+      "observed_at": "2026-11-25T13:55:08+00:00",
       "current": true,
       "history": [
         {
@@ -2594,7 +2649,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2655,7 +2710,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:55:14+00:00",
+      "observed_at": "2026-11-25T13:55:28+00:00",
       "current": true,
       "history": [
         {
@@ -2690,7 +2745,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -2763,41 +2818,6 @@
       "alerted_price_eur": null
     },
     {
-      "id": "9d8ff2e3548319d8",
-      "store": "KIBO",
-      "url": "https://www.kibo.pt/produto/corsair-vengeance-lpx-cmk32gx4m2d3000c16-kit-memoria-ram-ddr4-32gb-2x16gb-3000mhz-cl16-preto/",
-      "title": "Corsair Vengeance LPX CMK32GX4M2D3000C16 Kit Memória RAM DDR4 32GB (2x16GB) 3000MHz CL16 Preto",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 325.7,
-      "price_eur": 325.7,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:35+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-09T12:44:40+00:00",
-          "price_eur": 320.7,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-16T13:54:55+00:00",
-          "price_eur": 324.0,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-24T05:54:22+00:00",
-          "price_eur": 325.7,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
       "id": "5bdbd564c7b3b629",
       "store": "CHIP7",
       "url": "https://chip7.pt/componentes-hardware/memoria-ram/memoria-ram-ddr4/crucial/cp2k16g4dfra32a",
@@ -2811,7 +2831,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:00+00:00",
+      "observed_at": "2026-11-25T13:53:00+00:00",
       "current": true,
       "history": [
         {
@@ -2853,6 +2873,86 @@
       "alerted_price_eur": null
     },
     {
+      "id": "b611745532dfe9d4",
+      "store": "KIBO",
+      "url": "https://www.kibo.pt/produto/corsair-vengeance-rgb-pro-cmw32gx4m2e3200c16w-kit-de-memoria-ram-32-gb-2x16-gb-ddr4-3200-mhz-cl16-branca/",
+      "title": "Corsair Vengeance RGB Pro CMW32GX4M2E3200C16W Kit de Memória RAM 32 GB (2x16 GB) DDR4 3200 MHz CL16 Branca",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 327.6,
+      "price_eur": 327.6,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3200,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:54:04+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-09T12:44:02+00:00",
+          "price_eur": 329.5,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-16T13:54:22+00:00",
+          "price_eur": 332.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-24T05:53:59+00:00",
+          "price_eur": 334.7,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-25T13:54:04+00:00",
+          "price_eur": 327.6,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "1830305537e7bbe2",
+      "store": "KIBO",
+      "url": "https://www.kibo.pt/produto/corsair-vengeance-rgb-pro-sl-cmh32gx4m2e3200c16w-memoria-ram-32-gb-2x16-gb-ddr4-3200-mhz-cl16-branca/",
+      "title": "Corsair Vengeance RGB Pro SL CMH32GX4M2E3200C16W Memória RAM 32 GB (2x16 GB) DDR4 3200 MHz CL16 Branca",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 327.6,
+      "price_eur": 327.6,
+      "stock": "in_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": 3200,
+      "cas_latency": 16,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:54:16+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-09T12:44:17+00:00",
+          "price_eur": 329.5,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-16T13:54:35+00:00",
+          "price_eur": 332.9,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-24T05:54:10+00:00",
+          "price_eur": 334.7,
+          "stock": "in_stock"
+        },
+        {
+          "at": "2026-11-25T13:54:16+00:00",
+          "price_eur": 327.6,
+          "stock": "in_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
       "id": "a6dc2d0e36929b44",
       "store": "Chipman",
       "url": "https://chipman.pt/memorias-ram-ddr4/kingston-kit-memoria-ram-fury-beast-kf432c16bbk2-32",
@@ -2866,7 +2966,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:02+00:00",
+      "observed_at": "2026-11-25T13:53:02+00:00",
       "current": true,
       "history": [
         {
@@ -2901,7 +3001,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:23+00:00",
+      "observed_at": "2026-11-25T13:53:24+00:00",
       "current": true,
       "history": [
         {
@@ -2966,7 +3066,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3017,7 +3117,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:23+00:00",
+      "observed_at": "2026-11-25T13:55:38+00:00",
       "current": true,
       "history": [
         {
@@ -3047,7 +3147,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3070,6 +3170,51 @@
       "alerted_price_eur": null
     },
     {
+      "id": "0c0295341680b216",
+      "store": "PCBox",
+      "url": "https://www.pcbox.pt/product/cmk32gx4m2e3200c16-corsair-vengeance-cmk32gx4m2e3200c16--32gb-ddr4-3200mhz---2x",
+      "title": "Memória RAM CORSAIR Vengeance 32GB DDR4 3200MHz",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 330.61,
+      "price_eur": 330.61,
+      "stock": "out_of_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": null,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T13:53:51+00:00",
+      "current": true,
+      "history": [
+        {
+          "at": "2026-11-08T02:03:22+00:00",
+          "price_eur": 328.88,
+          "stock": "out_of_stock"
+        },
+        {
+          "at": "2026-11-09T12:44:54+00:00",
+          "price_eur": 329.06,
+          "stock": "out_of_stock"
+        },
+        {
+          "at": "2026-11-16T13:54:08+00:00",
+          "price_eur": 332.4,
+          "stock": "out_of_stock"
+        },
+        {
+          "at": "2026-11-24T05:53:48+00:00",
+          "price_eur": 334.24,
+          "stock": "out_of_stock"
+        },
+        {
+          "at": "2026-11-25T13:53:51+00:00",
+          "price_eur": 330.61,
+          "stock": "out_of_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
       "id": "67531fd1e6d95dac",
       "store": "PcComponentes",
       "url": "https://www.pccomponentes.pt/memoria-ram-g-skill-ripjaws-v-ddr4-3600mhz-pc4-28800-32gb-2x16gb-cl16",
@@ -3083,7 +3228,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:22+00:00",
+      "observed_at": "2026-11-25T13:55:42+00:00",
       "current": true,
       "history": [
         {
@@ -3123,7 +3268,7 @@
       "speed_mhz": null,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:53+00:00",
+      "observed_at": "2026-11-25T13:52:53+00:00",
       "current": true,
       "history": [
         {
@@ -3165,111 +3310,46 @@
       "alerted_price_eur": null
     },
     {
-      "id": "0c0295341680b216",
+      "id": "9a95f7a1ce6bd188",
       "store": "PCBox",
-      "url": "https://www.pcbox.pt/product/cmk32gx4m2e3200c16-corsair-vengeance-cmk32gx4m2e3200c16--32gb-ddr4-3200mhz---2x",
-      "title": "Memória RAM CORSAIR Vengeance 32GB DDR4 3200MHz",
+      "url": "https://www.pcbox.pt/product/cmg32gx4m2e3200c16-corsair-vengeance-cmg32gx4m2e3200c16--32gb-ddr4-3200mhz---2x",
+      "title": "Memória RAM CORSAIR Vengeance 32GB DDR4 3200MHz (2x16GB)",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 334.24,
-      "price_eur": 334.24,
+      "unit_price_eur": 337.15,
+      "price_eur": 337.15,
       "stock": "out_of_stock",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:50+00:00",
+      "observed_at": "2026-11-25T13:53:20+00:00",
       "current": true,
       "history": [
         {
-          "at": "2026-11-08T02:03:22+00:00",
-          "price_eur": 328.88,
+          "at": "2026-11-08T01:00:25+00:00",
+          "price_eur": 335.36,
           "stock": "out_of_stock"
         },
         {
-          "at": "2026-11-09T12:44:54+00:00",
-          "price_eur": 329.06,
+          "at": "2026-11-09T12:44:18+00:00",
+          "price_eur": 335.56,
           "stock": "out_of_stock"
         },
         {
-          "at": "2026-11-16T13:54:08+00:00",
-          "price_eur": 332.4,
+          "at": "2026-11-17T13:56:35+00:00",
+          "price_eur": 338.97,
           "stock": "out_of_stock"
         },
         {
-          "at": "2026-11-24T05:53:48+00:00",
-          "price_eur": 334.24,
+          "at": "2026-11-24T05:53:17+00:00",
+          "price_eur": 340.86,
           "stock": "out_of_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "b611745532dfe9d4",
-      "store": "KIBO",
-      "url": "https://www.kibo.pt/produto/corsair-vengeance-rgb-pro-cmw32gx4m2e3200c16w-kit-de-memoria-ram-32-gb-2x16-gb-ddr4-3200-mhz-cl16-branca/",
-      "title": "Corsair Vengeance RGB Pro CMW32GX4M2E3200C16W Kit de Memória RAM 32 GB (2x16 GB) DDR4 3200 MHz CL16 Branca",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 334.7,
-      "price_eur": 334.7,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": 3200,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:13+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-09T12:44:02+00:00",
-          "price_eur": 329.5,
-          "stock": "in_stock"
         },
         {
-          "at": "2026-11-16T13:54:22+00:00",
-          "price_eur": 332.9,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-24T05:53:59+00:00",
-          "price_eur": 334.7,
-          "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "1830305537e7bbe2",
-      "store": "KIBO",
-      "url": "https://www.kibo.pt/produto/corsair-vengeance-rgb-pro-sl-cmh32gx4m2e3200c16w-memoria-ram-32-gb-2x16-gb-ddr4-3200-mhz-cl16-branca/",
-      "title": "Corsair Vengeance RGB Pro SL CMH32GX4M2E3200C16W Memória RAM 32 GB (2x16 GB) DDR4 3200 MHz CL16 Branca",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 334.7,
-      "price_eur": 334.7,
-      "stock": "in_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": 3200,
-      "cas_latency": 16,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:25+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-09T12:44:17+00:00",
-          "price_eur": 329.5,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-16T13:54:35+00:00",
-          "price_eur": 332.9,
-          "stock": "in_stock"
-        },
-        {
-          "at": "2026-11-24T05:54:10+00:00",
-          "price_eur": 334.7,
-          "stock": "in_stock"
+          "at": "2026-11-25T13:53:20+00:00",
+          "price_eur": 337.15,
+          "stock": "out_of_stock"
         }
       ],
       "alerted_price_eur": null
@@ -3278,17 +3358,17 @@
       "id": "cf7a93cf5c0d5658",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/10456252/kingston-32gb-fury-beast-rgb-2x16gb-ddr4-3200mhz-cl16-black-kf432c16bb12ak232",
-      "title": "Memória RAM Kingston 32GB FURY Beast RGB (2x16GB) DDR4 3200MHz CL16 Black - KF432C16BB12AK2/32",
+      "title": "Boa compra Memória RAM Kingston 32GB FURY Beast RGB (2x16GB) DDR4 3200MHz CL16 Black - KF432C16BB12AK2/32",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 340.8,
-      "price_eur": 340.8,
+      "unit_price_eur": 338.99,
+      "price_eur": 338.99,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3321,46 +3401,11 @@
           "at": "2026-11-24T05:55:37+00:00",
           "price_eur": 340.8,
           "stock": "unknown"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "9a95f7a1ce6bd188",
-      "store": "PCBox",
-      "url": "https://www.pcbox.pt/product/cmg32gx4m2e3200c16-corsair-vengeance-cmg32gx4m2e3200c16--32gb-ddr4-3200mhz---2x",
-      "title": "Memória RAM CORSAIR Vengeance 32GB DDR4 3200MHz (2x16GB)",
-      "configuration": "kit",
-      "units_to_buy": 1,
-      "unit_price_eur": 340.86,
-      "price_eur": 340.86,
-      "stock": "out_of_stock",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": null,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:19+00:00",
-      "current": true,
-      "history": [
-        {
-          "at": "2026-11-08T01:00:25+00:00",
-          "price_eur": 335.36,
-          "stock": "out_of_stock"
         },
         {
-          "at": "2026-11-09T12:44:18+00:00",
-          "price_eur": 335.56,
-          "stock": "out_of_stock"
-        },
-        {
-          "at": "2026-11-17T13:56:35+00:00",
-          "price_eur": 338.97,
-          "stock": "out_of_stock"
-        },
-        {
-          "at": "2026-11-24T05:53:17+00:00",
-          "price_eur": 340.86,
-          "stock": "out_of_stock"
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 338.99,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -3379,7 +3424,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:20+00:00",
+      "observed_at": "2026-11-25T13:53:21+00:00",
       "current": true,
       "history": [
         {
@@ -3414,7 +3459,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -3465,7 +3510,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3506,7 +3551,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "CHIP7 financing PVP — indicative, contact shop (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:36+00:00",
+      "observed_at": "2026-11-25T13:53:37+00:00",
       "current": true,
       "indicative_only": true,
       "history": [
@@ -3532,7 +3577,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:55:19+00:00",
+      "observed_at": "2026-11-25T13:55:33+00:00",
       "current": true,
       "history": [
         {
@@ -3557,7 +3602,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:24+00:00",
+      "observed_at": "2026-11-25T13:54:27+00:00",
       "current": true,
       "history": [
         {
@@ -3582,7 +3627,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3658,7 +3703,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:08+00:00",
+      "observed_at": "2026-11-25T13:53:10+00:00",
       "current": true,
       "history": [
         {
@@ -3718,7 +3763,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:45+00:00",
+      "observed_at": "2026-11-25T13:55:16+00:00",
       "current": true,
       "history": [
         {
@@ -3768,7 +3813,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:57+00:00",
+      "observed_at": "2026-11-25T13:52:57+00:00",
       "current": true,
       "history": [
         {
@@ -3808,7 +3853,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:44+00:00",
+      "observed_at": "2026-11-25T13:53:45+00:00",
       "current": true,
       "history": [
         {
@@ -3833,7 +3878,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:43+00:00",
+      "observed_at": "2026-11-25T13:54:58+00:00",
       "current": true,
       "history": [
         {
@@ -3861,14 +3906,14 @@
       "title": "Memória RAM Kingston Pack 2x 16GB (32GB) DDR4 CL16 3600Mhz Fury Renegade - KF436C16RB12K2/32",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 380.12,
-      "price_eur": 380.12,
+      "unit_price_eur": 381.21,
+      "price_eur": 381.21,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3936,6 +3981,11 @@
           "at": "2026-11-25T05:55:40+00:00",
           "price_eur": 380.12,
           "stock": "unknown"
+        },
+        {
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 381.21,
+          "stock": "unknown"
         }
       ],
       "alerted_price_eur": null
@@ -3944,17 +3994,17 @@
       "id": "b5e829acc320258f",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/10351837/corsair-ddr4-32gb-pc-3200-cl16-kit-2x16gb-vengeance-lpx-cmk32gx4m2e3200c16w",
-      "title": "Memória RAM Corsair DDR4 32GB Pc 3200 CL16 Kit (2x16GB) Vengeance Lpx - CMK32GX4M2E3200C16W",
+      "title": "Memória RAM Corsair DDR4 32GB Pc 3200 CL16 Kit (2x16GB) Vengeance Lpx - CMK32GX4M2E3200C16W 392,57€ Senetic 5",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 388.99,
-      "price_eur": 388.99,
+      "unit_price_eur": 392.57,
+      "price_eur": 392.57,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
-      "observed_at": "2026-11-25T05:55:40+00:00",
+      "observed_at": "2026-11-25T13:55:58+00:00",
       "current": true,
       "comparison_only": true,
       "history": [
@@ -3971,6 +4021,11 @@
         {
           "at": "2026-11-18T05:55:35+00:00",
           "price_eur": 388.99,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-25T13:55:58+00:00",
+          "price_eur": 392.57,
           "stock": "unknown"
         }
       ],
@@ -3990,7 +4045,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:55:00+00:00",
+      "observed_at": "2026-11-25T13:55:15+00:00",
       "current": true,
       "history": [
         {
@@ -4020,7 +4075,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:22+00:00",
+      "observed_at": "2026-11-25T13:53:22+00:00",
       "current": true,
       "history": [
         {
@@ -4050,7 +4105,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:02+00:00",
+      "observed_at": "2026-11-25T13:54:04+00:00",
       "current": true,
       "history": [
         {
@@ -4090,7 +4145,7 @@
       "speed_mhz": 3600,
       "cas_latency": 16,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -4141,7 +4196,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:21+00:00",
+      "observed_at": "2026-11-25T13:54:24+00:00",
       "current": true,
       "history": [
         {
@@ -4166,7 +4221,7 @@
       "speed_mhz": 3200,
       "cas_latency": 22,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:18+00:00",
+      "observed_at": "2026-11-25T13:53:19+00:00",
       "current": true,
       "history": [
         {
@@ -4191,7 +4246,7 @@
       "speed_mhz": 3600,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:54:52+00:00",
+      "observed_at": "2026-11-25T13:55:07+00:00",
       "current": true,
       "history": [
         {
@@ -4221,7 +4276,7 @@
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Product price metadata (HTML fallback)",
-      "observed_at": "2026-11-25T05:53:56+00:00",
+      "observed_at": "2026-11-25T13:53:58+00:00",
       "current": true,
       "history": [
         {
@@ -4276,7 +4331,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-25T05:55:20+00:00",
+      "observed_at": "2026-11-25T13:55:34+00:00",
       "current": true,
       "history": [
         {
@@ -4316,7 +4371,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -4352,7 +4407,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer catalogue price (verify product page)",
-      "observed_at": "2026-11-25T05:52:42+00:00",
+      "observed_at": "2026-11-25T13:52:41+00:00",
       "current": true,
       "catalogue_only": true,
       "history": [
@@ -4383,7 +4438,7 @@
       "speed_mhz": null,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:57+00:00",
+      "observed_at": "2026-11-25T13:53:58+00:00",
       "current": true,
       "history": [
         {
@@ -4408,7 +4463,7 @@
       "speed_mhz": null,
       "cas_latency": 18,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:09+00:00",
+      "observed_at": "2026-11-25T13:54:12+00:00",
       "current": true,
       "history": [
         {
@@ -4433,7 +4488,7 @@
       "speed_mhz": 3200,
       "cas_latency": 16,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:40+00:00",
+      "observed_at": "2026-11-25T13:53:42+00:00",
       "current": true,
       "seller_status": "Worten",
       "seller_evidence": "page",
@@ -4466,7 +4521,7 @@
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:53:34+00:00",
+      "observed_at": "2026-11-25T13:53:35+00:00",
       "current": true,
       "history": [
         {
@@ -4484,14 +4539,14 @@
       "title": "Módulo de Memória Crucial CT2K16G4DFRA32A",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 683.96,
-      "price_eur": 683.96,
+      "unit_price_eur": 683.83,
+      "price_eur": 683.83,
       "stock": "in_stock",
       "shipping_to_pt": "unverified",
       "speed_mhz": null,
       "cas_latency": null,
       "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:52:59+00:00",
+      "observed_at": "2026-11-25T13:52:59+00:00",
       "current": true,
       "history": [
         {
@@ -4583,31 +4638,11 @@
           "at": "2026-11-25T05:52:59+00:00",
           "price_eur": 683.96,
           "stock": "in_stock"
-        }
-      ],
-      "alerted_price_eur": null
-    },
-    {
-      "id": "63a2961382a20c08",
-      "store": "KIBO",
-      "url": "https://www.kibo.pt/produto/synology-d4eu02-16g-memoria-ram-16-gb-ddr4-ecc-udimm-para-rs2825rp/",
-      "title": "Synology D4EU02-16G Memória RAM 16 GB DDR4 ECC UDIMM para RS2825RP+",
-      "configuration": "single_pair",
-      "units_to_buy": 2,
-      "unit_price_eur": 1420.5,
-      "price_eur": 2841.0,
-      "stock": "unknown",
-      "shipping_to_pt": "unverified",
-      "speed_mhz": null,
-      "cas_latency": null,
-      "source": "Retailer product JSON-LD",
-      "observed_at": "2026-11-25T05:54:01+00:00",
-      "current": true,
-      "history": [
+        },
         {
-          "at": "2026-11-13T13:53:46+00:00",
-          "price_eur": 2841.0,
-          "stock": "unknown"
+          "at": "2026-11-25T13:52:59+00:00",
+          "price_eur": 683.83,
+          "stock": "in_stock"
         }
       ],
       "alerted_price_eur": null
@@ -4643,30 +4678,40 @@
       "alerted_price_eur": null
     },
     {
-      "id": "24dc75822c9e214b",
+      "id": "3913b3f1c4b3b10a",
       "store": "Chipman",
-      "url": "https://chipman.pt/memorias-ram-ddr4/g-skill-kit-memoria-ram-aegis-f4-3200c16d-32gis-3200",
-      "title": "Kit Memória RAM G.SKILL Aegis F4-3200C16D-32GIS (3200 MHz - 32 GB - DIMM)",
+      "url": "https://chipman.pt/memorias-ram-ddr4/patriot-kit-memoria-ram-viper-elite-ii-pve2432g320c8k",
+      "title": "Kit de Memória RAM PATRIOT Viper Elite II PVE2432G320C8K (3200 MHz - 32 GB - DIMM)",
       "configuration": "kit",
       "units_to_buy": 1,
-      "unit_price_eur": 249.9,
-      "price_eur": 249.9,
+      "unit_price_eur": 252.9,
+      "price_eur": 252.9,
       "stock": "unknown",
       "shipping_to_pt": "unverified",
       "speed_mhz": 3200,
       "cas_latency": null,
       "source": "Primary product price (HTML fallback)",
-      "observed_at": "2026-11-24T05:54:12+00:00",
+      "observed_at": "2026-11-25T05:54:03+00:00",
       "current": false,
       "history": [
         {
-          "at": "2026-11-11T13:54:08+00:00",
-          "price_eur": 258.31,
+          "at": "2026-11-12T13:54:29+00:00",
+          "price_eur": 256.41,
           "stock": "unknown"
         },
         {
-          "at": "2026-11-23T05:54:09+00:00",
-          "price_eur": 249.9,
+          "at": "2026-11-17T05:54:08+00:00",
+          "price_eur": 269.9,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-17T13:56:50+00:00",
+          "price_eur": 274.9,
+          "stock": "unknown"
+        },
+        {
+          "at": "2026-11-23T05:53:45+00:00",
+          "price_eur": 252.9,
           "stock": "unknown"
         }
       ],
@@ -5178,6 +5223,31 @@
       "alerted_price_eur": null
     },
     {
+      "id": "aaecbce734e9e839",
+      "store": "PCBox",
+      "url": "https://www.pcbox.pt/product/ad4u320016g22-sgn-adata--ad4u320016g22-sgn--16gb-ddr4-3200mhz---1x16---cl22",
+      "title": "Memória RAM ADATA Premier 16GB DDR4 3200Mhz 1x16GB",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 149.0,
+      "price_eur": 298.0,
+      "stock": "out_of_stock",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": null,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T05:54:14+00:00",
+      "current": false,
+      "history": [
+        {
+          "at": "2026-11-08T01:00:34+00:00",
+          "price_eur": 298.0,
+          "stock": "out_of_stock"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
       "id": "a5933e87a908c6b5",
       "store": "KuantoKusta comparison",
       "url": "https://www.kuantokusta.pt/p/7037985/corsair-vengeance-32gb-rgb-rs-2x16gb-ddr4-3200mhz-cl16-preta-cmg32gx4m2e3200c16",
@@ -5451,6 +5521,32 @@
         {
           "at": "2026-11-08T01:01:57+00:00",
           "price_eur": 319.9,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
+    },
+    {
+      "id": "22be246abb957a3e",
+      "store": "KuantoKusta comparison",
+      "url": "https://www.kuantokusta.pt/p/12202282/goodram-rival-radiant-32gb-2x16gb-ddr4-3200mhz-cl16-red",
+      "title": "-5% Black Friday Memória RAM Goodram Rival Radiant 32GB (2x16GB) DDR4 3200MHz CL16 Red 320,49€ 303,99€ em 2 lojas",
+      "configuration": "kit",
+      "units_to_buy": 1,
+      "unit_price_eur": 320.49,
+      "price_eur": 320.49,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": 16,
+      "source": "Comparison lowest advertised price, merchant/stock/shipping not verified",
+      "observed_at": "2026-11-25T05:55:40+00:00",
+      "current": false,
+      "comparison_only": true,
+      "history": [
+        {
+          "at": "2026-11-22T21:55:40+00:00",
+          "price_eur": 320.49,
           "stock": "unknown"
         }
       ],
@@ -6322,6 +6418,31 @@
         }
       ],
       "alerted_price_eur": null
+    },
+    {
+      "id": "63a2961382a20c08",
+      "store": "KIBO",
+      "url": "https://www.kibo.pt/produto/synology-d4eu02-16g-memoria-ram-16-gb-ddr4-ecc-udimm-para-rs2825rp/",
+      "title": "Synology D4EU02-16G Memória RAM 16 GB DDR4 ECC UDIMM para RS2825RP+",
+      "configuration": "single_pair",
+      "units_to_buy": 2,
+      "unit_price_eur": 1420.5,
+      "price_eur": 2841.0,
+      "stock": "unknown",
+      "shipping_to_pt": "unverified",
+      "speed_mhz": null,
+      "cas_latency": null,
+      "source": "Retailer product JSON-LD",
+      "observed_at": "2026-11-25T05:54:01+00:00",
+      "current": false,
+      "history": [
+        {
+          "at": "2026-11-13T13:53:46+00:00",
+          "price_eur": 2841.0,
+          "stock": "unknown"
+        }
+      ],
+      "alerted_price_eur": null
     }
   ],
   "health": [
@@ -6334,7 +6455,7 @@
     {
       "source": "PcComponentes category",
       "status": "ok",
-      "found": 20,
+      "found": 19,
       "priced_cards": 0
     },
     {
@@ -6359,13 +6480,13 @@
       "source": "Castro Electrónica category",
       "status": "ok",
       "found": 25,
-      "priced_cards": 11
+      "priced_cards": 12
     },
     {
       "source": "Chipman category",
       "status": "ok",
       "found": 18,
-      "priced_cards": 9
+      "priced_cards": 10
     },
     {
       "source": "You Get category",
@@ -6376,7 +6497,7 @@
     {
       "source": "KIBO category",
       "status": "ok",
-      "found": 7,
+      "found": 6,
       "priced_cards": 0
     },
     {
@@ -6388,7 +6509,7 @@
     {
       "source": "PCBox category",
       "status": "ok",
-      "found": 5,
+      "found": 4,
       "priced_cards": 0
     },
     {
@@ -6411,7 +6532,7 @@
       "status": "configuration_unverified",
       "sample": {
         "url": "https://elshop.es/en/4985-kingston-technology-valueram-16-gb-ddr4-3200-mhz-cl22-so-dimm-kvr32s22d8-16.html",
-        "heading": "Kingston Technology ValueRAM 16 GB DDR4 3200 MHz CL22 SO-DIMM (KVR32S22D8/16)",
+        "heading": "Kingston Technology ValueRAM 16 GB DDR4 3200 MHz CL22 SO-DIMM",
         "price_nodes": [
           [
             "div",
@@ -6453,7 +6574,7 @@
             "div",
             "product-miniature__prices",
             "",
-            "€201.49"
+            "€200.99"
           ]
         ],
         "price_meta": [
@@ -6621,31 +6742,31 @@
             "div",
             "col-12 store-price-energetic",
             "",
-            "154,50 € Preço Loja - Iva incluído"
+            "151,50 € Preço Loja - Iva incluído"
           ],
           [
             "div",
             "product-store-price-wrapper product-bg-radius product-bg-light-blue col-6",
             "",
-            "154,50 € Preço Loja - Iva incluído"
+            "151,50 € Preço Loja - Iva incluído"
           ],
           [
             "span",
             "product-store-price",
             "",
-            "154,50 €"
+            "151,50 €"
           ],
           [
             "div",
             "product-opportunity-price-wrapper",
             "",
-            "146,89 € Preço Online - IVA incluído"
+            "143,89 € Preço Online - IVA incluído"
           ],
           [
             "span",
             "product-opportunity-new-price",
             "",
-            "146,89 €"
+            "143,89 €"
           ],
           [
             "div",
@@ -6657,11 +6778,19 @@
             "div",
             "prod-list-price-wrapper",
             "",
-            "27,59 € Loja: 29,00 €"
+            "138,89 € Loja: 146,00 €"
           ]
         ],
         "price_meta": []
       }
+    },
+    {
+      "source": "Globaldata product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "You Get product",
+      "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
@@ -6676,61 +6805,53 @@
       "status": "configuration_unverified"
     },
     {
-      "source": "Globaldata product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "You Get product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "PcComponentes product",
       "status": "configuration_unverified",
       "sample": {
-        "url": "https://www.pccomponentes.pt/memoria-ram-memoria-ram-crucial-ct16g4sfra32at-16gb-1x16gb-ddr4-3200mhz-cl22",
-        "heading": "Memoria RAM Crucial CT16G4SFRA32AT 16GB 1x16GB DDR4 3200MHz CL22",
+        "url": "https://www.pccomponentes.pt/team-group-delta-rgb-ddr4-3200-pc4-25600-16-gb-2x8gb-cl-16",
+        "heading": "Memória RAM Team Group Delta RGB 16GB 2x8GB DDR4 3200MHz CL16 RGB Preto",
         "price_nodes": [
-          [
-            "div",
-            "priceWithIdentifiers-aeeBtw isUp-ft3bWo",
-            "",
-            "P/N: CT16G4SFRA32AT | Cod. Artigo : 10992304 Crucial | Memórias Ram Crucial 146 "
-          ],
           [
             "div",
             "container-BycV2a priceAndEfficiency-_KgD6F",
             "",
-            "146 , 99 €"
+            "147 , 35 €"
           ],
           [
             "div",
             "priceAndCard-molO1L",
             "",
-            "146 , 99 €"
+            "147 , 35 €"
           ],
           [
             "div",
             "priceBoxContainer-ljfXEI skeleton-DzzlDX",
             "",
-            "146 , 99 €"
+            "147 , 35 €"
           ],
           [
             "div",
             "section-oxftTZ",
             "pdp-price-section",
-            "146 , 99 €"
+            "147 , 35 €"
           ],
           [
             "span",
             "price-UYqrOK",
             "pdp-price-current-container",
-            "146 , 99 €"
+            "147 , 35 €"
           ],
           [
             "span",
             "integer-KBIKRg",
             "pdp-price-current-integer",
-            "146 , 99 €"
+            "147 , 35 €"
+          ],
+          [
+            "span",
+            "decimal-fsn90Y",
+            "pdp-price-current-decimals",
+            ", 35 €"
           ]
         ],
         "price_meta": []
@@ -6770,15 +6891,15 @@
       "status": "configuration_unverified"
     },
     {
+      "source": "Castro Electrónica product",
+      "status": "configuration_unverified"
+    },
+    {
       "source": "PcComponentes product",
       "status": "configuration_unverified"
     },
     {
       "source": "Globaldata product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "Castro Electrónica product",
       "status": "configuration_unverified"
     },
     {
@@ -6814,19 +6935,7 @@
       "status": "configuration_unverified"
     },
     {
-      "source": "Castro Electrónica product",
-      "status": "configuration_unverified"
-    },
-    {
       "source": "PcComponentes product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "Castro Electrónica product",
-      "status": "configuration_unverified"
-    },
-    {
-      "source": "Chipman product",
       "status": "configuration_unverified"
     },
     {
@@ -6846,6 +6955,14 @@
       "status": "configuration_unverified"
     },
     {
+      "source": "Chipman product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Castro Electrónica product",
+      "status": "configuration_unverified"
+    },
+    {
       "source": "PcComponentes product",
       "status": "configuration_unverified"
     },
@@ -6855,6 +6972,14 @@
     },
     {
       "source": "PcComponentes product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Globaldata product",
+      "status": "configuration_unverified"
+    },
+    {
+      "source": "Chipman product",
       "status": "configuration_unverified"
     },
     {
